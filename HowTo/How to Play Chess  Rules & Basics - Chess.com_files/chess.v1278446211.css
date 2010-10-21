@@ -1,0 +1,209 @@
+a.chess_redbutton {
+	background: #dfdfdf;
+	border: 2px solid #bbb;
+	font-family: Arial,sans-serif !important;
+	font-size: 0.7em;
+	color: #666 !important;
+	padding: 1px;
+	text-decoration: none;
+}
+a.chess_redbutton:hover {
+	background: #d0d0d0;
+	text-decoration: none;
+}
+a.chess_gamenavbutton {
+	background: #777;
+	font-family: Arial,sans-serif !important;
+	font-size: 0.8em;
+	color: #fff !important;
+	padding: 1px 3px;
+	margin: 0 1px 0 1px;
+	font-weight: normal;
+	text-decoration: none;
+	border-right: 1px solid #555;
+	border-bottom: 1px solid #555;
+	border-left: 1px solid #999;
+	border-top: 1px solid #999;	
+}
+a.chess_gamenavbutton:hover {
+	background: #999;
+	text-decoration: none;
+}
+.chess_boardprompt {
+	font-family: Arial,sans-serif !important;
+	font-size: 1.2em;
+	float: left;
+	padding: 10px;
+	border: 2px solid #c00;
+	background-color: #ffd;
+	text-align: center;
+	color: #600;
+	font-weight: bold;
+}
+.chess_defaultlightsquare {
+}
+.chess_defaultdarksquare {
+}
+form {
+	padding: 0;
+	margin: 0;
+}
+.chessDiagramDiv, .dailyPuzzleDiv, .chess_com_loading {
+	width: 100%;
+	padding: 120px 0;
+	background-image: url(/assets/images/ajax-loader.gif);
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.chess_com_draggable {
+	cursor: pointer;
+	cursor: hand;
+}
+.chess_com_tab_sheet {
+	overflow: auto;
+}
+.chess_com_hidden {
+	display: none;
+}
+.chess_com_visible {
+	display: block;
+}
+.chess_selectoption {
+	padding: 1px 1px 1px 1px;
+	margin: 0 1px 0 1px;
+}
+.chess_com_movenodecomment {
+	color: #aaaaaa;
+	font-style: italic;
+}
+.chess_com_variantlevel1 {
+	color: #000000 !important;
+	font-weight: bold;
+}
+.chess_com_variantlevel2 {
+	color: #aa0000 !important;
+}
+.chess_com_variantlevel3 {
+	color: #0000aa !important;
+}
+.chess_com_variantleveldefault {
+	color: #777777 !important;
+}
+.chess_com_currentmovenode{
+	background-color: #ffff55;
+}
+
+/* Move List */
+
+div.notationVertical {
+	/*width: 128px;*/
+	height: 18px; 
+	overflow: hidden; 
+	background: #FFF;
+	padding: 3px 0;
+}
+
+div.odd {
+	background: #E7E7E7;
+}
+
+/* Live Chess 3 stuff */
+div.LC3 div.notationVertical {
+	padding: 4px;
+	font-family: "Tahoma", Arial, Helvetica, sans-serif;
+	text-align: left;
+}
+
+div.LC3 div.odd {
+	background: #F5F5F5;
+	border-top: 1px solid #EDEDED;
+	border-bottom: 1px solid #EDEDED;
+}
+
+div.LC3 div.odd span {
+	border: 1px solid #F5F5F5;
+}
+
+div.LC3 div.odd span.mhl {
+	border: 1px solid #FFCC00;
+}
+
+div.LC3 div.notationVertical span.num {
+	text-align: left; 
+}
+
+div.notationVertical span {
+	float: left;
+	display: inline;
+	margin-right: 2px;
+	width: 41px;
+	height: 14px;
+	padding: 2px;
+	border: 1px solid #FFF;
+}
+
+div.notationVertical span a {
+	cursor: pointer;
+}
+
+div.odd span {
+	border: 1px solid #E7E7E7;
+}
+
+div.notationVertical span.num {
+	font-weight: bold;
+	width: 20px;
+	text-align: right;
+}
+
+div.notationVertical span.mhl {
+	background: #FFFF00;
+	border: 1px solid #FFCC00;
+}
+
+div.notationHorizontal { line-height: 20px; }
+
+div.notationHorizontal span {
+	border: 1px solid #FFFFFF;
+	font-weight: bold;
+	display: inline !important;
+}
+
+div.normal div.notationHorizontal span { 
+	border: 1px solid #F5F5F5; 
+}
+
+div.notationHorizontal span a {
+	cursor: pointer;
+	color: #000;
+	text-decoration: none; 
+}
+
+div.notationHorizontal span.mhl, div.normal div.notationHorizontal span.mhl {
+	border: 1px solid #FFCC00;
+}
+
+div.notationHorizontal span.moveListComment { 
+	font-weight: normal !important;
+	color: #777777 !important; 
+	font-style: italic !important;
+}
+
+div.notationHorizontal span.moveListAlternateLine {
+	color: #000088;
+	font-weight: bold; 
+}
+
+div.notationHorizontal span.moveListAlternateLine span a {
+	color: #000088 !important;
+}
+
+div.notationHorizontal span.moveListAlternateLine span.moveListAlternateLine {
+	color: #CC0000;
+	font-weight: bold;
+}
+
+div.notationHorizontal span.moveListAlternateLine span.moveListAlternateLine span a {
+	color: #CC0000 !important;
+}
+
