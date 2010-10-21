@@ -11,10 +11,14 @@ namespace ChessLib
     public abstract class ChessItem
     {
         /// <summary>
-        /// The board where the Chess piece is located.
+        /// The Chess board this item belongs to.
         /// </summary>
         public ChessBoard Board { get; private set; }
 
+        /// <summary>
+        /// The constructor.
+        /// </summary>
+        /// <param name="board">The Chess board this item belongs to.</param>
         public ChessItem(ChessBoard board)
         {
             this.Board = board;

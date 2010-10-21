@@ -11,7 +11,7 @@ namespace ChessLib
     public class ChessBoard
     {
         /// <summary>
-        /// The tiles of the chess board.
+        /// The tiles of the Chess board.
         /// </summary>
         public Tile[,] Tiles { get; private set; }
 
@@ -30,11 +30,12 @@ namespace ChessLib
         {
             this.Tiles = new Tile[8, 8];
 
-            for (int x = 0; x < this.Tiles.GetLength(0); x++)
+            for (int row = 0; row < this.Tiles.GetLength(0); row++)
             {
-                for (int y = 0; y < this.Tiles.GetLength(1); y++)
+                for (int column = 0; column < this.Tiles.GetLength(1); column++)
                 {
-                    this.Tiles[x, y] = new Tile(this, (x + y) % 2 == 0 ? ChessColor.White : ChessColor.Black);
+                    Tile t = (this.Tiles[row, column] == null ? new Tile(this, (row + column) % 2 == 0 ? ChessColor.White : ChessColor.Black) : this.Tiles[row, column]);
+                    t.Piece = null;
                 }
             }
         }

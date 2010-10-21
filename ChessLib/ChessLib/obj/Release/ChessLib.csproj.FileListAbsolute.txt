@@ -1,0 +1,5 @@
+C:\Users\Bjarki\Desktop\Projects\TSkoli\FOR403\Chess\ChessLib\ChessLib\obj\Release\ResolveAssemblyReference.cache
+C:\Users\Bjarki\Desktop\Projects\TSkoli\FOR403\Chess\ChessLib\ChessLib\bin\Release\ChessLib.dll
+C:\Users\Bjarki\Desktop\Projects\TSkoli\FOR403\Chess\ChessLib\ChessLib\bin\Release\ChessLib.pdb
+C:\Users\Bjarki\Desktop\Projects\TSkoli\FOR403\Chess\ChessLib\ChessLib\obj\Release\ChessLib.dll
+C:\Users\Bjarki\Desktop\Projects\TSkoli\FOR403\Chess\ChessLib\ChessLib\obj\Release\ChessLib.pdb
