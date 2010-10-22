@@ -10,7 +10,6 @@ namespace ChessLib
     /// </summary>
     public class King : ChessPiece
     {
-
         /// <summary>
         /// The constructor.
         /// </summary>
@@ -22,17 +21,9 @@ namespace ChessLib
 
         }
 
-        /*/// <summary>
-        /// Move the Chess piece to the specified coordinates.
+        /// <summary>
+        /// The name of the Chess piece.
         /// </summary>
-        /// <param name="x">The x-coordinate to move to.</param>
-        /// <param name="y">The y-coordinate to move to.</param>
-        /// <returns>Whether or not the move was successful.</returns>
-        public override bool MoveTo(int x, int y)
-        {
-            if (x < 0 || y < 0 || x > this.Board.Tiles.GetLength(0) - 1 || y > this.Board.Tiles.GetLength(1)) return false;
-
-
-        }*/
+        public override string PieceName { get { return "King"; } }
     }
 }

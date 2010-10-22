@@ -8,7 +8,7 @@ namespace ChessLib
     /// <summary>
     /// A tile in the Chess board.
     /// </summary>
-    public class Tile : ChessItem, IColored
+    public class Tile : ChessItem, IColored, ILocated
     {
         /// <summary>
         /// The color of the tile.
@@ -19,37 +19,54 @@ namespace ChessLib
         /// </summary>
         /// <remarks>This will be null if no piece is positioned on the tile.</remarks>
         public ChessPiece Piece { get; internal set; }
+        /// <summary>
+        /// The location of the tile.
+        /// </summary>
+        public Location Location { get; private set; }
 
         /// <summary>
         /// The constructor.
         /// </summary>
         /// <param name="color">The color of the tile.</param>
-        public Tile(ChessBoard board, ChessColor color, ChessPiece piece = null)
+        public Tile(ChessBoard board, Location location, ChessColor color, ChessPiece piece = null)
             : base(board)
         {
+            this.Location = location;
             this.Color = color;
             this.Piece = piece;
         }
 
         /// <summary>
-        /// Move the Chess piece on the specified tile to the current tile.
+        /// Moves the piece on the current tile to the specified tile.
         /// </summary>
-        /// <param name="t">The tile which has the Chess piece.</param>
-        /// <returns>Whether or not the Chess piece could be moved.</returns>
+        /// <param name="l">The location.</param>
+        /// <returns>Whether or not the move was successful.</returns>
         public bool To(Tile t)
         {
-            throw new NotImplementedException();
+            if (this.Piece == null) return false;
+            if (t.Piece != null && t.Piece.Color == this.Piece.Color) return false;
+
+            // TODO: Implement more logic.
+            t.Piece = this.Piece;
+            this.Piece = null;
+
+            return true;
         }
 
         /// <summary>
-        /// Move the Chess piece on the specified tile to the current tile.
+        /// Moves the piece on the current tile to the specified location.
         /// </summary>
-        /// <param name="row">The row in which the Chess piece is located.</param>
-        /// <param name="column">The column in which the Chess piece is located.</param>
-        /// <returns>Whether or not the Chess piece could be moved.</returns>
-        public bool To(int row, int column)
+        /// <param name="l">The location.</param>
+        /// <returns>Whether or not the move was successful.</returns>
+        public bool To(Location l)
         {
-            return this.To(this.Board.Tiles[row, column]);
+            return this.To(this.Board[l]);
+        }
+
+        /// <see cref="Object.ToString()"/>
+        public override string ToString()
+        {
+            return this.Location.ToString();
         }
     }
 }

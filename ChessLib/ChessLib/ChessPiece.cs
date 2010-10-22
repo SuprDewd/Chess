@@ -26,45 +26,15 @@ namespace ChessLib
             this.Color = color;
         }
 
-        /*/// <summary>
-        /// Moves the Chess piece to it's default location.
-        /// </summary>
-        /// <returns></returns>
-        public bool Reset()
-        {
-
-        }
-
         /// <summary>
-        /// Move the Chess piece to the specified tile.
+        /// The name of the Chess piece.
         /// </summary>
-        /// <param name="t">The tile to move to.</param>
-        /// <returns>Whether or not the move was successful.</returns>
-        public bool MoveTo(Tile t)
+        public abstract string PieceName { get; }
+
+        /// <see cref="Object.ToString()"/>
+        public override string ToString()
         {
-            if (t == null) return false;
-            if (t.Board != this.Board) return false;
-
-            for (int row = 0; row < this.Board.Tiles.GetLength(0); row++)
-            {
-                for (int column = 0; column < this.Board.Tiles.GetLength(1); column++)
-                {
-                    if (Object.ReferenceEquals(t, this.Board.Tiles[row, column]))
-                    {
-                        return this.MoveTo(row, column);
-                    }
-                }
-            }
-
-            return false;
+            return this.Color.ToString() + " " + this.PieceName;
         }
-
-        /// <summary>
-        /// Move the Chess piece to the specified coordinates.
-        /// </summary>
-        /// <param name="x">The x-coordinate to move to.</param>
-        /// <param name="y">The y-coordinate to move to.</param>
-        /// <returns>Whether or not the move was successful.</returns>
-        public abstract bool MoveTo(int x, int y);*/
     }
 }

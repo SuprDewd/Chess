@@ -20,5 +20,10 @@ namespace ChessLib
         {
 
         }
+
+        /// <summary>
+        /// The name of the Chess piece.
+        /// </summary>
+        public override string PieceName { get { return "Rook"; } }
     }
 }

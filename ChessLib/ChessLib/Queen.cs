@@ -10,7 +10,6 @@ namespace ChessLib
     /// </summary>
     public class Queen : ChessPiece
     {
-
         /// <summary>
         /// The constructor.
         /// </summary>
@@ -21,5 +20,10 @@ namespace ChessLib
         {
 
         }
+
+        /// <summary>
+        /// The name of the Chess piece.
+        /// </summary>
+        public override string PieceName { get { return "Queen"; } }
     }
 }
