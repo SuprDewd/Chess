@@ -1,0 +1,199 @@
+﻿<Window x:Class="ChessTester.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525" Loaded="Window_Loaded">
+    <Window.Resources>
+        <Style x:Key="Tile" TargetType="Canvas">
+            <EventSetter Event="MouseUp" Handler="TileClicked" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Canvas Style="{StaticResource Tile}" Grid.Row="0" Name="A8" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="1" Name="A7" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="2" Name="A6" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="3" Name="A5" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="4" Name="A4" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="5" Name="A3" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="6" Name="A2" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="7" Name="A1" />
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Canvas Style="{StaticResource Tile}" Grid.Row="0" Name="B8" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="1" Name="B7" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="2" Name="B6" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="3" Name="B5" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="4" Name="B4" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="5" Name="B3" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="6" Name="B2" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="7" Name="B1" />
+        </Grid>
+
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Canvas Style="{StaticResource Tile}" Grid.Row="0" Name="C8" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="1" Name="C7" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="2" Name="C6" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="3" Name="C5" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="4" Name="C4" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="5" Name="C3" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="6" Name="C2" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="7" Name="C1" />
+        </Grid>
+
+        <Grid Grid.Column="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Canvas Style="{StaticResource Tile}" Grid.Row="0" Name="D8" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="1" Name="D7" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="2" Name="D6" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="3" Name="D5" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="4" Name="D4" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="5" Name="D3" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="6" Name="D2" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="7" Name="D1" />
+        </Grid>
+
+        <Grid Grid.Column="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Canvas Style="{StaticResource Tile}" Grid.Row="0" Name="E8" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="1" Name="E7" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="2" Name="E6" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="3" Name="E5" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="4" Name="E4" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="5" Name="E3" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="6" Name="E2" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="7" Name="E1" />
+        </Grid>
+
+        <Grid Grid.Column="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Canvas Style="{StaticResource Tile}" Grid.Row="0" Name="F8" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="1" Name="F7" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="2" Name="F6" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="3" Name="F5" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="4" Name="F4" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="5" Name="F3" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="6" Name="F2" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="7" Name="F1" />
+        </Grid>
+
+        <Grid Grid.Column="6">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Canvas Style="{StaticResource Tile}" Grid.Row="0" Name="G8" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="1" Name="G7" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="2" Name="G6" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="3" Name="G5" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="4" Name="G4" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="5" Name="G3" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="6" Name="G2" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="7" Name="G1" />
+        </Grid>
+
+        <Grid Grid.Column="7">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Canvas Style="{StaticResource Tile}" Grid.Row="0" Name="H8" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="1" Name="H7" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="2" Name="H6" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="3" Name="H5" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="4" Name="H4" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="5" Name="H3" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="6" Name="H2" />
+            <Canvas Style="{StaticResource Tile}" Grid.Row="7" Name="H1" />
+        </Grid>
+        
+    </Grid>
+</Window>
