@@ -10,7 +10,13 @@ namespace ChessLib
     /// </summary>
     public enum ChessColor
     {
+        /// <summary>
+        /// The color white.
+        /// </summary>
         White,
+        /// <summary>
+        /// The color black.
+        /// </summary>
         Black
     }
 }

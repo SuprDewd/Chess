@@ -14,14 +14,14 @@
     <Position X="1" Y="0.5" Width="1.5" />
     <AssociationLine Name="Tiles" Type="ChessLib.Tile" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="1" Y="1.316" />
-        <Point X="0.531" Y="1.316" />
-        <Point X="0.531" Y="3.278" />
-        <Point X="1" Y="3.278" />
+        <Point X="1" Y="1.387" />
+        <Point X="0.531" Y="1.387" />
+        <Point X="0.531" Y="3.528" />
+        <Point X="1" Y="3.528" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAABAAACAAAAAAAAAAAAAIAAAAAAAAAQAA=</HashCode>
+      <HashCode>AAAAAAAAAAAABAAACAAAAAAAAAAgAAIAAAAAAAAAQAA=</HashCode>
       <FileName>ChessBoard.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -36,12 +36,14 @@
         <Point X="4.75" Y="2.057" />
         <Point X="4.857" Y="2.057" />
         <Point X="4.857" Y="2.448" />
+        <Point X="5.042" Y="2.448" Type="JumpStart" />
+        <Point X="5.208" Y="2.448" Type="JumpEnd" />
         <Point X="6.75" Y="2.448" />
         <Point X="6.75" Y="2.75" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>AAgAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <HashCode>AAgAAAAAAAAAAAAEAQAAAAAAAAAAAAAAABAEgAAAAAA=</HashCode>
       <FileName>ChessPiece.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -57,7 +59,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="ChessLib.Tile">
-    <Position X="1" Y="2.75" Width="1.5" />
+    <Position X="1" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEAAIAAAAAAAAIAAAAAAAAoAAAAAA=</HashCode>
       <FileName>Tile.cs</FileName>

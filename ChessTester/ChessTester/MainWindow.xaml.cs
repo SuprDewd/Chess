@@ -58,7 +58,7 @@ namespace ChessTester
 
                     c.Background = t.Color == ChessColor.White ? Brushes.White : Brushes.Black;
                     c.Children.Clear();
-                    c.Children.Add(new Label() { Content = (t.ToString()) + (t.Piece != null ? ": " + t.Piece.ToString() : ""), Foreground = Brushes.Red });
+                    c.Children.Add(new Label() { Content = (t.ToString()) + (t.Piece != null ? ": " + t.Piece.ToString() : ""), Foreground = Brushes.Red, Background = t.Piece == null ? null : new ImageBrush() { ImageSource = new BitmapImage(new Uri(@"C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\Icons\" + t.Piece.PieceNameShort + ".ico")), Stretch = Stretch.Uniform }});
                 }
             }
         }

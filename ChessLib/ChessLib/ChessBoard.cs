@@ -8,6 +8,7 @@ namespace ChessLib
     /// <summary>
     /// The main Chess board.
     /// </summary>
+    /// <remarks>This is also the controller of the game.</remarks>
     public class ChessBoard
     {
         private readonly Dictionary<Location, ChessPiece> StartingPieces;
@@ -16,6 +17,10 @@ namespace ChessLib
         /// The tiles of the Chess board.
         /// </summary>
         private Tile[,] Tiles { get; set; }
+        /// <summary>
+        /// The players in the chess game.
+        /// </summary>
+        public Player[] Players { get; private set; }
 
         /// <summary>
         /// The constructor.
@@ -60,6 +65,14 @@ namespace ChessLib
                 {new Location(2, 'G'), new Pawn(this, ChessColor.White)},
                 {new Location(2, 'H'), new Pawn(this, ChessColor.White)},
             };
+
+            this.Players = new Player[2]
+            {
+                new Player(this, ChessColor.White),
+                new Player(this, ChessColor.Black)
+            };
+
+            //this.Players[0].Play();
 
             this.Reset();
         }

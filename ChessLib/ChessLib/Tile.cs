@@ -27,7 +27,10 @@ namespace ChessLib
         /// <summary>
         /// The constructor.
         /// </summary>
+        /// <param name="board">The board in which the tile is located.</param>
+        /// <param name="location">The location of the tile.</param>
         /// <param name="color">The color of the tile.</param>
+        /// <param name="piece">The Chess piece that is on the tile.</param>
         public Tile(ChessBoard board, Location location, ChessColor color, ChessPiece piece = null)
             : base(board)
         {
@@ -39,7 +42,7 @@ namespace ChessLib
         /// <summary>
         /// Moves the piece on the current tile to the specified tile.
         /// </summary>
-        /// <param name="l">The location.</param>
+        /// <param name="t">The location.</param>
         /// <returns>Whether or not the move was successful.</returns>
         public bool To(Tile t)
         {

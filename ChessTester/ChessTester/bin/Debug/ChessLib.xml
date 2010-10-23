@@ -1,0 +1,389 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ChessLib</name>
+    </assembly>
+    <members>
+        <member name="T:ChessLib.Tile">
+            <summary>
+            A tile in the Chess board.
+            </summary>
+        </member>
+        <member name="T:ChessLib.ChessItem">
+            <summary>
+            A Chess item.
+            </summary>
+        </member>
+        <member name="M:ChessLib.ChessItem.#ctor(ChessLib.ChessBoard)">
+            <summary>
+            The constructor.
+            </summary>
+            <param name="board">The Chess board this item belongs to.</param>
+        </member>
+        <member name="P:ChessLib.ChessItem.Board">
+            <summary>
+            The Chess board this item belongs to.
+            </summary>
+        </member>
+        <member name="T:ChessLib.IColored">
+            <summary>
+            A colored item.
+            </summary>
+        </member>
+        <member name="P:ChessLib.IColored.Color">
+            <summary>
+            The color of the item.
+            </summary>
+        </member>
+        <member name="T:ChessLib.ILocated">
+            <summary>
+            A Chess item that is located on the board.
+            </summary>
+        </member>
+        <member name="P:ChessLib.ILocated.Location">
+            <summary>
+            The location of the item.
+            </summary>
+        </member>
+        <member name="M:ChessLib.Tile.#ctor(ChessLib.ChessBoard,ChessLib.Location,ChessLib.ChessColor,ChessLib.ChessPiece)">
+            <summary>
+            The constructor.
+            </summary>
+            <param name="board">The board in which the tile is located.</param>
+            <param name="location">The location of the tile.</param>
+            <param name="color">The color of the tile.</param>
+            <param name="piece">The Chess piece that is on the tile.</param>
+        </member>
+        <member name="M:ChessLib.Tile.To(ChessLib.Tile)">
+            <summary>
+            Moves the piece on the current tile to the specified tile.
+            </summary>
+            <param name="t">The location.</param>
+            <returns>Whether or not the move was successful.</returns>
+        </member>
+        <member name="M:ChessLib.Tile.To(ChessLib.Location)">
+            <summary>
+            Moves the piece on the current tile to the specified location.
+            </summary>
+            <param name="l">The location.</param>
+            <returns>Whether or not the move was successful.</returns>
+        </member>
+        <member name="M:ChessLib.Tile.ToString">
+            <see cref="M:System.Object.ToString"/>
+        </member>
+        <member name="P:ChessLib.Tile.Color">
+            <summary>
+            The color of the tile.
+            </summary>
+        </member>
+        <member name="P:ChessLib.Tile.Piece">
+            <summary>
+            The piece positioned on the tile.
+            </summary>
+            <remarks>This will be null if no piece is positioned on the tile.</remarks>
+        </member>
+        <member name="P:ChessLib.Tile.Location">
+            <summary>
+            The location of the tile.
+            </summary>
+        </member>
+        <member name="T:ChessLib.Bishop">
+            <summary>
+            The Bishop Chess piece.
+            </summary>
+        </member>
+        <member name="T:ChessLib.ChessPiece">
+            <summary>
+            A Chess piece.
+            </summary>
+        </member>
+        <member name="M:ChessLib.ChessPiece.#ctor(ChessLib.ChessBoard,ChessLib.ChessColor)">
+            <summary>
+            The constructor.
+            </summary>
+            <param name="board">The board where the Chess piece is located.</param>
+            <param name="color">The color of the Chess piece.</param>
+        </member>
+        <member name="M:ChessLib.ChessPiece.ToString">
+            <see cref="M:System.Object.ToString"/>
+        </member>
+        <member name="M:ChessLib.ChessPiece.Capture">
+            <summary>
+            Capture the Chess piece.
+            </summary>
+        </member>
+        <member name="P:ChessLib.ChessPiece.Color">
+            <summary>
+            The color of the Chess piece.
+            </summary>
+        </member>
+        <member name="E:ChessLib.ChessPiece.Captured">
+            <summary>
+            An event which will be fired when the Chess piece is captured.
+            </summary>
+        </member>
+        <member name="P:ChessLib.ChessPiece.PieceName">
+            <summary>
+            The name of the Chess piece.
+            </summary>
+        </member>
+        <member name="P:ChessLib.ChessPiece.PieceNameShort">
+            <summary>
+            The name of the Chess piece, prepended with the first character of the color.
+            </summary>
+        </member>
+        <member name="M:ChessLib.Bishop.#ctor(ChessLib.ChessBoard,ChessLib.ChessColor)">
+            <summary>
+            The constructor.
+            </summary>
+            <param name="board">The board where the Chess piece is located.</param>
+            <param name="color">The color of the Chess piece.</param>
+        </member>
+        <member name="P:ChessLib.Bishop.PieceName">
+            <summary>
+            The name of the Chess piece.
+            </summary>
+        </member>
+        <member name="T:ChessLib.Queen">
+            <summary>
+            The Queen Chess piece.
+            </summary>
+        </member>
+        <member name="M:ChessLib.Queen.#ctor(ChessLib.ChessBoard,ChessLib.ChessColor)">
+            <summary>
+            The constructor.
+            </summary>
+            <param name="board">The board where the Chess piece is located.</param>
+            <param name="color">The color of the Chess piece.</param>
+        </member>
+        <member name="P:ChessLib.Queen.PieceName">
+            <summary>
+            The name of the Chess piece.
+            </summary>
+        </member>
+        <member name="T:ChessLib.ChessBoard">
+            <summary>
+            The main Chess board.
+            </summary>
+            <remarks>This is also the controller of the game.</remarks>
+        </member>
+        <member name="M:ChessLib.ChessBoard.#ctor">
+            <summary>
+            The constructor.
+            </summary>
+        </member>
+        <member name="M:ChessLib.ChessBoard.Reset">
+            <summary>
+            Resets the Chess board.
+            </summary>
+        </member>
+        <member name="P:ChessLib.ChessBoard.Tiles">
+            <summary>
+            The tiles of the Chess board.
+            </summary>
+        </member>
+        <member name="P:ChessLib.ChessBoard.Players">
+            <summary>
+            The players in the chess game.
+            </summary>
+        </member>
+        <member name="P:ChessLib.ChessBoard.Item(System.Int32,System.Char)">
+            <summary>
+            Gives access to the tiles of the Chess board.
+            </summary>
+            <param name="rank">The rank of the tile.</param>
+            <param name="file">The file of the tile.</param>
+            <returns>The tile at the specified rank and file.</returns>
+        </member>
+        <member name="P:ChessLib.ChessBoard.Item(System.Int32,System.Int32)">
+            <summary>
+            Gives access to the tiles of the Chess board.
+            </summary>
+            <param name="rank">The rank of the tile.</param>
+            <param name="file">The file of the tile.</param>
+            <returns>The tile at the specified rank and file.</returns>
+        </member>
+        <member name="P:ChessLib.ChessBoard.Item(ChessLib.Location)">
+            <summary>
+            Gives access to the tiles of the Chess board.
+            </summary>
+            <param name="l">The location of the tile.</param>
+            <returns>The tile at the specified rank and file.</returns>
+        </member>
+        <member name="P:ChessLib.ChessBoard.Item(System.String)">
+            <summary>
+            Gives access to the tiles of the Chess board.
+            </summary>
+            <param name="l">The location of the tile.</param>
+            <returns>The tile at the specified rank and file.</returns>
+        </member>
+        <member name="T:ChessLib.Rook">
+            <summary>
+            The Rook Chess piece.
+            </summary>
+        </member>
+        <member name="M:ChessLib.Rook.#ctor(ChessLib.ChessBoard,ChessLib.ChessColor)">
+            <summary>
+            The constructor.
+            </summary>
+            <param name="board">The board where the Chess piece is located.</param>
+            <param name="color">The color of the Chess piece.</param>
+        </member>
+        <member name="P:ChessLib.Rook.PieceName">
+            <summary>
+            The name of the Chess piece.
+            </summary>
+        </member>
+        <member name="T:ChessLib.Pawn">
+            <summary>
+            The Pawn Chess piece.
+            </summary>
+        </member>
+        <member name="M:ChessLib.Pawn.#ctor(ChessLib.ChessBoard,ChessLib.ChessColor)">
+            <summary>
+            The constructor.
+            </summary>
+            <param name="board">The board where the Chess piece is located.</param>
+            <param name="color">The color of the Chess piece.</param>
+        </member>
+        <member name="P:ChessLib.Pawn.PieceName">
+            <summary>
+            The name of the Chess piece.
+            </summary>
+        </member>
+        <member name="T:ChessLib.King">
+            <summary>
+            The King Chess piece.
+            </summary>
+        </member>
+        <member name="M:ChessLib.King.#ctor(ChessLib.ChessBoard,ChessLib.ChessColor)">
+            <summary>
+            The constructor.
+            </summary>
+            <param name="board">The board where the Chess piece is located.</param>
+            <param name="color">The color of the Chess piece.</param>
+        </member>
+        <member name="P:ChessLib.King.PieceName">
+            <summary>
+            The name of the Chess piece.
+            </summary>
+        </member>
+        <member name="T:ChessLib.ChessColor">
+            <summary>
+            The color of Chess pieces and tiles.
+            </summary>
+        </member>
+        <member name="F:ChessLib.ChessColor.White">
+            <summary>
+            The color white.
+            </summary>
+        </member>
+        <member name="F:ChessLib.ChessColor.Black">
+            <summary>
+            The color black.
+            </summary>
+        </member>
+        <member name="T:ChessLib.Knight">
+            <summary>
+            The Knight Chess piece.
+            </summary>
+        </member>
+        <member name="M:ChessLib.Knight.#ctor(ChessLib.ChessBoard,ChessLib.ChessColor)">
+            <summary>
+            The constructor.
+            </summary>
+            <param name="board">The board where the Chess piece is located.</param>
+            <param name="color">The color of the Chess piece.</param>
+        </member>
+        <member name="P:ChessLib.Knight.PieceName">
+            <summary>
+            The name of the Chess piece.
+            </summary>
+        </member>
+        <member name="T:ChessLib.Player">
+            <summary>
+            A player in a Chess game.
+            </summary>
+        </member>
+        <member name="M:ChessLib.Player.#ctor(ChessLib.ChessBoard,ChessLib.ChessColor)">
+            <summary>
+            The constructor.
+            </summary>
+            <param name="board">The board the player is playing on.</param>
+            <param name="color">The color that the player will use.</param>
+        </member>
+        <member name="P:ChessLib.Player.Color">
+            <summary>
+            The color that the player will use.
+            </summary>
+        </member>
+        <member name="T:ChessLib.Location">
+            <summary>
+            A location of an item.
+            </summary>
+        </member>
+        <member name="M:ChessLib.Location.#ctor(System.Int32,System.Char)">
+            <summary>
+            The constructor.
+            </summary>
+            <param name="rank">The rank of the item.</param>
+            <param name="file">The file of the item.</param>
+        </member>
+        <member name="M:ChessLib.Location.#ctor(System.Int32,System.Int32)">
+            <summary>
+            The constructor.
+            </summary>
+            <param name="rank">The rank of the item.</param>
+            <param name="file">The file of the item.</param>
+        </member>
+        <member name="M:ChessLib.Location.op_Equality(ChessLib.Location,ChessLib.Location)">
+            <summary>
+            The equals operator.
+            </summary>
+            <param name="l1">A location.</param>
+            <param name="l2">A location.</param>
+            <returns>Whether or not the locations are the same.</returns>
+        </member>
+        <member name="M:ChessLib.Location.op_Inequality(ChessLib.Location,ChessLib.Location)">
+            <summary>
+            The not equals operator.
+            </summary>
+            <param name="l1">A location.</param>
+            <param name="l2">A location.</param>
+            <returns>Whether or not the locations are not the same.</returns>
+        </member>
+        <member name="M:ChessLib.Location.Equals(System.Object)">
+            <see cref="M:System.Object.Equals(System.Object)"/>
+        </member>
+        <member name="M:ChessLib.Location.GetHashCode">
+            <see cref="M:System.Object.GetHashCode"/>
+        </member>
+        <member name="M:ChessLib.Location.ToString">
+            <see cref="M:System.Object.ToString"/>
+        </member>
+        <member name="M:ChessLib.Location.ConvertFile(System.Char)">
+            <summary>
+            Converts a file between int and char.
+            </summary>
+            <param name="file">The file.</param>
+            <returns>The file as an int.</returns>
+        </member>
+        <member name="M:ChessLib.Location.ConvertFile(System.Int32)">
+            <summary>
+            Converts a file between int and char.
+            </summary>
+            <param name="file">The file.</param>
+            <returns>The file as a char.</returns>
+        </member>
+        <member name="P:ChessLib.Location.File">
+            <summary>
+            The file, or column, of an item.
+            </summary>
+        </member>
+        <member name="P:ChessLib.Location.Rank">
+            <summary>
+            The rank, or row, of an item.
+            </summary>
+        </member>
+    </members>
+</doc>
