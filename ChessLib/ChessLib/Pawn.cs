@@ -31,7 +31,23 @@ namespace ChessLib
             get
             {
                 int rnxt = this.Location.Rank + (this.Color == ChessColor.White ? 1 : -1);
-                if (Location.IsValid(rnxt, this.Location.File)) yield return this.Board[rnxt, this.Location.File];
+                if (Location.IsValid(rnxt, this.Location.File))
+                {
+                    yield return this.Board[rnxt, this.Location.File];
+
+                    int fn = Location.ConvertFile(this.Location.File) - 1,
+                        fp = Location.ConvertFile(this.Location.File) + 1;
+
+                    if (Location.IsValid(rnxt, fn) && this.Board[rnxt, fn].Piece != null)
+                    {
+                        yield return this.Board[rnxt, fn];
+                    }
+
+                    if (Location.IsValid(rnxt, fp) && this.Board[rnxt, fp].Piece != null)
+                    {
+                        yield return this.Board[rnxt, fp];
+                    }
+                }
 
                 if (this.Color == ChessColor.White && this.Location.Rank == 2)
                 {
