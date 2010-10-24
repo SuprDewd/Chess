@@ -30,11 +30,34 @@ namespace ChessLib
         {
             get
             {
-                foreach (Tile tile in this.Board)
+                int f = Location.ConvertFile(this.Location.File),
+                    fn2 = f - 2,
+                    fn1 = f - 1,
+                    fp1 = f + 1,
+                    fp2 = f + 2,
+                    rn2 = this.Location.Rank - 2,
+                    rn1 = this.Location.Rank - 1,
+                    rp1 = this.Location.Rank + 1,
+                    rp2 = this.Location.Rank + 2;
+
+                int[][] poss = new int[][]
                 {
-                    if (tile != this.Tile)
+                    new int[] { rn2, fn1 },
+                    new int[] { rn2, fp1 },
+                    new int[] { rp2, fn1 },
+                    new int[] { rp2, fp1 },
+
+                    new int[] { rn1, fn2 },
+                    new int[] { rp1, fn2 },
+                    new int[] { rn1, fp2 },
+                    new int[] { rp1, fp2 }
+                };
+
+                foreach (int[] pos in poss)
+                {
+                    if (Location.IsValid(pos[0], pos[1]))
                     {
-                        yield return tile;
+                        yield return this.Board[pos[0], pos[1]];
                     }
                 }
             }

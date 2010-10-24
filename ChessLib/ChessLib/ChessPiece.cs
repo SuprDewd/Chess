@@ -83,5 +83,31 @@ namespace ChessLib
         {
             this.Captured.IfNotNull(a => a(this));
         }
+
+        /// <summary>
+        /// Selects a row of tiles, spreading out from the current tile.
+        /// </summary>
+        /// <param name="rankAdd">The number to add to the rank on each iteration.</param>
+        /// <param name="fileAdd">The number to add to the file on each iteration.</param>
+        /// <returns>The row of tiles.</returns>
+        protected IEnumerable<Tile> SelectRow(int rankAdd, int fileAdd)
+        {
+            Tile lastTile = this.Tile;
+
+            int rAdded, fAdded;
+
+            while (true)
+            {
+                rAdded = lastTile.Location.Rank + rankAdd;
+                fAdded = Location.ConvertFile(lastTile.Location.File) + fileAdd;
+
+                if (Location.IsValid(rAdded, fAdded))
+                {
+                    lastTile = this.Board[rAdded, fAdded];
+                    yield return lastTile;
+                }
+                else yield break;
+            }
+        }
     }
 }

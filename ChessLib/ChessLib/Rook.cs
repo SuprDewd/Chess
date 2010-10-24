@@ -30,13 +30,7 @@ namespace ChessLib
         {
             get
             {
-                foreach (Tile tile in this.Board)
-                {
-                    if (tile != this.Tile && (this.Tile.Location.Rank == tile.Location.Rank || this.Tile.Location.File == tile.Location.File))
-                    {
-                        yield return tile;
-                    }
-                }
+                return this.SelectRow(1, 0).TakeWhileAndOneMore(t => t.Piece == null).UnionAll(this.SelectRow(0, 1).TakeWhileAndOneMore(t => t.Piece == null).UnionAll(this.SelectRow(-1, 0).TakeWhileAndOneMore(t => t.Piece == null).UnionAll(this.SelectRow(0, -1).TakeWhileAndOneMore(t => t.Piece == null))));
             }
         }
 
