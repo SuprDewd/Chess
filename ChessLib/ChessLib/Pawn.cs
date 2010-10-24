@@ -30,12 +30,16 @@ namespace ChessLib
         {
             get
             {
-                foreach (Tile tile in this.Board)
+                int rnxt = this.Location.Rank + (this.Color == ChessColor.White ? 1 : -1);
+                if (Location.IsValid(rnxt, this.Location.File)) yield return this.Board[rnxt, this.Location.File];
+
+                if (this.Color == ChessColor.White && this.Location.Rank == 2)
                 {
-                    if (tile != this.Tile)
-                    {
-                        yield return tile;
-                    }
+                    yield return this.Board[4, this.Location.File];
+                }
+                else if (this.Color == ChessColor.Black && this.Location.Rank == 7)
+                {
+                    yield return this.Board[5, this.Location.File];
                 }
             }
         }

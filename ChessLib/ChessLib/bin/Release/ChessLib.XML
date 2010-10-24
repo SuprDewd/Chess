@@ -4,228 +4,6 @@
         <name>ChessLib</name>
     </assembly>
     <members>
-        <member name="T:ChessLib.Pawn">
-            <summary>
-            The Pawn Chess piece.
-            </summary>
-        </member>
-        <member name="T:ChessLib.ChessPiece">
-            <summary>
-            A Chess piece.
-            </summary>
-        </member>
-        <member name="T:ChessLib.BelongsTo`2">
-            <summary>
-            An item that belongs to another item.
-            </summary>
-            <typeparam name="T1">The type of an owner.</typeparam>
-            <typeparam name="T2">The type of an owner.</typeparam>
-        </member>
-        <member name="M:ChessLib.BelongsTo`2.#ctor(`0,`1)">
-            <summary>
-            The constructor.
-            </summary>
-            <param name="ownerOne">An owner.</param>
-            <param name="ownerTwo">An owner.</param>
-        </member>
-        <member name="P:ChessLib.BelongsTo`2.OwnerOne">
-            <summary>
-            One of the owners of the item.
-            </summary>
-        </member>
-        <member name="P:ChessLib.BelongsTo`2.OwnerTwo">
-            <summary>
-            One of the owners of the item.
-            </summary>
-        </member>
-        <member name="T:ChessLib.IColored">
-            <summary>
-            A colored item.
-            </summary>
-        </member>
-        <member name="P:ChessLib.IColored.Color">
-            <summary>
-            The color of the item.
-            </summary>
-        </member>
-        <member name="M:ChessLib.ChessPiece.#ctor(ChessLib.ChessBoard,ChessLib.ChessColor,ChessLib.Tile)">
-            <summary>
-            The constructor.
-            </summary>
-            <param name="board">The board where the Chess piece is located.</param>
-            <param name="color">The color of the Chess piece.</param>
-            <param name="tile">The tile where the Chess piece is located.</param>
-        </member>
-        <member name="M:ChessLib.ChessPiece.ToString">
-            <see cref="M:System.Object.ToString"/>
-        </member>
-        <member name="M:ChessLib.ChessPiece.Capture">
-            <summary>
-            Capture the Chess piece.
-            </summary>
-        </member>
-        <member name="P:ChessLib.ChessPiece.Color">
-            <summary>
-            The color of the Chess piece.
-            </summary>
-        </member>
-        <member name="P:ChessLib.ChessPiece.Board">
-            <summary>
-            The Chess board on which the Chess piece is located.
-            </summary>
-        </member>
-        <member name="P:ChessLib.ChessPiece.Tile">
-            <summary>
-            The tile on which the Chess piece is located.
-            </summary>
-        </member>
-        <member name="E:ChessLib.ChessPiece.Captured">
-            <summary>
-            An event which will be fired when the Chess piece is captured.
-            </summary>
-        </member>
-        <member name="P:ChessLib.ChessPiece.AllMoves">
-            <summary>
-            All the moves that the Chess piece can move.
-            </summary>
-            <remarks>This does not check for validity of the moves.</remarks>
-        </member>
-        <member name="P:ChessLib.ChessPiece.AllValidMoves">
-            <summary>
-            All the moves that the Chess piece can move, that are valid.
-            </summary>
-        </member>
-        <member name="P:ChessLib.ChessPiece.PieceName">
-            <summary>
-            The name of the Chess piece.
-            </summary>
-        </member>
-        <member name="P:ChessLib.ChessPiece.PieceNameShort">
-            <summary>
-            The name of the Chess piece, prepended with the first character of the color.
-            </summary>
-        </member>
-        <member name="M:ChessLib.Pawn.#ctor(ChessLib.ChessBoard,ChessLib.ChessColor,ChessLib.Tile)">
-            <summary>
-            The constructor.
-            </summary>
-            <param name="board">The board where the Chess piece is located.</param>
-            <param name="color">The color of the Chess piece.</param>
-            <param name="tile">The tile where the Chess piece is located.</param>
-        </member>
-        <member name="P:ChessLib.Pawn.AllMoves">
-            <summary>
-            All possible moves this Chess piece can move.
-            </summary>
-            <remarks>This does not check whether other Chess pieces are in the way.</remarks>
-        </member>
-        <member name="P:ChessLib.Pawn.AllValidMoves">
-            <summary>
-            All possible moves this Chess piece can move, which are valid.
-            </summary>
-        </member>
-        <member name="P:ChessLib.Pawn.PieceName">
-            <summary>
-            The name of the Chess piece.
-            </summary>
-        </member>
-        <member name="T:ChessLib.Knight">
-            <summary>
-            The Knight Chess piece.
-            </summary>
-        </member>
-        <member name="M:ChessLib.Knight.#ctor(ChessLib.ChessBoard,ChessLib.ChessColor,ChessLib.Tile)">
-            <summary>
-            The constructor.
-            </summary>
-            <param name="board">The board where the Chess piece is located.</param>
-            <param name="color">The color of the Chess piece.</param>
-            <param name="tile">The tile where the Chess piece is located.</param>
-        </member>
-        <member name="P:ChessLib.Knight.AllMoves">
-            <summary>
-            All possible moves this Chess piece can move.
-            </summary>
-            <remarks>This does not check whether other Chess pieces are in the way.</remarks>
-        </member>
-        <member name="P:ChessLib.Knight.AllValidMoves">
-            <summary>
-            All possible moves this Chess piece can move, which are valid.
-            </summary>
-        </member>
-        <member name="P:ChessLib.Knight.PieceName">
-            <summary>
-            The name of the Chess piece.
-            </summary>
-        </member>
-        <member name="T:ChessLib.Bishop">
-            <summary>
-            The Bishop Chess piece.
-            </summary>
-        </member>
-        <member name="M:ChessLib.Bishop.#ctor(ChessLib.ChessBoard,ChessLib.ChessColor,ChessLib.Tile)">
-            <summary>
-            The constructor.
-            </summary>
-            <param name="board">The board where the Chess piece is located.</param>
-            <param name="color">The color of the Chess piece.</param>
-            <param name="tile">The tile where the Chess piece is located.</param>
-        </member>
-        <member name="P:ChessLib.Bishop.AllMoves">
-            <summary>
-            All possible moves this Chess piece can move.
-            </summary>
-            <remarks>This does not check whether other Chess pieces are in the way.</remarks>
-        </member>
-        <member name="P:ChessLib.Bishop.AllValidMoves">
-            <summary>
-            All possible moves this Chess piece can move, which are valid.
-            </summary>
-        </member>
-        <member name="P:ChessLib.Bishop.PieceName">
-            <summary>
-            The name of the Chess piece.
-            </summary>
-        </member>
-        <member name="T:ChessLib.King">
-            <summary>
-            The King Chess piece.
-            </summary>
-        </member>
-        <member name="M:ChessLib.King.#ctor(ChessLib.ChessBoard,ChessLib.ChessColor,ChessLib.Tile)">
-            <summary>
-            The constructor.
-            </summary>
-            <param name="board">The board where the Chess piece is located.</param>
-            <param name="color">The color of the Chess piece.</param>
-            <param name="tile">The tile where the Chess piece is located.</param>
-        </member>
-        <member name="P:ChessLib.King.AllMoves">
-            <summary>
-            All possible moves this Chess piece can move.
-            </summary>
-            <remarks>This does not check whether other Chess pieces are in the way.</remarks>
-        </member>
-        <member name="P:ChessLib.King.AllValidMoves">
-            <summary>
-            All possible moves this Chess piece can move, which are valid.
-            </summary>
-        </member>
-        <member name="P:ChessLib.King.Checked">
-            <summary>
-            Whether the king is checked or not.
-            </summary>
-        </member>
-        <member name="P:ChessLib.King.CheckMated">
-            <summary>
-            Whether the king is checkmated or not.
-            </summary>
-        </member>
-        <member name="P:ChessLib.King.PieceName">
-            <summary>
-            The name of the Chess piece.
-            </summary>
-        </member>
         <member name="T:ChessLib.Tile">
             <summary>
             A tile in the Chess board.
@@ -246,6 +24,16 @@
         <member name="P:ChessLib.BelongsTo`1.Owner">
             <summary>
             The owner of the item.
+            </summary>
+        </member>
+        <member name="T:ChessLib.IColored">
+            <summary>
+            A colored item.
+            </summary>
+        </member>
+        <member name="P:ChessLib.IColored.Color">
+            <summary>
+            The color of the item.
             </summary>
         </member>
         <member name="T:ChessLib.ILocated">
@@ -300,19 +88,320 @@
             The location of the tile.
             </summary>
         </member>
-        <member name="T:ChessLib.ChessColor">
+        <member name="T:ChessLib.Bishop">
             <summary>
-            The color of Chess pieces and tiles.
+            The Bishop Chess piece.
             </summary>
         </member>
-        <member name="F:ChessLib.ChessColor.White">
+        <member name="T:ChessLib.ChessPiece">
             <summary>
-            The color white.
+            A Chess piece.
             </summary>
         </member>
-        <member name="F:ChessLib.ChessColor.Black">
+        <member name="T:ChessLib.BelongsTo`2">
             <summary>
-            The color black.
+            An item that belongs to another item.
+            </summary>
+            <typeparam name="T1">The type of an owner.</typeparam>
+            <typeparam name="T2">The type of an owner.</typeparam>
+        </member>
+        <member name="M:ChessLib.BelongsTo`2.#ctor(`0,`1)">
+            <summary>
+            The constructor.
+            </summary>
+            <param name="ownerOne">An owner.</param>
+            <param name="ownerTwo">An owner.</param>
+        </member>
+        <member name="P:ChessLib.BelongsTo`2.OwnerOne">
+            <summary>
+            One of the owners of the item.
+            </summary>
+        </member>
+        <member name="P:ChessLib.BelongsTo`2.OwnerTwo">
+            <summary>
+            One of the owners of the item.
+            </summary>
+        </member>
+        <member name="M:ChessLib.ChessPiece.#ctor(ChessLib.ChessBoard,ChessLib.ChessColor,ChessLib.Tile)">
+            <summary>
+            The constructor.
+            </summary>
+            <param name="board">The board where the Chess piece is located.</param>
+            <param name="color">The color of the Chess piece.</param>
+            <param name="tile">The tile where the Chess piece is located.</param>
+        </member>
+        <member name="M:ChessLib.ChessPiece.ToString">
+            <see cref="M:System.Object.ToString"/>
+        </member>
+        <member name="M:ChessLib.ChessPiece.Capture">
+            <summary>
+            Capture the Chess piece.
+            </summary>
+        </member>
+        <member name="P:ChessLib.ChessPiece.Color">
+            <summary>
+            The color of the Chess piece.
+            </summary>
+        </member>
+        <member name="P:ChessLib.ChessPiece.Board">
+            <summary>
+            The Chess board on which the Chess piece is located.
+            </summary>
+        </member>
+        <member name="P:ChessLib.ChessPiece.Tile">
+            <summary>
+            The tile on which the Chess piece is located.
+            </summary>
+        </member>
+        <member name="P:ChessLib.ChessPiece.Location">
+            <summary>
+            The location of the tile on which the Chess piece is located.
+            </summary>
+        </member>
+        <member name="E:ChessLib.ChessPiece.Captured">
+            <summary>
+            An event which will be fired when the Chess piece is captured.
+            </summary>
+        </member>
+        <member name="P:ChessLib.ChessPiece.AllMoves">
+            <summary>
+            All the moves that the Chess piece can move.
+            </summary>
+            <remarks>This does not check for validity of the moves.</remarks>
+        </member>
+        <member name="P:ChessLib.ChessPiece.AllValidMoves">
+            <summary>
+            All the moves that the Chess piece can move, that are valid.
+            </summary>
+        </member>
+        <member name="P:ChessLib.ChessPiece.PieceName">
+            <summary>
+            The name of the Chess piece.
+            </summary>
+        </member>
+        <member name="P:ChessLib.ChessPiece.PieceNameShort">
+            <summary>
+            The name of the Chess piece, prepended with the first character of the color.
+            </summary>
+        </member>
+        <member name="M:ChessLib.Bishop.#ctor(ChessLib.ChessBoard,ChessLib.ChessColor,ChessLib.Tile)">
+            <summary>
+            The constructor.
+            </summary>
+            <param name="board">The board where the Chess piece is located.</param>
+            <param name="color">The color of the Chess piece.</param>
+            <param name="tile">The tile where the Chess piece is located.</param>
+        </member>
+        <member name="P:ChessLib.Bishop.AllMoves">
+            <summary>
+            All possible moves this Chess piece can move.
+            </summary>
+            <remarks>This does not check whether other Chess pieces are in the way.</remarks>
+        </member>
+        <member name="P:ChessLib.Bishop.AllValidMoves">
+            <summary>
+            All possible moves this Chess piece can move, which are valid.
+            </summary>
+        </member>
+        <member name="P:ChessLib.Bishop.PieceName">
+            <summary>
+            The name of the Chess piece.
+            </summary>
+        </member>
+        <member name="T:ChessLib.Queen">
+            <summary>
+            The Queen Chess piece.
+            </summary>
+        </member>
+        <member name="M:ChessLib.Queen.#ctor(ChessLib.ChessBoard,ChessLib.ChessColor,ChessLib.Tile)">
+            <summary>
+            The constructor.
+            </summary>
+            <param name="board">The board where the Chess piece is located.</param>
+            <param name="color">The color of the Chess piece.</param>
+            <param name="tile">The tile where the Chess piece is located.</param>
+        </member>
+        <member name="P:ChessLib.Queen.AllMoves">
+            <summary>
+            All possible moves this Chess piece can move.
+            </summary>
+            <remarks>This does not check whether other Chess pieces are in the way.</remarks>
+        </member>
+        <member name="P:ChessLib.Queen.AllValidMoves">
+            <summary>
+            All possible moves this Chess piece can move, which are valid.
+            </summary>
+        </member>
+        <member name="P:ChessLib.Queen.PieceName">
+            <summary>
+            The name of the Chess piece.
+            </summary>
+        </member>
+        <member name="T:ChessLib.ChessBoard">
+            <summary>
+            The main Chess board.
+            </summary>
+            <remarks>This is also the controller of the game.</remarks>
+        </member>
+        <member name="M:ChessLib.ChessBoard.#ctor">
+            <summary>
+            The constructor.
+            </summary>
+        </member>
+        <member name="M:ChessLib.ChessBoard.Reset">
+            <summary>
+            Resets the Chess board.
+            </summary>
+        </member>
+        <member name="M:ChessLib.ChessBoard.GetEnumerator">
+            <see cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator"/>
+        </member>
+        <member name="M:ChessLib.ChessBoard.System#Collections#IEnumerable#GetEnumerator">
+            <see cref="M:System.Collections.IEnumerable.GetEnumerator"/>
+        </member>
+        <member name="P:ChessLib.ChessBoard.Tiles">
+            <summary>
+            The tiles of the Chess board.
+            </summary>
+        </member>
+        <member name="P:ChessLib.ChessBoard.Item(System.Int32,System.Char)">
+            <summary>
+            Gives access to the tiles of the Chess board.
+            </summary>
+            <param name="rank">The rank of the tile.</param>
+            <param name="file">The file of the tile.</param>
+            <returns>The tile at the specified rank and file.</returns>
+        </member>
+        <member name="P:ChessLib.ChessBoard.Item(System.Int32,System.Int32)">
+            <summary>
+            Gives access to the tiles of the Chess board.
+            </summary>
+            <param name="rank">The rank of the tile.</param>
+            <param name="file">The file of the tile.</param>
+            <returns>The tile at the specified rank and file.</returns>
+        </member>
+        <member name="P:ChessLib.ChessBoard.Item(ChessLib.Location)">
+            <summary>
+            Gives access to the tiles of the Chess board.
+            </summary>
+            <param name="l">The location of the tile.</param>
+            <returns>The tile at the specified rank and file.</returns>
+        </member>
+        <member name="P:ChessLib.ChessBoard.Item(System.String)">
+            <summary>
+            Gives access to the tiles of the Chess board.
+            </summary>
+            <param name="l">The location of the tile.</param>
+            <returns>The tile at the specified rank and file.</returns>
+        </member>
+        <member name="T:ChessLib.Misc">
+            <summary>
+            Miscellaneous utility methods.
+            </summary>
+        </member>
+        <member name="M:ChessLib.Misc.IfNotNull``1(``0,System.Action{``0})">
+            <summary>
+            Executes the specified action, if the current instance is not null.
+            </summary>
+            <typeparam name="T">The type of the current instance.</typeparam>
+            <param name="obj">The current instance.</param>
+            <param name="action">The action to execute.</param>
+        </member>
+        <member name="T:ChessLib.Rook">
+            <summary>
+            The Rook Chess piece.
+            </summary>
+        </member>
+        <member name="M:ChessLib.Rook.#ctor(ChessLib.ChessBoard,ChessLib.ChessColor,ChessLib.Tile)">
+            <summary>
+            The constructor.
+            </summary>
+            <param name="board">The board where the Chess piece is located.</param>
+            <param name="color">The color of the Chess piece.</param>
+            <param name="tile">The tile where the Chess piece is located.</param>
+        </member>
+        <member name="P:ChessLib.Rook.AllMoves">
+            <summary>
+            All possible moves this Chess piece can move.
+            </summary>
+            <remarks>This does not check whether other Chess pieces are in the way.</remarks>
+        </member>
+        <member name="P:ChessLib.Rook.AllValidMoves">
+            <summary>
+            All possible moves this Chess piece can move, which are valid.
+            </summary>
+        </member>
+        <member name="P:ChessLib.Rook.PieceName">
+            <summary>
+            The name of the Chess piece.
+            </summary>
+        </member>
+        <member name="T:ChessLib.Pawn">
+            <summary>
+            The Pawn Chess piece.
+            </summary>
+        </member>
+        <member name="M:ChessLib.Pawn.#ctor(ChessLib.ChessBoard,ChessLib.ChessColor,ChessLib.Tile)">
+            <summary>
+            The constructor.
+            </summary>
+            <param name="board">The board where the Chess piece is located.</param>
+            <param name="color">The color of the Chess piece.</param>
+            <param name="tile">The tile where the Chess piece is located.</param>
+        </member>
+        <member name="P:ChessLib.Pawn.AllMoves">
+            <summary>
+            All possible moves this Chess piece can move.
+            </summary>
+            <remarks>This does not check whether other Chess pieces are in the way.</remarks>
+        </member>
+        <member name="P:ChessLib.Pawn.AllValidMoves">
+            <summary>
+            All possible moves this Chess piece can move, which are valid.
+            </summary>
+        </member>
+        <member name="P:ChessLib.Pawn.PieceName">
+            <summary>
+            The name of the Chess piece.
+            </summary>
+        </member>
+        <member name="T:ChessLib.King">
+            <summary>
+            The King Chess piece.
+            </summary>
+        </member>
+        <member name="M:ChessLib.King.#ctor(ChessLib.ChessBoard,ChessLib.ChessColor,ChessLib.Tile)">
+            <summary>
+            The constructor.
+            </summary>
+            <param name="board">The board where the Chess piece is located.</param>
+            <param name="color">The color of the Chess piece.</param>
+            <param name="tile">The tile where the Chess piece is located.</param>
+        </member>
+        <member name="P:ChessLib.King.AllMoves">
+            <summary>
+            All possible moves this Chess piece can move.
+            </summary>
+            <remarks>This does not check whether other Chess pieces are in the way.</remarks>
+        </member>
+        <member name="P:ChessLib.King.AllValidMoves">
+            <summary>
+            All possible moves this Chess piece can move, which are valid.
+            </summary>
+        </member>
+        <member name="P:ChessLib.King.Checked">
+            <summary>
+            Whether the king is checked or not.
+            </summary>
+        </member>
+        <member name="P:ChessLib.King.CheckMated">
+            <summary>
+            Whether the king is checkmated or not.
+            </summary>
+        </member>
+        <member name="P:ChessLib.King.PieceName">
+            <summary>
+            The name of the Chess piece.
             </summary>
         </member>
         <member name="T:ChessLib.Location">
@@ -399,133 +488,27 @@
             The rank, or row, of an item.
             </summary>
         </member>
-        <member name="T:ChessLib.Queen">
+        <member name="T:ChessLib.ChessColor">
             <summary>
-            The Queen Chess piece.
+            The color of Chess pieces and tiles.
             </summary>
         </member>
-        <member name="M:ChessLib.Queen.#ctor(ChessLib.ChessBoard,ChessLib.ChessColor,ChessLib.Tile)">
+        <member name="F:ChessLib.ChessColor.White">
             <summary>
-            The constructor.
-            </summary>
-            <param name="board">The board where the Chess piece is located.</param>
-            <param name="color">The color of the Chess piece.</param>
-            <param name="tile">The tile where the Chess piece is located.</param>
-        </member>
-        <member name="P:ChessLib.Queen.AllMoves">
-            <summary>
-            All possible moves this Chess piece can move.
-            </summary>
-            <remarks>This does not check whether other Chess pieces are in the way.</remarks>
-        </member>
-        <member name="P:ChessLib.Queen.AllValidMoves">
-            <summary>
-            All possible moves this Chess piece can move, which are valid.
+            The color white.
             </summary>
         </member>
-        <member name="P:ChessLib.Queen.PieceName">
+        <member name="F:ChessLib.ChessColor.Black">
             <summary>
-            The name of the Chess piece.
+            The color black.
             </summary>
         </member>
-        <member name="T:ChessLib.Player">
+        <member name="T:ChessLib.Knight">
             <summary>
-            A player in a Chess game.
+            The Knight Chess piece.
             </summary>
         </member>
-        <member name="M:ChessLib.Player.#ctor(ChessLib.ChessBoard,ChessLib.ChessColor)">
-            <summary>
-            The constructor.
-            </summary>
-            <param name="board">The board the player is playing on.</param>
-            <param name="color">The color that the player will use.</param>
-        </member>
-        <member name="P:ChessLib.Player.Color">
-            <summary>
-            The color that the player will use.
-            </summary>
-        </member>
-        <member name="T:ChessLib.Misc">
-            <summary>
-            Miscellaneous utility methods.
-            </summary>
-        </member>
-        <member name="M:ChessLib.Misc.IfNotNull``1(``0,System.Action{``0})">
-            <summary>
-            Executes the specified action, if the current instance is not null.
-            </summary>
-            <typeparam name="T">The type of the current instance.</typeparam>
-            <param name="obj">The current instance.</param>
-            <param name="action">The action to execute.</param>
-        </member>
-        <member name="T:ChessLib.ChessBoard">
-            <summary>
-            The main Chess board.
-            </summary>
-            <remarks>This is also the controller of the game.</remarks>
-        </member>
-        <member name="M:ChessLib.ChessBoard.#ctor">
-            <summary>
-            The constructor.
-            </summary>
-        </member>
-        <member name="M:ChessLib.ChessBoard.Reset">
-            <summary>
-            Resets the Chess board.
-            </summary>
-        </member>
-        <member name="M:ChessLib.ChessBoard.GetEnumerator">
-            <see cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator"/>
-        </member>
-        <member name="M:ChessLib.ChessBoard.System#Collections#IEnumerable#GetEnumerator">
-            <see cref="M:System.Collections.IEnumerable.GetEnumerator"/>
-        </member>
-        <member name="P:ChessLib.ChessBoard.Tiles">
-            <summary>
-            The tiles of the Chess board.
-            </summary>
-        </member>
-        <member name="P:ChessLib.ChessBoard.Players">
-            <summary>
-            The players in the chess game.
-            </summary>
-        </member>
-        <member name="P:ChessLib.ChessBoard.Item(System.Int32,System.Char)">
-            <summary>
-            Gives access to the tiles of the Chess board.
-            </summary>
-            <param name="rank">The rank of the tile.</param>
-            <param name="file">The file of the tile.</param>
-            <returns>The tile at the specified rank and file.</returns>
-        </member>
-        <member name="P:ChessLib.ChessBoard.Item(System.Int32,System.Int32)">
-            <summary>
-            Gives access to the tiles of the Chess board.
-            </summary>
-            <param name="rank">The rank of the tile.</param>
-            <param name="file">The file of the tile.</param>
-            <returns>The tile at the specified rank and file.</returns>
-        </member>
-        <member name="P:ChessLib.ChessBoard.Item(ChessLib.Location)">
-            <summary>
-            Gives access to the tiles of the Chess board.
-            </summary>
-            <param name="l">The location of the tile.</param>
-            <returns>The tile at the specified rank and file.</returns>
-        </member>
-        <member name="P:ChessLib.ChessBoard.Item(System.String)">
-            <summary>
-            Gives access to the tiles of the Chess board.
-            </summary>
-            <param name="l">The location of the tile.</param>
-            <returns>The tile at the specified rank and file.</returns>
-        </member>
-        <member name="T:ChessLib.Rook">
-            <summary>
-            The Rook Chess piece.
-            </summary>
-        </member>
-        <member name="M:ChessLib.Rook.#ctor(ChessLib.ChessBoard,ChessLib.ChessColor,ChessLib.Tile)">
+        <member name="M:ChessLib.Knight.#ctor(ChessLib.ChessBoard,ChessLib.ChessColor,ChessLib.Tile)">
             <summary>
             The constructor.
             </summary>
@@ -533,18 +516,18 @@
             <param name="color">The color of the Chess piece.</param>
             <param name="tile">The tile where the Chess piece is located.</param>
         </member>
-        <member name="P:ChessLib.Rook.AllMoves">
+        <member name="P:ChessLib.Knight.AllMoves">
             <summary>
             All possible moves this Chess piece can move.
             </summary>
             <remarks>This does not check whether other Chess pieces are in the way.</remarks>
         </member>
-        <member name="P:ChessLib.Rook.AllValidMoves">
+        <member name="P:ChessLib.Knight.AllValidMoves">
             <summary>
             All possible moves this Chess piece can move, which are valid.
             </summary>
         </member>
-        <member name="P:ChessLib.Rook.PieceName">
+        <member name="P:ChessLib.Knight.PieceName">
             <summary>
             The name of the Chess piece.
             </summary>

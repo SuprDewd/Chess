@@ -22,6 +22,10 @@ namespace ChessLib
         /// The tile on which the Chess piece is located.
         /// </summary>
         public Tile Tile { get { return this.OwnerTwo; } internal set { this.OwnerTwo = value; } }
+        /// <summary>
+        /// The location of the tile on which the Chess piece is located.
+        /// </summary>
+        public Location Location { get { return this.Tile.Location; } }
 
         /// <summary>
         /// An event which will be fired when the Chess piece is captured.

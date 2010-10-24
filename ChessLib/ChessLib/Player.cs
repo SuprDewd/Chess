@@ -5,10 +5,10 @@ using System.Text;
 
 namespace ChessLib
 {
-    /// <summary>
+    /*/// <summary>
     /// A player in a Chess game.
     /// </summary>
-    public class Player : ChessItem, IColored
+    public class Player : BelongsTo<ChessBoard>, IColored
     {
         /// <summary>
         /// The color that the player will use.
@@ -24,5 +24,5 @@ namespace ChessLib
         {
             this.Color = color;
         }
-    }
+    }*/
 }
