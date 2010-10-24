@@ -17,7 +17,6 @@ C:\Users\Bjarki\Desktop\Projects\TSkoli\FOR403\Chess\ChessTester\ChessTester\obj
 C:\Users\Bjarki\Desktop\Projects\TSkoli\FOR403\Chess\ChessTester\ChessTester\obj\x86\Debug\ChessTester.pdb
 C:\Users\Bjarki\Desktop\Projects\TSkoli\FOR403\Chess\ChessTester\ChessTester\bin\Debug\ChessTester.exe
 C:\Users\Bjarki\Desktop\Projects\TSkoli\FOR403\Chess\ChessTester\ChessTester\bin\Debug\ChessTester.pdb
-C:\Users\Bjarki\Desktop\Projects\TSkoli\FOR403\Chess\ChessTester\ChessTester\bin\Debug\ChessLib.dll
 C:\Users\Bjarki\Desktop\Projects\TSkoli\FOR403\Chess\ChessTester\ChessTester\bin\Debug\ChessLib.pdb
 C:\Users\Bjarki\Desktop\Projects\TSkoli\FOR403\Chess\ChessTester\ChessTester\bin\Debug\ChessLib.xml
 C:\Users\Bjarki\Desktop\Projects\TSkoli\FOR403\Chess\ChessTester\ChessTester\obj\x86\Debug\ResolveAssemblyReference.cache
@@ -30,3 +29,4 @@ C:\Users\Bjarki\Desktop\Projects\TSkoli\FOR403\Chess\ChessTester\ChessTester\obj
 C:\Users\Bjarki\Desktop\Projects\TSkoli\FOR403\Chess\ChessTester\ChessTester\obj\x86\Debug\GenerateResource.read.1.tlog
 C:\Users\Bjarki\Desktop\Projects\TSkoli\FOR403\Chess\ChessTester\ChessTester\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessTester\ChessTester\bin\Debug\ChessLib.dll
+C:\Users\Bjarki\Desktop\Projects\TSkoli\FOR403\Chess\ChessTester\ChessTester\bin\Debug\ChessLib.dll
