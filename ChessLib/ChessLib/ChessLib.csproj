@@ -43,10 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChessItem.cs" />
     <Compile Include="Bishop.cs" />
     <Compile Include="ChessBoard.cs" />
     <Compile Include="ChessColor.cs" />
+    <Compile Include="BelongsTo.cs" />
     <Compile Include="ChessPiece.cs" />
     <Compile Include="IColored.cs" />
     <Compile Include="ILocated.cs" />

@@ -56,9 +56,9 @@ namespace ChessTester
                     Tile t = this.Board[x + 1, y + 1];
                     Canvas c = this.canvases[t.Location.Rank - 1, Location.ConvertFile(t.Location.File) - 1];
 
-                    c.Background = t.Color == ChessColor.White ? Brushes.White : Brushes.Black;
+                    c.Background = t.Color == ChessColor.White ? Brushes.Black : Brushes.White;
                     c.Children.Clear();
-                    c.Children.Add(new Label() { Content = (t.ToString()) + (t.Piece != null ? ": " + t.Piece.ToString() : ""), Foreground = Brushes.Red, Background = t.Piece == null ? null : new ImageBrush() { ImageSource = new BitmapImage(new Uri(@"C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\Icons\" + t.Piece.PieceNameShort + ".ico")), Stretch = Stretch.Uniform }});
+                    c.Children.Add(new Label() { Height = 80, VerticalAlignment = System.Windows.VerticalAlignment.Stretch, HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch, Content = (t.ToString()) + (t.Piece != null ? ": " + t.Piece.ToString() : ""), Foreground = Brushes.Red, Background = t.Piece == null ? null : new ImageBrush() { ImageSource = new BitmapImage(new Uri(@"C:\Users\Bjarki\Desktop\Projects\TSkoli\FOR403\Chess\Icons\" + t.Piece.PieceNameShort + ".ico")), Stretch = Stretch.Fill } });
                 }
             }
         }
@@ -71,13 +71,25 @@ namespace ChessTester
             {
                 Canvas c = (Canvas)sender;
                 this.LastTileClicked = this.Board[c.Name];
+
+                if (this.LastTileClicked.Piece == null)
+                {
+                    this.LastTileClicked = null;
+                    return;
+                }
+
                 c.Background = Brushes.Pink;
+
+                foreach (Tile t in this.LastTileClicked.Piece.AllValidMoves)
+                {
+                    this.canvases[t.Location.Rank - 1, Location.ConvertFile(t.Location.File) - 1].Background = Brushes.Green;
+                }
             }
             else
             {
                 Tile tileClicked = this.Board[((Canvas)sender).Name];
 
-                if (!this.LastTileClicked.To(tileClicked))
+                if (this.LastTileClicked != tileClicked && !this.LastTileClicked.To(tileClicked))
                 {
                     MessageBox.Show("Invalid move.");
                 }

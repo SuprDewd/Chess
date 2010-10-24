@@ -8,7 +8,7 @@ namespace ChessLib
     /// <summary>
     /// A tile in the Chess board.
     /// </summary>
-    public class Tile : ChessItem, IColored, ILocated
+    public class Tile : BelongsTo<ChessBoard>, IColored, ILocated
     {
         /// <summary>
         /// The color of the tile.
@@ -48,8 +48,16 @@ namespace ChessLib
         {
             if (this.Piece == null) return false;
             if (t.Piece != null && t.Piece.Color == this.Piece.Color) return false;
+            if (!this.Piece.AllValidMoves.Contains(t)) return false;
 
             // TODO: Implement more logic.
+
+            if (t.Piece != null)
+            {
+                t.Piece.Capture();
+            }
+
+            this.Piece.Tile = t;
             t.Piece = this.Piece;
             this.Piece = null;
 
@@ -63,7 +71,7 @@ namespace ChessLib
         /// <returns>Whether or not the move was successful.</returns>
         public bool To(Location l)
         {
-            return this.To(this.Board[l]);
+            return this.To(this.Owner[l]);
         }
 
         /// <see cref="Object.ToString()"/>

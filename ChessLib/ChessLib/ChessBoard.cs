@@ -9,7 +9,7 @@ namespace ChessLib
     /// The main Chess board.
     /// </summary>
     /// <remarks>This is also the controller of the game.</remarks>
-    public class ChessBoard
+    public class ChessBoard : IEnumerable<Tile>
     {
         private readonly Dictionary<Location, ChessPiece> StartingPieces;
 
@@ -93,6 +93,8 @@ namespace ChessLib
                     Tile t = (this.Tiles[row, column] == null ? new Tile(this, curLoc, (row + column) % 2 == 0 ? ChessColor.Black : ChessColor.White) : this.Tiles[row, column]);
                     t.Piece = piece;
 
+                    if (t.Piece != null) t.Piece.Tile = t;
+
                     this.Tiles[row, column] = t;
                 }
             }
@@ -155,5 +157,29 @@ namespace ChessLib
         }
 
         #endregion
+
+        /// <see cref="IEnumerable&lt;T&gt;.GetEnumerator()"/>
+        public IEnumerator<Tile> GetEnumerator()
+        {
+            for (int rank = 1; rank <= this.Tiles.GetLength(0); rank++)
+            {
+                for (int file = 1; file <= this.Tiles.GetLength(1); file++)
+                {
+                    yield return this[rank, file];
+                }
+            }
+        }
+
+        /// <see cref="System.Collections.IEnumerable.GetEnumerator()"/>
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            for (int rank = 1; rank <= this.Tiles.GetLength(0); rank++)
+            {
+                for (int file = 1; file <= this.Tiles.GetLength(1); file++)
+                {
+                    yield return this[rank, file];
+                }
+            }
+        }
     }
 }

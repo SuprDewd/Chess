@@ -123,7 +123,7 @@ namespace ChessLib
         /// <returns>The file as an int.</returns>
         public static int ConvertFile(char file)
         {
-            char c = file.ToString().ToUpper().ToCharArray().First();
+            char c = file.ToString().ToUpper()[0];
 
             if (c >= 'A' && c <= 'H')
             {
@@ -150,6 +150,29 @@ namespace ChessLib
             {
                 throw new Exception("Files can only be from A to H.");
             }
+        }
+
+        /// <summary>
+        /// Checks whether the specified rank and file are valid.
+        /// </summary>
+        /// <param name="rank">The rank.</param>
+        /// <param name="file">The file.</param>
+        /// <returns>Whether the specified rank and file are valid.</returns>
+        public static bool IsValid(int rank, char file)
+        {
+            char uCase = file.ToString().ToUpper()[0];
+            return (rank >= 1 && rank <= 8 && uCase >= 'A' && uCase <= 'H');
+        }
+
+        /// <summary>
+        /// Checks whether the specified rank and file are valid.
+        /// </summary>
+        /// <param name="rank">The rank.</param>
+        /// <param name="file">The file.</param>
+        /// <returns>Whether the specified rank and file are valid.</returns>
+        public static bool IsValid(int rank, int file)
+        {
+            return (rank >= 1 && rank <= 8 && file >= 1 && file <= 8);
         }
     }
 }
