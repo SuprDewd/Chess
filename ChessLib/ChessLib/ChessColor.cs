@@ -6,7 +6,7 @@ using System.Text;
 namespace ChessLib
 {
     /// <summary>
-    /// The color of Chess pieces and tiles.
+    /// The color of Chess pieces and squares.
     /// </summary>
     public enum ChessColor
     {

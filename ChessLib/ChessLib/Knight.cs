@@ -15,9 +15,9 @@ namespace ChessLib
         /// </summary>
         /// <param name="board">The board where the Chess piece is located.</param>
         /// <param name="color">The color of the Chess piece.</param>
-        /// <param name="tile">The tile where the Chess piece is located.</param>
-        public Knight(ChessBoard board, ChessColor color, Tile tile = null)
-            : base(board, color, tile)
+        /// <param name="square">The square where the Chess piece is located.</param>
+        public Knight(ChessBoard board, ChessColor color, Square square = null)
+            : base(board, color, square)
         {
 
         }
@@ -26,7 +26,7 @@ namespace ChessLib
         /// All possible moves this Chess piece can move.
         /// </summary>
         /// <remarks>This does not check whether other Chess pieces are in the way.</remarks>
-        public override IEnumerable<Tile> AllMoves
+        public override IEnumerable<Square> AllMoves
         {
             get
             {
@@ -66,7 +66,7 @@ namespace ChessLib
         /// <summary>
         /// All possible moves this Chess piece can move, which are valid.
         /// </summary>
-        public override IEnumerable<Tile> AllValidMoves
+        public override IEnumerable<Square> AllValidMoves
         {
             get
             {

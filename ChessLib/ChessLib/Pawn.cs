@@ -15,9 +15,9 @@ namespace ChessLib
         /// </summary>
         /// <param name="board">The board where the Chess piece is located.</param>
         /// <param name="color">The color of the Chess piece.</param>
-        /// <param name="tile">The tile where the Chess piece is located.</param>
-        public Pawn(ChessBoard board, ChessColor color, Tile tile = null)
-            : base(board, color, tile)
+        /// <param name="square">The square where the Chess piece is located.</param>
+        public Pawn(ChessBoard board, ChessColor color, Square square = null)
+            : base(board, color, square)
         {
 
         }
@@ -26,14 +26,14 @@ namespace ChessLib
         /// All possible moves this Chess piece can move.
         /// </summary>
         /// <remarks>This does not check whether other Chess pieces are in the way.</remarks>
-        public override IEnumerable<Tile> AllMoves
+        public override IEnumerable<Square> AllMoves
         {
             get
             {
                 int rnxt = this.Location.Rank + (this.Color == ChessColor.White ? 1 : -1);
                 if (Location.IsValid(rnxt, this.Location.File))
                 {
-                    yield return this.Board[rnxt, this.Location.File];
+                    if (this.Board[rnxt, this.Location.File].Piece == null) yield return this.Board[rnxt, this.Location.File];
 
                     int fn = Location.ConvertFile(this.Location.File) - 1,
                         fp = Location.ConvertFile(this.Location.File) + 1;
@@ -51,11 +51,11 @@ namespace ChessLib
 
                 if (this.Color == ChessColor.White && this.Location.Rank == 2)
                 {
-                    yield return this.Board[4, this.Location.File];
+                    if (this.Board[3, this.Location.File].Piece == null && this.Board[4, this.Location.File].Piece == null) yield return this.Board[4, this.Location.File];
                 }
                 else if (this.Color == ChessColor.Black && this.Location.Rank == 7)
                 {
-                    yield return this.Board[5, this.Location.File];
+                    if (this.Board[6, this.Location.File].Piece == null && this.Board[5, this.Location.File].Piece == null) yield return this.Board[5, this.Location.File];
                 }
             }
         }
@@ -63,7 +63,7 @@ namespace ChessLib
         /// <summary>
         /// All possible moves this Chess piece can move, which are valid.
         /// </summary>
-        public override IEnumerable<Tile> AllValidMoves
+        public override IEnumerable<Square> AllValidMoves
         {
             get
             {

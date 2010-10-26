@@ -8,7 +8,7 @@ namespace ChessLib
     /// <summary>
     /// A Chess piece.
     /// </summary>
-    public abstract class ChessPiece : BelongsTo<ChessBoard, Tile>, IColored
+    public abstract class ChessPiece : BelongsTo<ChessBoard, Square>, IColored
     {
         /// <summary>
         /// The color of the Chess piece.
@@ -19,13 +19,18 @@ namespace ChessLib
         /// </summary>
         public ChessBoard Board { get { return this.OwnerOne; } internal set { this.OwnerOne = value; } }
         /// <summary>
-        /// The tile on which the Chess piece is located.
+        /// The square on which the Chess piece is located.
         /// </summary>
-        public Tile Tile { get { return this.OwnerTwo; } internal set { this.OwnerTwo = value; } }
+        public Square Square { get { return this.OwnerTwo; } internal set { this.OwnerTwo = value; } }
         /// <summary>
-        /// The location of the tile on which the Chess piece is located.
+        /// The location of the square on which the Chess piece is located.
         /// </summary>
-        public Location Location { get { return this.Tile.Location; } }
+        public Location Location { get { return this.Square.Location; } }
+        /// <summary>
+        /// Whether the Chess piece is hidden or not.
+        /// </summary>
+        /// <remarks>Only used to virtually remove the Chess piece from the Chess board for calculation purposes.</remarks>
+        internal protected bool Hidden = false;
 
         /// <summary>
         /// An event which will be fired when the Chess piece is captured.
@@ -37,9 +42,9 @@ namespace ChessLib
         /// </summary>
         /// <param name="board">The board where the Chess piece is located.</param>
         /// <param name="color">The color of the Chess piece.</param>
-        /// <param name="tile">The tile where the Chess piece is located.</param>
-        public ChessPiece(ChessBoard board, ChessColor color, Tile tile)
-            : base(board, tile)
+        /// <param name="square">The square where the Chess piece is located.</param>
+        public ChessPiece(ChessBoard board, ChessColor color, Square square)
+            : base(board, square)
         {
             this.Color = color;
         }
@@ -48,11 +53,11 @@ namespace ChessLib
         /// All the moves that the Chess piece can move.
         /// </summary>
         /// <remarks>This does not check for validity of the moves.</remarks>
-        public abstract IEnumerable<Tile> AllMoves { get; }
+        public abstract IEnumerable<Square> AllMoves { get; }
         /// <summary>
         /// All the moves that the Chess piece can move, that are valid.
         /// </summary>
-        public abstract IEnumerable<Tile> AllValidMoves { get; }
+        public abstract IEnumerable<Square> AllValidMoves { get; }
 
         /// <summary>
         /// The name of the Chess piece.
@@ -82,32 +87,6 @@ namespace ChessLib
         internal void Capture()
         {
             this.Captured.IfNotNull(a => a(this));
-        }
-
-        /// <summary>
-        /// Selects a row of tiles, spreading out from the current tile.
-        /// </summary>
-        /// <param name="rankAdd">The number to add to the rank on each iteration.</param>
-        /// <param name="fileAdd">The number to add to the file on each iteration.</param>
-        /// <returns>The row of tiles.</returns>
-        protected IEnumerable<Tile> SelectRow(int rankAdd, int fileAdd)
-        {
-            Tile lastTile = this.Tile;
-
-            int rAdded, fAdded;
-
-            while (true)
-            {
-                rAdded = lastTile.Location.Rank + rankAdd;
-                fAdded = Location.ConvertFile(lastTile.Location.File) + fileAdd;
-
-                if (Location.IsValid(rAdded, fAdded))
-                {
-                    lastTile = this.Board[rAdded, fAdded];
-                    yield return lastTile;
-                }
-                else yield break;
-            }
         }
     }
 }

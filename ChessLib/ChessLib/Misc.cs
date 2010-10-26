@@ -53,24 +53,45 @@ namespace ChessLib
         /// <returns>The items.</returns>
         public static IEnumerable<T> TakeWhileAndOneMore<T>(this IEnumerable<T> source, Func<T, bool> predicate)
         {
-            bool oneMore = true;
-
             foreach (T item in source)
             {
                 if (predicate(item))
                 {
                     yield return item;
                 }
-                else if (oneMore)
-                {
-                    yield return item;
-                    oneMore = false;
-                }
                 else
                 {
+                    yield return item;
                     yield break;
                 }
             }
+        }
+
+        /// <summary>
+        /// Returns the opposite color of the colored item.
+        /// </summary>
+        /// <param name="c">The current instance.</param>
+        /// <returns>The opposite color of the colored item.</returns>
+        public static ChessColor Opposite(this ChessColor c)
+        {
+            return c == ChessColor.White ? ChessColor.Black : ChessColor.White;
+        }
+
+        /// <summary>
+        /// Executes the specified action and returns the current instance.
+        /// </summary>
+        /// <typeparam name="T">The type of the current instance.</typeparam>
+        /// <param name="source">The current instance.</param>
+        /// <param name="action">The specified action.</param>
+        /// <returns>The current instance.</returns>
+        public static IEnumerable<T> Do<T>(this IEnumerable<T> source, Action action)
+        {
+            foreach (T item in source)
+            {
+                yield return item;
+            }
+
+            action();
         }
     }
 }

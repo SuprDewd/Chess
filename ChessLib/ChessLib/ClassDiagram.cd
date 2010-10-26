@@ -1,49 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="ChessLib.ChessItem">
-    <Position X="4" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAA=</HashCode>
-      <FileName>ChessItem.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Board" />
-    </ShowAsAssociation>
-  </Class>
   <Class Name="ChessLib.ChessBoard">
     <Position X="1" Y="0.5" Width="1.5" />
-    <AssociationLine Name="Tiles" Type="ChessLib.Tile" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+    <AssociationLine Name="Squares" Type="ChessLib.Square" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="1" Y="1.387" />
-        <Point X="0.531" Y="1.387" />
-        <Point X="0.531" Y="3.528" />
-        <Point X="1" Y="3.528" />
+        <Point X="1" Y="1.872" />
+        <Point X="0.531" Y="1.872" />
+        <Point X="0.531" Y="4.458" />
+        <Point X="1" Y="4.458" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAABAAACAAAAAAAAAAgAAIAAAAAAAAAQAA=</HashCode>
+      <HashCode>ACAAAAAAAEAABBAAKAACAACAAAAgAAAABAAAAAAAQAA=</HashCode>
       <FileName>ChessBoard.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
-      <Property Name="Tiles" />
+      <Property Name="Squares" />
     </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="ChessLib.ChessPiece">
-    <Position X="6" Y="2.75" Width="1.5" />
-    <InheritanceLine Type="ChessLib.ChessItem" ManuallyRouted="true">
-      <Path>
-        <Point X="4.75" Y="1.603" />
-        <Point X="4.75" Y="2.057" />
-        <Point X="4.857" Y="2.057" />
-        <Point X="4.857" Y="2.448" />
-        <Point X="5.042" Y="2.448" Type="JumpStart" />
-        <Point X="5.208" Y="2.448" Type="JumpEnd" />
-        <Point X="6.75" Y="2.448" />
-        <Point X="6.75" Y="2.75" />
-      </Path>
-    </InheritanceLine>
+    <Position X="6.5" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAgAAAAAAAAAAAAEAQAAAAAAAAAAAAAAABAEgAAAAAA=</HashCode>
+      <HashCode>AAggAAAAAAAAAAAEAQIAAAAAAAAAAAAAABCkgCAEAAA=</HashCode>
       <FileName>ChessPiece.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -52,17 +31,25 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="ChessLib.King">
-    <Position X="1.5" Y="5.5" Width="1.5" />
+    <Position X="1.5" Y="7" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAggAAAAAAAAAACAAAAAAAAAAAAAAAAAAACAAEAAAAA=</HashCode>
       <FileName>King.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ChessLib.Tile">
-    <Position X="1" Y="3" Width="1.5" />
+  <Class Name="ChessLib.Square">
+    <Position X="1" Y="3.75" Width="1.5" />
+    <InheritanceLine Type="ChessLib.BelongsTo&lt;T&gt;" FixedToPoint="true">
+      <Path>
+        <Point X="3.5" Y="2.055" />
+        <Point X="3.5" Y="3.375" />
+        <Point X="2.25" Y="3.375" />
+        <Point X="2.25" Y="3.75" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAEAAIAAAAAAAAIAAAAAAAAoAAAAAA=</HashCode>
-      <FileName>Tile.cs</FileName>
+      <HashCode>AAAAAAAAAAAABAAEAAIQAAAAAAAIAAAAAAAAoCAAACA=</HashCode>
+      <FileName>Square.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Color" />
@@ -70,60 +57,63 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="ChessLib.Queen">
-    <Position X="3.25" Y="5.5" Width="1.5" />
+    <Position X="3.25" Y="7" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAggAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
       <FileName>Queen.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ChessLib.Rook">
-    <Position X="5" Y="5.5" Width="1.5" />
+    <Position X="5" Y="7" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAggAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
       <FileName>Rook.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ChessLib.Bishop">
-    <Position X="6.75" Y="5.5" Width="1.5" />
+    <Position X="6.75" Y="7" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAggAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
       <FileName>Bishop.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ChessLib.Knight">
-    <Position X="8.5" Y="5.5" Width="1.5" />
+    <Position X="8.5" Y="7" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAggAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
       <FileName>Knight.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ChessLib.Pawn">
-    <Position X="10.25" Y="5.5" Width="1.5" />
+    <Position X="10.25" Y="7" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAggAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
       <FileName>Pawn.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ChessLib.Location">
-    <Position X="10.25" Y="0.75" Width="1.5" />
+    <Position X="8.25" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAABAAAAAAAQAAAEgAAAAAEAAAAEEIAAAAAAAAAAAiA=</HashCode>
+      <HashCode>AAABAAAAAAAQAAAEgAgAAAEAAAAEEIAAAAAAAAAAAiA=</HashCode>
       <FileName>Location.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ChessLib.Player">
-    <Position X="8.25" Y="2.75" Width="1.5" />
+  <Class Name="ChessLib.BelongsTo&lt;T&gt;">
+    <Position X="2.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
-      <FileName>Player.cs</FileName>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BelongsTo.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Color" />
-    </ShowAsAssociation>
-    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ChessLib.BelongsTo&lt;T1, T2&gt;">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>BelongsTo.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Interface Name="ChessLib.IColored">
-    <Position X="3.25" Y="2.25" Width="1.5" />
+    <Position X="4" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
       <FileName>IColored.cs</FileName>
@@ -133,7 +123,7 @@
     </ShowAsAssociation>
   </Interface>
   <Interface Name="ChessLib.ILocated">
-    <Position X="12" Y="0.75" Width="1.5" />
+    <Position X="10" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ILocated.cs</FileName>
@@ -143,7 +133,7 @@
     </ShowAsAssociation>
   </Interface>
   <Enum Name="ChessLib.ChessColor">
-    <Position X="3.25" Y="3.5" Width="1.5" />
+    <Position X="3.25" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAEAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ChessColor.cs</FileName>

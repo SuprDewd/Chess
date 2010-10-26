@@ -49,21 +49,47 @@ namespace ChessTester
 
         private void Reset()
         {
+            bool blackKingChecked = false;
+            bool blackKingCheckeMated = false;
+            bool whiteKingChecked = false;
+            bool whiteKingCheckeMated = false;
+
             for (int x = 0; x < 8; x++)
             {
                 for (int y = 0; y < 8; y++)
                 {
-                    Tile t = this.Board[x + 1, y + 1];
+                    Square t = this.Board[x + 1, y + 1];
                     Canvas c = this.canvases[t.Location.Rank - 1, Location.ConvertFile(t.Location.File) - 1];
+
+                    if (t.Piece != null && t.Piece.GetType() == typeof(King))
+                    {
+                        King k = (King)t.Piece;
+
+                        if (k.Color == ChessColor.White)
+                        {
+                            whiteKingChecked = k.Checked;
+                            whiteKingCheckeMated = k.CheckMated;
+                        }
+                        else
+                        {
+                            blackKingChecked = k.Checked;
+                            blackKingCheckeMated = k.CheckMated;
+                        }
+                    }
 
                     c.Background = t.Color == ChessColor.White ? Brushes.Black : Brushes.White;
                     c.Children.Clear();
-                    c.Children.Add(new Label() { Height = 80, VerticalAlignment = System.Windows.VerticalAlignment.Stretch, HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch, Content = (t.ToString()) + (t.Piece != null ? ": " + t.Piece.ToString() : ""), Foreground = Brushes.Red, Background = t.Piece == null ? null : new ImageBrush() { ImageSource = new BitmapImage(new Uri(@"C:\Users\Bjarki\Desktop\Projects\TSkoli\FOR403\Chess\Icons\" + t.Piece.PieceNameShort + ".ico")), Stretch = Stretch.Fill } });
+                    c.Children.Add(new Label() { Height = 80, VerticalAlignment = System.Windows.VerticalAlignment.Stretch, HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch, Content = (t.ToString()) + (t.Piece != null ? ": " + t.Piece.ToString() : ""), Foreground = Brushes.Red, Background = t.Piece == null ? null : new ImageBrush() { ImageSource = new BitmapImage(new Uri(@"C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\Icons\" + t.Piece.PieceNameShort + ".ico")), Stretch = Stretch.Fill } });
                 }
             }
+
+            txtStatus.Text = "Black King Checked:    " + (blackKingChecked ? "yes" : "no") +     Environment.NewLine +
+                             "Black King CheckMated: " + (blackKingCheckeMated ? "yes" : "no") + Environment.NewLine +
+                             "White King Checked:    " + (whiteKingChecked ? "yes" : "no") +     Environment.NewLine +
+                             "White King CheckMated: " + (whiteKingCheckeMated ? "yes" : "no"); 
         }
 
-        private Tile LastTileClicked = null;
+        private Square LastTileClicked = null;
 
         private void TileClicked(object sender, RoutedEventArgs e)
         {
@@ -72,7 +98,7 @@ namespace ChessTester
                 Canvas c = (Canvas)sender;
                 this.LastTileClicked = this.Board[c.Name];
 
-                if (this.LastTileClicked.Piece == null)
+                if (this.LastTileClicked.Piece == null || this.LastTileClicked.Piece.Color != this.Board.Turn)
                 {
                     this.LastTileClicked = null;
                     return;
@@ -80,14 +106,14 @@ namespace ChessTester
 
                 c.Background = Brushes.Pink;
 
-                foreach (Tile t in this.LastTileClicked.Piece.AllValidMoves)
+                foreach (Square t in this.LastTileClicked.Piece.AllValidMoves)
                 {
                     this.canvases[t.Location.Rank - 1, Location.ConvertFile(t.Location.File) - 1].Background = Brushes.Green;
                 }
             }
             else
             {
-                Tile tileClicked = this.Board[((Canvas)sender).Name];
+                Square tileClicked = this.Board[((Canvas)sender).Name];
 
                 if (this.LastTileClicked != tileClicked && !this.LastTileClicked.To(tileClicked))
                 {

@@ -9,18 +9,18 @@ namespace ChessLib
     /// The main Chess board.
     /// </summary>
     /// <remarks>This is also the controller of the game.</remarks>
-    public class ChessBoard : IEnumerable<Tile>
+    public class ChessBoard : IEnumerable<Square>
     {
         private readonly Dictionary<Location, ChessPiece> StartingPieces;
 
         /// <summary>
-        /// The tiles of the Chess board.
+        /// The squares of the Chess board.
         /// </summary>
-        private Tile[,] Tiles { get; set; }
-        /*/// <summary>
-        /// The players in the chess game.
+        private Square[,] Squares { get; set; }
+        /// <summary>
+        /// The color that should move next.
         /// </summary>
-        public Player[] Players { get; private set; }*/
+        public ChessColor Turn { get; private set; }
 
         /// <summary>
         /// The constructor.
@@ -66,14 +66,6 @@ namespace ChessLib
                 {new Location(2, 'H'), new Pawn(this, ChessColor.White)},
             };
 
-            /*this.Players = new Player[2]
-            {
-                new Player(this, ChessColor.White),
-                new Player(this, ChessColor.Black)
-            };*/
-
-            //this.Players[0].Play();
-
             this.Reset();
         }
 
@@ -82,60 +74,116 @@ namespace ChessLib
         /// </summary>
         public void Reset()
         {
-            this.Tiles = new Tile[8, 8];
+            this.Turn = ChessColor.White;
+            this.Squares = new Square[8, 8];
 
-            for (int row = 0; row < this.Tiles.GetLength(0); row++)
+            for (int row = 0; row < this.Squares.GetLength(0); row++)
             {
-                for (int column = 0; column < this.Tiles.GetLength(1); column++)
+                for (int column = 0; column < this.Squares.GetLength(1); column++)
                 {
                     Location curLoc = new Location(row + 1, column + 1);
                     ChessPiece piece = (from p in this.StartingPieces where p.Key == curLoc select p.Value).SingleOrDefault();
-                    Tile t = (this.Tiles[row, column] == null ? new Tile(this, curLoc, (row + column) % 2 == 0 ? ChessColor.Black : ChessColor.White) : this.Tiles[row, column]);
+                    Square t = (this.Squares[row, column] == null ? new Square(this, curLoc, (row + column) % 2 == 0 ? ChessColor.Black : ChessColor.White) : this.Squares[row, column]);
                     t.Piece = piece;
 
-                    if (t.Piece != null) t.Piece.Tile = t;
+                    if (t.Piece != null) t.Piece.Square = t;
 
-                    this.Tiles[row, column] = t;
+                    this.Squares[row, column] = t;
                 }
             }
+
+            this.NextTurn.IfNotNull(a => a(this));
         }
+
+        /// <summary>
+        /// Gets the king with the specified color.
+        /// </summary>
+        /// <param name="c">The color of the king to find.</param>
+        /// <returns>The square that the king is on.</returns>
+        public Square GetKing(ChessColor c)
+        {
+            return (from s in this
+                    where s.Piece != null && s.Color == c && s.Piece.GetType() == typeof(King)
+                    select s).Single();
+        }
+
+        /// <summary>
+        /// Tell the Chess board that the current turn is over.
+        /// </summary>
+        internal void TurnOver()
+        {
+            this.Turn = this.Turn.Opposite();
+
+            bool blackCheckmate = ((King)this.GetKing(ChessColor.Black).Piece).CheckMated;
+            bool whiteCheckmate = ((King)this.GetKing(ChessColor.White).Piece).CheckMated;
+
+            if ((from s in this where s.Piece != null select s).Count() == 2 || (blackCheckmate && whiteCheckmate))
+            {
+                this.StaleMate.IfNotNull(a => a(this));
+            }
+            else if (blackCheckmate || whiteCheckmate)
+            {
+                this.CheckMate.IfNotNull(a => a(this, blackCheckmate ? ChessColor.Black : ChessColor.White));
+            }
+            else
+            {
+                this.NextTurn.IfNotNull(a => a(this));
+            }
+        }
+
+        #region Events
+
+        /// <summary>
+        /// An event that is fired when the next player should move.
+        /// </summary>
+        public event Action<ChessBoard> NextTurn;
+        /// <summary>
+        /// An event that is fired when there is a checkmate.
+        /// </summary>
+        public event Action<ChessBoard, ChessColor> CheckMate;
+        /// <summary>
+        /// An event that is fired when there is a stalemate.
+        /// </summary>
+        public event Action<ChessBoard> StaleMate; 
+
+        #endregion
 
         #region Indexers
 
         /// <summary>
-        /// Gives access to the tiles of the Chess board.
+        /// Gives access to the squares of the Chess board.
         /// </summary>
-        /// <param name="rank">The rank of the tile.</param>
-        /// <param name="file">The file of the tile.</param>
-        /// <returns>The tile at the specified rank and file.</returns>
-        public Tile this[int rank, char file]
+        /// <param name="rank">The rank of the square.</param>
+        /// <param name="file">The file of the square.</param>
+        /// <returns>The square at the specified rank and file.</returns>
+        public Square this[int rank, char file]
         {
             get
             {
-                return this.Tiles[rank - 1, Location.ConvertFile(file) - 1];
+                return this.Squares[rank - 1, Location.ConvertFile(file) - 1];
             }
         }
 
         /// <summary>
-        /// Gives access to the tiles of the Chess board.
+        /// Gives access to the squares of the Chess board.
         /// </summary>
-        /// <param name="rank">The rank of the tile.</param>
-        /// <param name="file">The file of the tile.</param>
-        /// <returns>The tile at the specified rank and file.</returns>
-        public Tile this[int rank, int file]
+        /// <param name="rank">The rank of the square.</param>
+        /// <param name="file">The file of the square.</param>
+        /// <returns>The square at the specified rank and file.</returns>
+        public Square this[int rank, int file]
         {
             get
             {
-                return this.Tiles[rank - 1, file - 1];
+                return this.Squares[rank - 1, file - 1];
             }
         }
 
         /// <summary>
-        /// Gives access to the tiles of the Chess board.
+        /// Gives access to the squares of the Chess board.
         /// </summary>
-        /// <param name="l">The location of the tile.</param>
-        /// <returns>The tile at the specified rank and file.</returns>
-        public Tile this[Location l]
+        /// <param name="l">The location of the square.</param>
+        /// <returns>The square at the specified rank and file.</returns>
+        public Square this[Location l]
         {
             get
             {
@@ -144,11 +192,11 @@ namespace ChessLib
         }
 
         /// <summary>
-        /// Gives access to the tiles of the Chess board.
+        /// Gives access to the squares of the Chess board.
         /// </summary>
-        /// <param name="l">The location of the tile.</param>
-        /// <returns>The tile at the specified rank and file.</returns>
-        public Tile this[string l]
+        /// <param name="l">The location of the square.</param>
+        /// <returns>The square at the specified rank and file.</returns>
+        public Square this[string l]
         {
             get
             {
@@ -158,12 +206,14 @@ namespace ChessLib
 
         #endregion
 
+        #region Enumerators
+
         /// <see cref="IEnumerable&lt;T&gt;.GetEnumerator()"/>
-        public IEnumerator<Tile> GetEnumerator()
+        public IEnumerator<Square> GetEnumerator()
         {
-            for (int rank = 1; rank <= this.Tiles.GetLength(0); rank++)
+            for (int rank = 1; rank <= this.Squares.GetLength(0); rank++)
             {
-                for (int file = 1; file <= this.Tiles.GetLength(1); file++)
+                for (int file = 1; file <= this.Squares.GetLength(1); file++)
                 {
                     yield return this[rank, file];
                 }
@@ -173,13 +223,15 @@ namespace ChessLib
         /// <see cref="System.Collections.IEnumerable.GetEnumerator()"/>
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            for (int rank = 1; rank <= this.Tiles.GetLength(0); rank++)
+            for (int rank = 1; rank <= this.Squares.GetLength(0); rank++)
             {
-                for (int file = 1; file <= this.Tiles.GetLength(1); file++)
+                for (int file = 1; file <= this.Squares.GetLength(1); file++)
                 {
                     yield return this[rank, file];
                 }
             }
         }
+
+        #endregion
     }
 }
