@@ -638,5 +638,23 @@
             Checks whether the current square is being attacked by the opposite color.
             </summary>
         </member>
+        <member name="T:ChessLib.MovementBehaviour">
+            <summary>
+            An abstract class describing a movement behaviour.
+            </summary>
+        </member>
+        <member name="M:ChessLib.MovementBehaviour.#ctor(ChessLib.ChessPiece)">
+            <summary>
+            The constructor.
+            </summary>
+            <param name="chessPiece">The Chess piece that the movement behaviour belongs to is on.</param>
+        </member>
+        <member name="M:ChessLib.MovementBehaviour.Move(ChessLib.Square)">
+            <summary>
+            Moves the Chess piece.
+            </summary>
+            <param name="s">The square to move the Chess piece to.</param>
+            <returns>Whether the move was successful.</returns>
+        </member>
     </members>
 </doc>
