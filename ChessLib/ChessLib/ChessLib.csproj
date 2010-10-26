@@ -44,6 +44,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionDisposable.cs" />
+    <Compile Include="Behaviours\PawnMovement.cs" />
+    <Compile Include="Behaviours\KingMovement.cs" />
+    <Compile Include="Behaviours\KnightMovement.cs" />
+    <Compile Include="Behaviours\MovementDirection.cs" />
+    <Compile Include="Behaviours\RowMovement.cs" />
     <Compile Include="Bishop.cs" />
     <Compile Include="ChessBoard.cs" />
     <Compile Include="ChessColor.cs" />

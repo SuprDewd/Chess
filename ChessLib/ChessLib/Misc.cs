@@ -93,5 +93,32 @@ namespace ChessLib
 
             action();
         }
+
+        /// <summary>
+        /// Iterates through the collection and applies the specified action on each element.
+        /// </summary>
+        /// <typeparam name="T">The type of the current instance.</typeparam>
+        /// <param name="source">The current instance.</param>
+        /// <param name="action">The specified action.</param>
+        /// <returns>The current instance.</returns>
+        public static IEnumerable<T> Iter<T>(this IEnumerable<T> source, Action<T> action)
+        {
+            foreach (T item in source)
+            {
+                action(item);
+            }
+
+            return source;
+        }
+        
+        /// <summary>
+        /// Whether the piece should be used in calculations.
+        /// </summary>
+        /// <param name="piece">The current instance.</param>
+        /// <returns>Whether the piece should be used in calculations.</returns>
+        public static bool NotHere(this ChessPiece piece)
+        {
+            return piece == null;
+        }
     }
 }

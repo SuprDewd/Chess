@@ -53,12 +53,12 @@ namespace ChessLib
             if (this.Piece == null) return false;
             if (this.Piece.Color != this.Board.Turn) return false;
 
-            Square king = this.Board.GetKing(this.Piece.Color);
+            King king = (King)this.Board.GetKing(this.Board.Turn).Piece;
 
-            if (!Object.ReferenceEquals(this, king) && ((King)king.Piece).Checked) return false;
+            if (!Object.ReferenceEquals(this, king.Square) && king.Checked) return false;
 
             if (t.Piece != null && t.Piece.Color == this.Piece.Color) return false;
-            if (!this.Piece.AllValidMoves.Contains(t)) return false;
+            if (!this.Piece.Movement.Move(t)) return false;
 
             // TODO: Implement more logic.
 
@@ -142,7 +142,7 @@ namespace ChessLib
 
             return (from s in this.Board
                     where s.Piece != null && predicate(s) && s.Piece.Color == c && s.Piece.GetType() != typeof(Pawn)
-                    select s).Any(s => s.Piece.AllValidMoves.Contains(this));
+                    select s).Any(s => s.Piece.Movement.ValidMoves.Contains(this));
         }
 
         /// <summary>

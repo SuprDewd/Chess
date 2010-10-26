@@ -103,7 +103,7 @@ namespace ChessLib
         public Square GetKing(ChessColor c)
         {
             return (from s in this
-                    where s.Piece != null && s.Color == c && s.Piece.GetType() == typeof(King)
+                    where s.Piece != null && s.Piece.Color == c && s.Piece.GetType() == typeof(King)
                     select s).Single();
         }
 

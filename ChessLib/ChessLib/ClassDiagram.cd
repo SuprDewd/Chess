@@ -1,15 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="ChessLib.ChessBoard">
-    <Position X="1" Y="0.5" Width="1.5" />
-    <AssociationLine Name="Squares" Type="ChessLib.Square" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="1" Y="1.872" />
-        <Point X="0.531" Y="1.872" />
-        <Point X="0.531" Y="4.458" />
-        <Point X="1" Y="4.458" />
-      </Path>
-    </AssociationLine>
+    <Position X="7.25" Y="9" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ACAAAAAAAEAABBAAKAACAACAAAAgAAAABAAAAAAAQAA=</HashCode>
       <FileName>ChessBoard.cs</FileName>
@@ -20,100 +12,157 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="ChessLib.ChessPiece">
-    <Position X="6.5" Y="1.25" Width="1.5" />
+    <Position X="16" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAggAAAAAAAAAAAEAQIAAAAAAAAAAAAAABCkgCAEAAA=</HashCode>
+      <HashCode>AAgAAAAAAAAAAAAEBQIAAAAAAAAAAAAAABAkgCAAAAA=</HashCode>
       <FileName>ChessPiece.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Color" />
+      <Property Name="Location" />
+      <Property Name="Board" />
+      <Property Name="Movement" />
+      <Property Name="Square" />
     </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="ChessLib.King">
-    <Position X="1.5" Y="7" Width="1.5" />
+    <Position X="10.5" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAggAAAAAAAAAACAAAAAAAAAAAAAAAAAAACAAEAAAAA=</HashCode>
+      <HashCode>AAgAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
       <FileName>King.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ChessLib.Square">
-    <Position X="1" Y="3.75" Width="1.5" />
-    <InheritanceLine Type="ChessLib.BelongsTo&lt;T&gt;" FixedToPoint="true">
-      <Path>
-        <Point X="3.5" Y="2.055" />
-        <Point X="3.5" Y="3.375" />
-        <Point X="2.25" Y="3.375" />
-        <Point X="2.25" Y="3.75" />
-      </Path>
-    </InheritanceLine>
+    <Position X="0.5" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAABAAEAAIQAAAAAAAIAAAAAAAAoCAAACA=</HashCode>
       <FileName>Square.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Color" />
+      <Property Name="Board" />
+      <Property Name="Location" />
+      <Property Name="Piece" />
     </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="ChessLib.Queen">
-    <Position X="3.25" Y="7" Width="1.5" />
+    <Position X="12.75" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAggAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Queen.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ChessLib.Rook">
-    <Position X="5" Y="7" Width="1.5" />
+    <Position X="15" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAggAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Rook.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ChessLib.Bishop">
-    <Position X="6.75" Y="7" Width="1.5" />
+    <Position X="17.25" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAggAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Bishop.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ChessLib.Knight">
-    <Position X="8.5" Y="7" Width="1.5" />
+    <Position X="19.5" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAggAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Knight.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ChessLib.Pawn">
-    <Position X="10.25" Y="7" Width="1.5" />
+    <Position X="21.75" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAggAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Pawn.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ChessLib.Location">
-    <Position X="8.25" Y="1.25" Width="1.5" />
+    <Position X="4.25" Y="10.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAABAAAAAAAQAAAEgAgAAAEAAAAEEIAAAAAAAAAAAiA=</HashCode>
       <FileName>Location.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ChessLib.BelongsTo&lt;T&gt;">
-    <Position X="2.75" Y="0.5" Width="1.5" />
+    <Position X="0.5" Y="8.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>BelongsTo.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ChessLib.BelongsTo&lt;T1, T2&gt;">
-    <Position X="4.5" Y="0.5" Width="1.5" />
+    <Position X="11.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
       <FileName>BelongsTo.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="ChessLib.ActionDisposable" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="24.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ActionDisposable.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ChessLib.Misc" Collapsed="true">
+    <Position X="26" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAACAAAAAICAAAAAAAAAACAAEAAAA=</HashCode>
+      <FileName>Misc.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChessLib.MovementBehaviour">
+    <Position X="4.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAEAAAAAAAAAAAAAAAAEAAAAAAICAAAAA=</HashCode>
+      <FileName>MovementBehaviour.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Board" />
+      <Property Name="Piece" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ChessLib.Behaviours.KingMovement">
+    <Position X="6" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Behaviours\KingMovement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChessLib.Behaviours.KnightMovement">
+    <Position X="8.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Behaviours\KnightMovement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChessLib.Behaviours.PawnMovement">
+    <Position X="1.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Behaviours\PawnMovement.cs</FileName>
+      <NewMemberFileName>Behaviours\KnightMovement.cs</NewMemberFileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChessLib.Behaviours.RowMovement">
+    <Position X="3.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAACAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Behaviours\RowMovement.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Direction" />
+    </ShowAsAssociation>
+  </Class>
   <Interface Name="ChessLib.IColored">
-    <Position X="4" Y="2.75" Width="1.5" />
+    <Position X="10.25" Y="11.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
       <FileName>IColored.cs</FileName>
@@ -123,7 +172,7 @@
     </ShowAsAssociation>
   </Interface>
   <Interface Name="ChessLib.ILocated">
-    <Position X="10" Y="1.25" Width="1.5" />
+    <Position X="4.25" Y="15.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ILocated.cs</FileName>
@@ -133,10 +182,17 @@
     </ShowAsAssociation>
   </Interface>
   <Enum Name="ChessLib.ChessColor">
-    <Position X="3.25" Y="4" Width="1.5" />
+    <Position X="10.25" Y="9.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAEAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ChessColor.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ChessLib.Behaviours.MovementDirection" Collapsed="true">
+    <Position X="3.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAEAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Behaviours\MovementDirection.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />

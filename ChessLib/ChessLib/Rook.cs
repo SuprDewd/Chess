@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ChessLib.Behaviours;
 
 namespace ChessLib
 {
@@ -19,30 +20,7 @@ namespace ChessLib
         public Rook(ChessBoard board, ChessColor color, Square square = null)
             : base(board, color, square)
         {
-
-        }
-
-        /// <summary>
-        /// All possible moves this Chess piece can move.
-        /// </summary>
-        /// <remarks>This does not check whether other Chess pieces are in the way.</remarks>
-        public override IEnumerable<Square> AllMoves
-        {
-            get
-            {
-                return this.Square.SelectRow(1, 0).UnionAll(this.Square.SelectRow(0, 1).UnionAll(this.Square.SelectRow(-1, 0).UnionAll(this.Square.SelectRow(0, -1))));
-            }
-        }
-
-        /// <summary>
-        /// All possible moves this Chess piece can move, which are valid.
-        /// </summary>
-        public override IEnumerable<Square> AllValidMoves
-        {
-            get
-            {
-                return this.Square.SelectRow(1, 0).TakeWhileAndOneMore(t => t.Piece == null || t.Piece.Hidden).UnionAll(this.Square.SelectRow(0, 1).TakeWhileAndOneMore(t => t.Piece == null || t.Piece.Hidden).UnionAll(this.Square.SelectRow(-1, 0).TakeWhileAndOneMore(t => t.Piece == null || t.Piece.Hidden).UnionAll(this.Square.SelectRow(0, -1).TakeWhileAndOneMore(t => t.Piece == null || t.Piece.Hidden)))).Where(t => t.Piece == null || t.Piece.Color != this.Color);
-            }
+            this.Movement = new RowMovement(this, MovementDirection.Vertical | MovementDirection.Horizontal);
         }
 
         /// <summary>

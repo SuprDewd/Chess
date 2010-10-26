@@ -106,7 +106,7 @@ namespace ChessTester
 
                 c.Background = Brushes.Pink;
 
-                foreach (Square t in this.LastTileClicked.Piece.AllValidMoves)
+                foreach (Square t in this.LastTileClicked.Piece.ValidMoves)
                 {
                     this.canvases[t.Location.Rank - 1, Location.ConvertFile(t.Location.File) - 1].Background = Brushes.Green;
                 }

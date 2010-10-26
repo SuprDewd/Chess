@@ -21,10 +21,31 @@ namespace ChessLib
         }
 
         /// <summary>
+        /// The board that the movement belongs to.
+        /// </summary>
+        public ChessBoard Board { get { return this.OwnerOne; } }
+        /// <summary>
+        /// The Chess piece that the movement belongs to.
+        /// </summary>
+        public ChessPiece Piece { get { return this.OwnerTwo; } }
+
+        /// <summary>
+        /// All the moves that the Chess piece is able to move.
+        /// </summary>
+        public abstract IEnumerable<Square> Moves { get; }
+        /// <summary>
+        /// All the moves that the Chess piece is able to move, that are also valid.
+        /// </summary>
+        public abstract IEnumerable<Square> ValidMoves { get; }
+
+        /// <summary>
         /// Moves the Chess piece.
         /// </summary>
-        /// <param name="s">The square to move the Chess piece to.</param>
+        /// <param name="to">The square to move the Chess piece to.</param>
         /// <returns>Whether the move was successful.</returns>
-        public abstract bool Move(Square s);
+        public virtual bool Move(Square to)
+        {
+            return this.ValidMoves.Contains(to);
+        }
     }
 }

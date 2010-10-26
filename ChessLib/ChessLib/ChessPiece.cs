@@ -27,10 +27,9 @@ namespace ChessLib
         /// </summary>
         public Location Location { get { return this.Square.Location; } }
         /// <summary>
-        /// Whether the Chess piece is hidden or not.
+        /// The movement behaviour of the Chess piece.
         /// </summary>
-        /// <remarks>Only used to virtually remove the Chess piece from the Chess board for calculation purposes.</remarks>
-        internal protected bool Hidden = false;
+        internal MovementBehaviour Movement { get; set; }
 
         /// <summary>
         /// An event which will be fired when the Chess piece is captured.
@@ -50,14 +49,13 @@ namespace ChessLib
         }
 
         /// <summary>
-        /// All the moves that the Chess piece can move.
+        /// All the moves that the Chess piece is able to move.
         /// </summary>
-        /// <remarks>This does not check for validity of the moves.</remarks>
-        public abstract IEnumerable<Square> AllMoves { get; }
+        public IEnumerable<Square> Moves { get { return this.Movement.Moves; } }
         /// <summary>
-        /// All the moves that the Chess piece can move, that are valid.
+        /// All the moves that the Chess piece is able to move, that are also valid.
         /// </summary>
-        public abstract IEnumerable<Square> AllValidMoves { get; }
+        public IEnumerable<Square> ValidMoves { get { return this.Movement.ValidMoves; } }
 
         /// <summary>
         /// The name of the Chess piece.
