@@ -146,8 +146,8 @@ namespace ChessLib
             if (a.Piece == null) return false;
             if (a.Piece.Color != this.Turn) return false;
 
-            King king = (King)a.Board.GetKing(this.Turn).Piece;
-            if (!Object.ReferenceEquals(this, king.Square) && king.Checked) return false;
+            King king = (King)this.GetKing(this.Turn).Piece;
+            if (!Object.ReferenceEquals(a, king.Square) && king.Checked) return false;
 
             if (b.Piece != null && b.Piece.Color == a.Piece.Color) return false;
             if (!a.Piece.Movement.Move(b)) return false;

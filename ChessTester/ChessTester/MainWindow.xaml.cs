@@ -79,7 +79,7 @@ namespace ChessTester
 
                     c.Background = t.Color == ChessColor.White ? Brushes.Black : Brushes.White;
                     c.Children.Clear();
-                    c.Children.Add(new Label() { Height = 80, VerticalAlignment = System.Windows.VerticalAlignment.Stretch, HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch, Content = (t.ToString()) + (t.Piece != null ? ": " + t.Piece.ToString() : ""), Foreground = Brushes.Red, Background = t.Piece == null ? null : new ImageBrush() { ImageSource = new BitmapImage(new Uri(@"C:\Users\Bjarki\Desktop\Projects\TSkoli\FOR403\Chess\Icons\" + t.Piece.PieceNameShort + ".ico")), Stretch = Stretch.Fill } });
+                    c.Children.Add(new Label() { Height = 80, VerticalAlignment = System.Windows.VerticalAlignment.Stretch, HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch, Content = (t.ToString()) + (t.Piece != null ? ": " + t.Piece.ToString() + ", " + t.Piece.MoveCount : ""), Foreground = Brushes.Red, Background = t.Piece == null ? null : new ImageBrush() { ImageSource = new BitmapImage(new Uri(@"C:\Users\Bjarki\Desktop\Projects\TSkoli\FOR403\Chess\Icons\" + t.Piece.PieceNameShort + ".ico")), Stretch = Stretch.Fill } });
                 }
             }
 

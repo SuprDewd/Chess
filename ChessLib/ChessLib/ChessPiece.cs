@@ -35,6 +35,11 @@ namespace ChessLib
         /// How many times the Chess piece has been moved.
         /// </summary>
         public int MoveCount { get; protected internal set; }
+        /// <summary>
+        /// Whether a Chess piece is hidden or not.
+        /// </summary>
+        /// <remarks>Used for movement calculcations.</remarks>
+        public bool Hidden { get; set; }
 
         /// <summary>
         /// An event which will be fired when the Chess piece is captured.
@@ -49,6 +54,7 @@ namespace ChessLib
         /// <param name="square">The square where the Chess piece is located.</param>
         public ChessPiece(ChessBoard board, ChessColor color, Square square)
         {
+            this.Hidden = false;
             this.Board = board;
             this.Color = color;
             this.Square = square;

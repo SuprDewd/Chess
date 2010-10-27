@@ -80,6 +80,12 @@
             How many times the Chess piece has been moved.
             </summary>
         </member>
+        <member name="P:ChessLib.ChessPiece.Hidden">
+            <summary>
+            Whether a Chess piece is hidden or not.
+            </summary>
+            <remarks>Used for movement calculcations.</remarks>
+        </member>
         <member name="E:ChessLib.ChessPiece.Captured">
             <summary>
             An event which will be fired when the Chess piece is captured.

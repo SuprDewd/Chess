@@ -73,10 +73,11 @@ namespace ChessLib.Behaviours
         {
             get
             {
+                this.Piece.Hidden = true;
                 return (from s in this.Moves.Where(p => p.Piece == null || p.Piece.Color != this.Piece.Color)
                         let oppColor = this.Piece.Color.Opposite()
                         where !s.IsAttackedBy(oppColor, p => p.Piece.GetType() != typeof(King)) && !this.SurroundedByKing(s, oppColor)
-                        select s);
+                        select s).Do(() => this.Piece.Hidden = false);
             }
         }
 
