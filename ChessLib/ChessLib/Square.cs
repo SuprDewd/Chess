@@ -50,30 +50,7 @@ namespace ChessLib
         /// <returns>Whether or not the move was successful.</returns>
         public bool To(Square t)
         {
-            if (this.Piece == null) return false;
-            if (this.Piece.Color != this.Board.Turn) return false;
-
-            King king = (King)this.Board.GetKing(this.Board.Turn).Piece;
-
-            if (!Object.ReferenceEquals(this, king.Square) && king.Checked) return false;
-
-            if (t.Piece != null && t.Piece.Color == this.Piece.Color) return false;
-            if (!this.Piece.Movement.Move(t)) return false;
-
-            // TODO: Implement more logic.
-
-            if (t.Piece != null)
-            {
-                t.Piece.Capture();
-            }
-
-            this.Piece.Square = t;
-            t.Piece = this.Piece;
-            this.Piece = null;
-            t.Piece.MoveCount++;
-
-            this.Board.TurnOver();
-            return true;
+            return this.Board.Move(this, t);
         }
 
         /// <summary>

@@ -44,7 +44,24 @@ namespace ChessLib.Behaviours
 
                 if (this.Piece.MoveCount == 0)
                 {
-                    // Castling
+                    int rank = this.Piece.Color == ChessColor.White ? 1 : 8;
+
+                    if (this.Board[rank, 2].Piece == null && this.Board[rank, 3].Piece == null)
+                    {
+                        Square s = this.Board[rank, 1];
+                        if (s.Piece != null && s.Piece.MoveCount == 0 && !this.Board[rank, 4].IsAttackedBy(this.Piece.Color.Opposite(), sq => sq.Piece.GetType() != typeof(King)))
+                        {
+                            yield return this.Board[rank, 3];
+                        }
+                    }
+                    else if (this.Board[rank, 6].Piece == null && this.Board[rank, 7].Piece == null)
+                    {
+                        Square s = this.Board[rank, 8];
+                        if (s.Piece != null && s.Piece.MoveCount == 0 && !this.Board[rank, 6].IsAttackedBy(this.Piece.Color.Opposite(), sq => sq.Piece.GetType() != typeof(King)))
+                        {
+                            yield return this.Board[rank, 7];
+                        }
+                    }
                 }
             }
         }
@@ -56,12 +73,62 @@ namespace ChessLib.Behaviours
         {
             get
             {
-                //this.Hidden = true;
-
                 return (from s in this.Moves.Where(p => p.Piece == null || p.Piece.Color != this.Piece.Color)
-                        where !s.IsAttackedBy(this.Piece.Color.Opposite(), p => p.Piece.GetType() != typeof(King))
-                        select s); //.Do(() => this.Hidden = false);
+                        let oppColor = this.Piece.Color.Opposite()
+                        where !s.IsAttackedBy(oppColor, p => p.Piece.GetType() != typeof(King)) && !this.SurroundedByKing(s, oppColor)
+                        select s);
             }
+        }
+
+        /// <summary>
+        /// Whether the king with the specified color is surrounding the specified square.
+        /// </summary>
+        /// <param name="s">The square.</param>
+        /// <param name="kingColor">The color of the king.</param>
+        /// <returns>Whether the king with the specified color is surrounding the specified square.</returns>
+        private bool SurroundedByKing(Square s, ChessColor kingColor)
+        {
+            Square king = this.Board.GetKing(kingColor);
+
+            int kRank = king.Location.Rank;
+            int kFile = Location.ConvertFile(king.Location.File);
+
+            int sRank = s.Location.Rank;
+            int sFile = Location.ConvertFile(s.Location.File);
+
+            return (kRank >= sRank - 1 && kRank <= sRank + 1 && kFile <= sFile + 1 && kFile >= sFile - 1);
+        }
+
+        /// <summary>
+        /// Handles the castling rule.
+        /// </summary>
+        /// <param name="b">The square to move to.</param>
+        /// <returns>Whether or not the move was handled.</returns>
+        /// <remarks>Returns false if the situation was not a castling situation.</remarks>
+        internal protected bool HandleCastling(Square b)
+        {
+            Square a = this.Piece.Square;
+            int rank = this.Board.Turn == ChessColor.White ? 1 : 8;
+            int bFile = Location.ConvertFile(b.Location.File);
+
+            if (!(Location.ConvertFile(a.Location.File) == 5 && (bFile == 3 || bFile == 7))) return false;
+
+            // TODO: Handle castling.
+
+            Square c = this.Board[rank, bFile == 3 ? 1 : 8];
+            Square d = this.Board[rank, bFile == 3 ? 4 : 6];
+
+            this.Piece.Square.Piece = null;
+            b.Piece = this.Piece;
+            this.Piece.MoveCount++;
+            this.Piece.Square = b;
+
+            d.Piece = c.Piece;
+            c.Piece = null;
+            d.Piece.MoveCount++;
+            d.Piece.Square = d;
+
+            return true;
         }
     }
 }

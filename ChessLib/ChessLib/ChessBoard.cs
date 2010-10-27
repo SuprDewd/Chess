@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ChessLib.Behaviours;
 
 namespace ChessLib
 {
@@ -11,7 +12,10 @@ namespace ChessLib
     /// <remarks>This is also the controller of the game.</remarks>
     public class ChessBoard : IEnumerable<Square>
     {
-        private readonly Dictionary<Location, ChessPiece> StartingPieces;
+        /// <summary>
+        /// All the pieces and their starting locations.
+        /// </summary>
+        protected readonly Dictionary<Location, ChessPiece> StartingPieces;
 
         /// <summary>
         /// The squares of the Chess board.
@@ -110,7 +114,7 @@ namespace ChessLib
         /// <summary>
         /// Tell the Chess board that the current turn is over.
         /// </summary>
-        internal void TurnOver()
+        internal protected void TurnOver()
         {
             this.Turn = this.Turn.Opposite();
 
@@ -131,6 +135,42 @@ namespace ChessLib
             }
         }
 
+        /// <summary>
+        /// Moves a Chess piece from A to B.
+        /// </summary>
+        /// <param name="a">Square A.</param>
+        /// <param name="b">Square B.</param>
+        /// <returns>Whether or not the move was successful.</returns>
+        internal protected bool Move(Square a, Square b)
+        {
+            if (a.Piece == null) return false;
+            if (a.Piece.Color != this.Turn) return false;
+
+            King king = (King)a.Board.GetKing(this.Turn).Piece;
+            if (!Object.ReferenceEquals(this, king.Square) && king.Checked) return false;
+
+            if (b.Piece != null && b.Piece.Color == a.Piece.Color) return false;
+            if (!a.Piece.Movement.Move(b)) return false;
+
+            // TODO: Implement more logic.
+
+            if (!(a.Piece.GetType() == typeof(King) && ((KingMovement)a.Piece.Movement).HandleCastling(b)))
+            {
+                if (b.Piece != null)
+                {
+                    b.Piece.Capture();
+                }
+
+                a.Piece.Square = b;
+                b.Piece = a.Piece;
+                a.Piece = null;
+                b.Piece.MoveCount++;
+            }
+
+            this.TurnOver();
+            return true;
+        }
+
         #region Events
 
         /// <summary>
@@ -144,7 +184,7 @@ namespace ChessLib
         /// <summary>
         /// An event that is fired when there is a stalemate.
         /// </summary>
-        public event Action<ChessBoard> StaleMate; 
+        public event Action<ChessBoard> StaleMate;
 
         #endregion
 
@@ -196,6 +236,7 @@ namespace ChessLib
         /// </summary>
         /// <param name="l">The location of the square.</param>
         /// <returns>The square at the specified rank and file.</returns>
+        /// <example>A1, D2, H8 ...</example>
         public Square this[string l]
         {
             get
