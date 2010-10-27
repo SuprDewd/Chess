@@ -1,0 +1,14 @@
+﻿<Window x:Class="LanChess.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:c="clr-namespace:LanChess"
+        xmlns:l="clr-namespace:ChessLib;assembly=ChessLib"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid Name="MainGrid">
+        <c:ChessBoardControl x:Name="cbcBoard">
+            <c:ChessBoardControl.Board>
+                <l:ChessBoard />
+            </c:ChessBoardControl.Board>
+        </c:ChessBoardControl>
+    </Grid>
+</Window>

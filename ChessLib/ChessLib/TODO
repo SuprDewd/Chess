@@ -1,9 +1,11 @@
 ﻿
-  Valid moves for all Chess pieces.
-  Knight movement.
+  - Valid moves for all Chess pieces.
+  - Knight movement.
+  King check-rules.
   En Passant.
   Castling.
   Promotion.
   King vs. King.
   King and two rooks, king cannot capture either one, if the other one is attacking the killed rooks square.
-  Switch between black and white player.
+  - Switch between black and white player.
+  History.
