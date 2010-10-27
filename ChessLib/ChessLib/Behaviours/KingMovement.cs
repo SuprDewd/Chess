@@ -41,6 +41,11 @@ namespace ChessLib.Behaviours
                 if (Location.IsValid(this.Piece.Square.Location.Rank, fp)) yield return this.Board[this.Piece.Square.Location.Rank, fp];
                 if (Location.IsValid(rn, this.Piece.Square.Location.File)) yield return this.Board[rn, this.Piece.Square.Location.File];
                 if (Location.IsValid(rp, this.Piece.Square.Location.File)) yield return this.Board[rp, this.Piece.Square.Location.File];
+
+                if (this.Piece.MoveCount == 0)
+                {
+                    // Castling
+                }
             }
         }
 

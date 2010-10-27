@@ -8,26 +8,26 @@ namespace ChessLib
     /// <summary>
     /// An abstract class describing a movement behaviour.
     /// </summary>
-    public abstract class MovementBehaviour : BelongsTo<ChessBoard, ChessPiece>
+    public abstract class MovementBehaviour : IChessItem, IBelongToPiece
     {
         /// <summary>
         /// The constructor.
         /// </summary>
         /// <param name="chessPiece">The Chess piece that the movement behaviour belongs to is on.</param>
         public MovementBehaviour(ChessPiece chessPiece)
-            : base(chessPiece.Board, chessPiece)
         {
-
+            this.Board = chessPiece.Board;
+            this.Piece = chessPiece;
         }
 
         /// <summary>
         /// The board that the movement belongs to.
         /// </summary>
-        public ChessBoard Board { get { return this.OwnerOne; } }
+        public ChessBoard Board { get; private set; }
         /// <summary>
         /// The Chess piece that the movement belongs to.
         /// </summary>
-        public ChessPiece Piece { get { return this.OwnerTwo; } }
+        public ChessPiece Piece { get; private set; }
 
         /// <summary>
         /// All the moves that the Chess piece is able to move.

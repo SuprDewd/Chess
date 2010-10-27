@@ -8,7 +8,7 @@ namespace ChessLib
     /// <summary>
     /// A Chess piece.
     /// </summary>
-    public abstract class ChessPiece : BelongsTo<ChessBoard, Square>, IColored
+    public abstract class ChessPiece : IChessItem, IColored
     {
         /// <summary>
         /// The color of the Chess piece.
@@ -17,11 +17,11 @@ namespace ChessLib
         /// <summary>
         /// The Chess board on which the Chess piece is located.
         /// </summary>
-        public ChessBoard Board { get { return this.OwnerOne; } internal set { this.OwnerOne = value; } }
+        public ChessBoard Board { get; internal set; }
         /// <summary>
         /// The square on which the Chess piece is located.
         /// </summary>
-        public Square Square { get { return this.OwnerTwo; } internal set { this.OwnerTwo = value; } }
+        public Square Square { get; internal set; }
         /// <summary>
         /// The location of the square on which the Chess piece is located.
         /// </summary>
@@ -29,7 +29,12 @@ namespace ChessLib
         /// <summary>
         /// The movement behaviour of the Chess piece.
         /// </summary>
-        internal MovementBehaviour Movement { get; set; }
+        protected internal MovementBehaviour Movement { get; set; }
+
+        /// <summary>
+        /// How many times the Chess piece has been moved.
+        /// </summary>
+        public int MoveCount { get; protected internal set; }
 
         /// <summary>
         /// An event which will be fired when the Chess piece is captured.
@@ -43,9 +48,10 @@ namespace ChessLib
         /// <param name="color">The color of the Chess piece.</param>
         /// <param name="square">The square where the Chess piece is located.</param>
         public ChessPiece(ChessBoard board, ChessColor color, Square square)
-            : base(board, square)
         {
+            this.Board = board;
             this.Color = color;
+            this.Square = square;
         }
 
         /// <summary>

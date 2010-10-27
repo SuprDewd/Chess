@@ -8,7 +8,7 @@ namespace ChessLib
     /// <summary>
     /// A square in the Chess board.
     /// </summary>
-    public class Square : BelongsTo<ChessBoard>, IColored, ILocated
+    public class Square : IChessItem, IColored, ILocated
     {
         /// <summary>
         /// The color of the square.
@@ -26,7 +26,7 @@ namespace ChessLib
         /// <summary>
         /// The Chess board, that the square belongs to.
         /// </summary>
-        public ChessBoard Board { get { return this.Owner; } }
+        public ChessBoard Board { get; private set; }
 
         /// <summary>
         /// The constructor.
@@ -36,8 +36,8 @@ namespace ChessLib
         /// <param name="color">The color of the square.</param>
         /// <param name="piece">The Chess piece that is on the square.</param>
         public Square(ChessBoard board, Location location, ChessColor color, ChessPiece piece = null)
-            : base(board)
         {
+            this.Board = board;
             this.Location = location;
             this.Color = color;
             this.Piece = piece;
@@ -70,6 +70,7 @@ namespace ChessLib
             this.Piece.Square = t;
             t.Piece = this.Piece;
             this.Piece = null;
+            t.Piece.MoveCount++;
 
             this.Board.TurnOver();
             return true;
@@ -82,7 +83,7 @@ namespace ChessLib
         /// <returns>Whether or not the move was successful.</returns>
         public bool To(Location l)
         {
-            return this.To(this.Owner[l]);
+            return this.To(this.Board[l]);
         }
 
         /// <see cref="Object.ToString()"/>

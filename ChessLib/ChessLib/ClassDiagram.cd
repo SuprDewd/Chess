@@ -14,15 +14,15 @@
   <Class Name="ChessLib.ChessPiece">
     <Position X="16" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAgAAAAAAAAAAAAEBQIAAAAAAAAAAAAAABAkgCAAAAA=</HashCode>
+      <HashCode>AAgAAAAAAAAAEAAEBQIAAAAAAAAAAEAAABAkgCAAAAA=</HashCode>
       <FileName>ChessPiece.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Color" />
-      <Property Name="Location" />
       <Property Name="Board" />
-      <Property Name="Movement" />
       <Property Name="Square" />
+      <Property Name="Location" />
+      <Property Name="Movement" />
     </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
@@ -41,9 +41,9 @@
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Color" />
-      <Property Name="Board" />
-      <Property Name="Location" />
       <Property Name="Piece" />
+      <Property Name="Location" />
+      <Property Name="Board" />
     </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
@@ -89,20 +89,6 @@
       <FileName>Location.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ChessLib.BelongsTo&lt;T&gt;">
-    <Position X="0.5" Y="8.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>BelongsTo.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="ChessLib.BelongsTo&lt;T1, T2&gt;">
-    <Position X="11.5" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
-      <FileName>BelongsTo.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="ChessLib.ActionDisposable" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="24.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
@@ -128,6 +114,7 @@
       <Property Name="Board" />
       <Property Name="Piece" />
     </ShowAsAssociation>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="ChessLib.Behaviours.KingMovement">
     <Position X="6" Y="5.75" Width="1.5" />
