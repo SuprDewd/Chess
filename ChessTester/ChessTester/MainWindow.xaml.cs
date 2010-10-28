@@ -124,5 +124,19 @@ namespace ChessTester
                 this.LastTileClicked = null;
             }
         }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            this.Board.CurrentHistory--;
+            this.Reset();
+            //this.Board.PlayHistoryTo(this.Board.CurrentHistory - 1);
+        }
+
+        private void button2_Click(object sender, RoutedEventArgs e)
+        {
+            this.Board.CurrentHistory++;
+            this.Reset();
+            //this.Board.PlayHistoryTo(this.Board.CurrentHistory + 1);
+        }
     }
 }

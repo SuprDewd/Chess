@@ -3,7 +3,7 @@
   <Class Name="ChessLib.ChessBoard">
     <Position X="12.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ACAAAAAAANAABBAAKAACAACAAAAgAAAABAAAAAAAQAA=</HashCode>
+      <HashCode>AiAAACAAANAABBAAKIACAACAAEAgAAAABAACAAAAQAA=</HashCode>
       <FileName>ChessBoard.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -21,8 +21,8 @@
       <Property Name="Color" />
       <Property Name="Board" />
       <Property Name="Square" />
-      <Property Name="Location" />
       <Property Name="Movement" />
+      <Property Name="Location" />
     </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
@@ -42,8 +42,8 @@
     <ShowAsAssociation>
       <Property Name="Color" />
       <Property Name="Piece" />
-      <Property Name="Location" />
       <Property Name="Board" />
+      <Property Name="Location" />
     </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
@@ -80,13 +80,6 @@
     <TypeIdentifier>
       <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Pawn.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="ChessLib.Location">
-    <Position X="7.75" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAABAAAAAAAQAAAEgAgAAAEAAAAEEIAAAAAAAAAAAiA=</HashCode>
-      <FileName>Location.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ChessLib.ActionDisposable" BaseTypeListCollapsed="true">
@@ -148,6 +141,13 @@
       <Property Name="Direction" />
     </ShowAsAssociation>
   </Class>
+  <Struct Name="ChessLib.Location" Collapsed="true">
+    <Position X="9.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAQAAAEgAgAAAEAAAAEEIAAAAAAAAAAAiA=</HashCode>
+      <FileName>Location.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
   <Interface Name="ChessLib.IColored">
     <Position X="9.75" Y="15" Width="1.5" />
     <TypeIdentifier>

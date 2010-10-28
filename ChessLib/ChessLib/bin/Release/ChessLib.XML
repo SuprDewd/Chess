@@ -169,6 +169,12 @@
             Resets the Chess board.
             </summary>
         </member>
+        <member name="M:ChessLib.ChessBoard.PlayHistoryTo(System.Int32)">
+            <summary>
+            Plays the history from the beginning, the specified amount of moves.
+            </summary>
+            <param name="to">How many moves to play from the beginning.</param>
+        </member>
         <member name="M:ChessLib.ChessBoard.GetKing(ChessLib.ChessColor)">
             <summary>
             Gets the king with the specified color.
@@ -189,6 +195,22 @@
             <param name="b">Square B.</param>
             <returns>Whether or not the move was successful.</returns>
         </member>
+        <member name="M:ChessLib.ChessBoard.Move(ChessLib.Square,ChessLib.Square,System.Boolean)">
+            <summary>
+            Moves a Chess piece from A to B.
+            </summary>
+            <param name="a">Square A.</param>
+            <param name="b">Square B.</param>
+            <param name="writeHistory">Whether or not to write the move to the history.</param>
+            <returns>Whether or not the move was successful.</returns>
+        </member>
+        <member name="M:ChessLib.ChessBoard.WriteHistory(ChessLib.Location,ChessLib.Location)">
+            <summary>
+            Writes a new move to the history.
+            </summary>
+            <param name="a">From.</param>
+            <param name="b">To.</param>
+        </member>
         <member name="M:ChessLib.ChessBoard.GetEnumerator">
             <see cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator"/>
         </member>
@@ -203,6 +225,16 @@
         <member name="P:ChessLib.ChessBoard.Turn">
             <summary>
             The color that should move next.
+            </summary>
+        </member>
+        <member name="P:ChessLib.ChessBoard.History">
+            <summary>
+            The move history.
+            </summary>
+        </member>
+        <member name="P:ChessLib.ChessBoard.CurrentHistory">
+            <summary>
+            The current position in the move history.
             </summary>
         </member>
         <member name="P:ChessLib.ChessBoard.Promotion">
@@ -796,6 +828,26 @@
         <member name="F:ChessLib.PromotionChoise.Knight">
             <summary>
             The knight.
+            </summary>
+        </member>
+        <member name="T:ChessLib.Move">
+            <summary>
+            A move.
+            </summary>
+        </member>
+        <member name="M:ChessLib.Move.#ctor(ChessLib.Location,ChessLib.Location)">
+            <summary>
+            The constructor.
+            </summary>
+        </member>
+        <member name="P:ChessLib.Move.A">
+            <summary>
+            From.
+            </summary>
+        </member>
+        <member name="P:ChessLib.Move.B">
+            <summary>
+            To.
             </summary>
         </member>
     </members>

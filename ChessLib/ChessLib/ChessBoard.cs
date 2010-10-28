@@ -27,6 +27,16 @@ namespace ChessLib
         public ChessColor Turn { get; private set; }
 
         /// <summary>
+        /// The move history.
+        /// </summary>
+        public List<Move> History { get; internal protected set; }
+        private int _CurrentHistory = 0;
+        /// <summary>
+        /// The current position in the move history.
+        /// </summary>
+        public int CurrentHistory { get { return this._CurrentHistory; } set { this._CurrentHistory = value; this.PlayHistoryTo(this._CurrentHistory); } }
+
+        /// <summary>
         /// A function which decides what to promote to when a pawn reaches the end of the Chess board.
         /// </summary>
         protected internal Func<ChessBoard, PromotionChoise> Promotion { get; protected set; }
@@ -43,6 +53,7 @@ namespace ChessLib
         public ChessBoard(Func<ChessBoard, PromotionChoise> promotion)
         {
             this.Promotion = promotion;
+            this.History = new List<Move>();
 
             this.StartingPieces = new Dictionary<Location, ChessPiece>
             {
@@ -100,6 +111,13 @@ namespace ChessLib
                 {
                     Location curLoc = new Location(row + 1, column + 1);
                     ChessPiece piece = (from p in this.StartingPieces where p.Key == curLoc select p.Value).SingleOrDefault();
+
+                    if (piece != null)
+                    {
+                        piece.MoveCount = 0;
+                        piece.Hidden = false;
+                    }
+
                     Square t = (this.Squares[row, column] == null ? new Square(this, curLoc, (row + column) % 2 == 0 ? ChessColor.Black : ChessColor.White) : this.Squares[row, column]);
                     t.Piece = piece;
 
@@ -110,6 +128,24 @@ namespace ChessLib
             }
 
             this.NextTurn.IfNotNull(a => a(this));
+        }
+
+        /// <summary>
+        /// Plays the history from the beginning, the specified amount of moves.
+        /// </summary>
+        /// <param name="to">How many moves to play from the beginning.</param>
+        public void PlayHistoryTo(int to)
+        {
+            this.Reset();
+            this._CurrentHistory = 0;
+
+            for (int i = 0; i < Math.Max(Math.Min(to, this.History.Count), 0); i++)
+            {
+                Move m = this.History[i];
+
+                this.Move(this[m.A], this[m.B], false);
+                this._CurrentHistory = i + 1;
+            }
         }
 
         /// <summary>
@@ -156,6 +192,18 @@ namespace ChessLib
         /// <returns>Whether or not the move was successful.</returns>
         internal protected bool Move(Square a, Square b)
         {
+            return this.Move(a, b, true);
+        }
+
+        /// <summary>
+        /// Moves a Chess piece from A to B.
+        /// </summary>
+        /// <param name="a">Square A.</param>
+        /// <param name="b">Square B.</param>
+        /// <param name="writeHistory">Whether or not to write the move to the history.</param>
+        /// <returns>Whether or not the move was successful.</returns>
+        protected bool Move(Square a, Square b, bool writeHistory)
+        {
             if (a.Piece == null) return false;
             if (a.Piece.Color != this.Turn) return false;
 
@@ -180,8 +228,26 @@ namespace ChessLib
                 b.Piece.MoveCount++;
             }
 
+            if (writeHistory) this.WriteHistory(a.Location, b.Location);
+
             this.TurnOver();
             return true;
+        }
+
+        /// <summary>
+        /// Writes a new move to the history.
+        /// </summary>
+        /// <param name="a">From.</param>
+        /// <param name="b">To.</param>
+        protected void WriteHistory(Location a, Location b)
+        {
+            for (int i = this.History.Count - 1; i >= this.CurrentHistory; i--)
+            {
+                this.History.RemoveAt(i);
+            }
+
+            this.History.Add(new Move(a, b));
+            this._CurrentHistory++;
         }
 
         #region Events

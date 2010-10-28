@@ -8,7 +8,7 @@ namespace ChessLib
     /// <summary>
     /// A location of an item.
     /// </summary>
-    public class Location
+    public struct Location
     {
         private char _File;
         /// <summary>
@@ -59,8 +59,10 @@ namespace ChessLib
         /// <param name="file">The file of the item.</param>
         public Location(int rank, char file)
         {
-            this.Rank = rank;
-            this.File = file;
+            if (!Location.IsValid(rank, file)) throw new ArgumentException();
+
+            this._Rank = rank;
+            this._File = file;
         }
 
         /// <summary>
@@ -70,8 +72,10 @@ namespace ChessLib
         /// <param name="file">The file of the item.</param>
         public Location(int rank, int file)
         {
-            this.Rank = rank;
-            this.File = Location.ConvertFile(file);
+            if (!Location.IsValid(rank, file)) throw new ArgumentException();
+
+            this._Rank = rank;
+            this._File = Location.ConvertFile(file);
         }
 
         /// <summary>
@@ -101,7 +105,7 @@ namespace ChessLib
         {
             if (!(obj is Location)) return false;
 
-            return (obj as Location) == this;
+            return (Location)obj == this;
         }
 
         /// <see cref="Object.GetHashCode()"/>
