@@ -13,7 +13,7 @@ namespace ChessLib
         /// <summary>
         /// The color of the Chess piece.
         /// </summary>
-        public ChessColor Color { get; private set; }
+        public ChessColor Color { get; internal protected set; }
         /// <summary>
         /// The Chess board on which the Chess piece is located.
         /// </summary>

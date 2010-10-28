@@ -124,6 +124,47 @@ namespace ChessLib
         }
 
         /// <summary>
+        /// Checks whether the current square is being attacked by the specified color.
+        /// </summary>
+        /// <param name="c">The color of the attacking pieces.</param>
+        /// <param name="predicate">A predicate to filter which squares are checked.</param>
+        /// <param name="actAs">The color the current instance should act as.</param>
+        /// <returns>Whether or not the current square is being attacked.</returns>
+        /// <remarks>The predicate is fired, after it's made sure that there is a piece on the square => Square.Piece != null.</remarks>
+        public bool IsAttackedBy(ChessColor c, Func<Square, bool> predicate, ChessColor actAs)
+        {
+            if (this.Piece == null) return this.IsAttackedBy(c, predicate);
+
+            this.Piece.Color = this.Piece.Color.Opposite();
+
+            int pawnRank = this.Location.Rank + (c == ChessColor.White ? -1 : 1);
+            int rFile = Location.ConvertFile(this.Location.File) + 1;
+            int lFile = Location.ConvertFile(this.Location.File) - 1;
+
+            if (Location.IsValid(pawnRank, rFile))
+            {
+                Square s = this.Board[pawnRank, rFile];
+
+                if (s.Piece != null && predicate(s) && s.Piece.Color == c && s.Piece.GetType() == typeof(Pawn)) return true;
+            }
+
+            if (Location.IsValid(pawnRank, lFile))
+            {
+                Square s = this.Board[pawnRank, lFile];
+
+                if (s.Piece != null && predicate(s) && s.Piece.Color == c && s.Piece.GetType() == typeof(Pawn)) return true;
+            }
+
+            bool res = (from s in this.Board
+                        where s.Piece != null && predicate(s) && s.Piece.Color == c && s.Piece.GetType() != typeof(Pawn)
+                        select s).Any(s => s.Piece.Movement.ValidMoves.Contains(this));
+
+            this.Piece.Color = this.Piece.Color.Opposite();
+
+            return res;
+        }
+
+        /// <summary>
         /// Selects a row of squares, spreading out from the current square.
         /// </summary>
         /// <param name="rankAdd">The number to add to the rank on each iteration.</param>

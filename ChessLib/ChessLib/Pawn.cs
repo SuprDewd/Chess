@@ -20,8 +20,14 @@ namespace ChessLib
         public Pawn(ChessBoard board, ChessColor color, Square square = null)
             : base(board, color, square)
         {
+            this.EnPassantable = false;
             this.Movement = new PawnMovement(this);
         }
+
+        /// <summary>
+        /// Whether or not the pawn is en passantable.
+        /// </summary>
+        public bool EnPassantable { get; protected internal set; }
 
         /// <summary>
         /// The name of the Chess piece.

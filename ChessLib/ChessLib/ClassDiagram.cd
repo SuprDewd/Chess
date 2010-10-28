@@ -21,8 +21,8 @@
       <Property Name="Color" />
       <Property Name="Board" />
       <Property Name="Square" />
-      <Property Name="Movement" />
       <Property Name="Location" />
+      <Property Name="Movement" />
     </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
@@ -42,8 +42,8 @@
     <ShowAsAssociation>
       <Property Name="Color" />
       <Property Name="Piece" />
-      <Property Name="Board" />
       <Property Name="Location" />
+      <Property Name="Board" />
     </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
@@ -141,12 +141,23 @@
       <Property Name="Direction" />
     </ShowAsAssociation>
   </Class>
-  <Struct Name="ChessLib.Location" Collapsed="true">
-    <Position X="9.75" Y="6.25" Width="1.5" />
+  <Struct Name="ChessLib.Location">
+    <Position X="0.75" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAABAAAAAAAQAAAEgAgAAAEAAAAEEIAAAAAAAAAAAiA=</HashCode>
       <FileName>Location.cs</FileName>
     </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChessLib.Move">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAkAAAA=</HashCode>
+      <FileName>Move.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="A" />
+      <Property Name="B" />
+    </ShowAsAssociation>
   </Struct>
   <Interface Name="ChessLib.IColored">
     <Position X="9.75" Y="15" Width="1.5" />
@@ -200,6 +211,13 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAAABAAAAAAEAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Behaviours\MovementDirection.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ChessLib.PromotionChoise">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAEAAAAAAEAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PromotionChoise.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />

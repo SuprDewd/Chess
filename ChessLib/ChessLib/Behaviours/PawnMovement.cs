@@ -54,6 +54,28 @@ namespace ChessLib.Behaviours
                 {
                     if (this.Board[6, this.Piece.Location.File].Piece == null && this.Board[5, this.Piece.Location.File].Piece == null) yield return this.Board[5, this.Piece.Location.File];
                 }
+
+                int file = Location.ConvertFile(this.Piece.Location.File);
+
+                if (Location.IsValid(this.Piece.Location.Rank, file - 1))
+                {
+                    Square lSq = this.Board[this.Piece.Location.Rank, file - 1];
+
+                    if (lSq.Piece != null && lSq.Piece.GetType() == typeof(Pawn) && ((Pawn)lSq.Piece).EnPassantable)
+                    {
+                        yield return this.Board[rnxt, file - 1];
+                    }
+                }
+
+                if (Location.IsValid(this.Piece.Location.Rank, file + 1))
+                {
+                    Square rSq = this.Board[this.Piece.Location.Rank, file + 1];
+
+                    if (rSq.Piece != null && rSq.Piece.GetType() == typeof(Pawn) && ((Pawn)rSq.Piece).EnPassantable)
+                    {
+                        yield return this.Board[rnxt, file + 1];
+                    }
+                }
             }
         }
 
@@ -103,6 +125,28 @@ namespace ChessLib.Behaviours
             }
 
             return false;
+        }
+
+
+        public bool HandleEnPassant(Square b)
+        {
+            Square a = this.Piece.Square;
+
+            // Handle En Passant.
+
+            if (!(a.Location.File != b.Location.File && b.Piece == null)) return false;
+
+            Square c = this.Board[a.Location.Rank, b.Location.File];
+
+            c.Piece.Capture();
+            c.Piece = null;
+
+            a.Piece.Square = b;
+            b.Piece = a.Piece;
+            a.Piece = null;
+            b.Piece.MoveCount++;
+
+            return true;
         }
     }
 }

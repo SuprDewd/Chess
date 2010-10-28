@@ -213,9 +213,9 @@ namespace ChessLib
             if (b.Piece != null && b.Piece.Color == a.Piece.Color) return false;
             if (!a.Piece.Movement.Move(b)) return false;
 
-            // TODO: Implement more logic.
+            bool pawn = a.Piece.GetType() == typeof(Pawn);
 
-            if (!(a.Piece.GetType() == typeof(Pawn) && ((PawnMovement)a.Piece.Movement).HandlePromotion(b)) && !(a.Piece.GetType() == typeof(King) && ((KingMovement)a.Piece.Movement).HandleCastling(b)))
+            if (!(pawn && (((PawnMovement)a.Piece.Movement).HandlePromotion(b) || ((PawnMovement)a.Piece.Movement).HandleEnPassant(b))) && !(a.Piece.GetType() == typeof(King) && ((KingMovement)a.Piece.Movement).HandleCastling(b)))
             {
                 if (b.Piece != null)
                 {
@@ -226,6 +226,16 @@ namespace ChessLib
                 b.Piece = a.Piece;
                 a.Piece = null;
                 b.Piece.MoveCount++;
+            }
+
+            foreach (Pawn p in from sq in this where sq.Piece != null && sq.Piece.Color == this.Turn && sq.Piece.GetType() == typeof(Pawn) select (Pawn)sq.Piece)
+            {
+                p.EnPassantable = false;
+            }
+
+            if (pawn && Math.Abs(b.Location.Rank - a.Location.Rank) == 2)
+            {
+                ((Pawn)b.Piece).EnPassantable = true;
             }
 
             if (writeHistory) this.WriteHistory(a.Location, b.Location);
