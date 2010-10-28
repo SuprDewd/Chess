@@ -67,5 +67,42 @@ namespace ChessLib.Behaviours
                 return this.Moves.Where(t => t.Piece == null || t.Piece.Color != this.Piece.Color);
             }
         }
+
+        /// <summary>
+        /// Handles the promotion rule.
+        /// </summary>
+        /// <param name="b">The square to move to.</param>
+        /// <returns>Whether or not the move was handled.</returns>
+        /// <remarks>Returns false if the situation was not a promotion situation.</remarks>
+        public bool HandlePromotion(Square b)
+        {
+            Square a = this.Piece.Square;
+
+            if (b.Location.Rank == 1 || b.Location.Rank == 8)
+            {
+                if (b.Piece != null)
+                {
+                    b.Piece.Capture();
+                }
+
+                a.Piece.Square = b;
+                b.Piece = a.Piece;
+                a.Piece = null;
+                b.Piece.MoveCount++;
+
+                PromotionChoise choise = this.Board.Promotion(this.Board);
+                ChessPiece cp =
+                    choise == PromotionChoise.Bishop ? (ChessPiece)new Bishop(this.Board, b.Piece.Color, b.Piece.Square) :
+                    choise == PromotionChoise.Knight ? (ChessPiece)new Knight(this.Board, b.Piece.Color, b.Piece.Square) :
+                    choise == PromotionChoise.Rook ? (ChessPiece)new Rook(this.Board, b.Piece.Color, b.Piece.Square) :
+                    (ChessPiece)new Queen(this.Board, b.Piece.Color, b.Piece.Square);
+                cp.MoveCount = b.Piece.MoveCount;
+                b.Piece = cp;
+
+                return true;
+            }
+
+            return false;
+        }
     }
 }

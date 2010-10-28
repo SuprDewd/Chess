@@ -64,6 +64,7 @@
     <Compile Include="MovementBehaviour.cs" />
     <Compile Include="Pawn.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="PromotionChoise.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queen.cs" />
     <Compile Include="Rook.cs" />

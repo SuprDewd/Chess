@@ -27,10 +27,23 @@ namespace ChessLib
         public ChessColor Turn { get; private set; }
 
         /// <summary>
+        /// A function which decides what to promote to when a pawn reaches the end of the Chess board.
+        /// </summary>
+        protected internal Func<ChessBoard, PromotionChoise> Promotion { get; protected set; }
+
+        /// <summary>
         /// The constructor.
         /// </summary>
-        public ChessBoard()
+        public ChessBoard() : this(c => PromotionChoise.Queen) { }
+
+        /// <summary>
+        /// The constructor.
+        /// </summary>
+        /// <param name="promotion">A function which decides what to promote to when a pawn reaches the end of the Chess board.</param>
+        public ChessBoard(Func<ChessBoard, PromotionChoise> promotion)
         {
+            this.Promotion = promotion;
+
             this.StartingPieces = new Dictionary<Location, ChessPiece>
             {
                 {new Location(8, 'A'), new Rook(this, ChessColor.Black)},
@@ -154,7 +167,7 @@ namespace ChessLib
 
             // TODO: Implement more logic.
 
-            if (!(a.Piece.GetType() == typeof(King) && ((KingMovement)a.Piece.Movement).HandleCastling(b)))
+            if (!(a.Piece.GetType() == typeof(Pawn) && ((PawnMovement)a.Piece.Movement).HandlePromotion(b)) && !(a.Piece.GetType() == typeof(King) && ((KingMovement)a.Piece.Movement).HandleCastling(b)))
             {
                 if (b.Piece != null)
                 {

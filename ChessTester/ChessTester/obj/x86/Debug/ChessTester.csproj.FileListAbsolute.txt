@@ -28,5 +28,5 @@ C:\Users\Bjarki\Desktop\Projects\TSkoli\FOR403\Chess\ChessTester\ChessTester\obj
 C:\Users\Bjarki\Desktop\Projects\TSkoli\FOR403\Chess\ChessTester\ChessTester\obj\x86\Debug\ChessTester.Properties.Resources.resources
 C:\Users\Bjarki\Desktop\Projects\TSkoli\FOR403\Chess\ChessTester\ChessTester\obj\x86\Debug\GenerateResource.read.1.tlog
 C:\Users\Bjarki\Desktop\Projects\TSkoli\FOR403\Chess\ChessTester\ChessTester\obj\x86\Debug\GenerateResource.write.1.tlog
-C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessTester\ChessTester\bin\Debug\ChessLib.dll
 C:\Users\Bjarki\Desktop\Projects\TSkoli\FOR403\Chess\ChessTester\ChessTester\bin\Debug\ChessLib.dll
+C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessTester\ChessTester\bin\Debug\ChessLib.dll

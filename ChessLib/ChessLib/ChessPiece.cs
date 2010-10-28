@@ -39,7 +39,7 @@ namespace ChessLib
         /// Whether a Chess piece is hidden or not.
         /// </summary>
         /// <remarks>Used for movement calculcations.</remarks>
-        public bool Hidden { get; set; }
+        protected internal bool Hidden { get; set; }
 
         /// <summary>
         /// An event which will be fired when the Chess piece is captured.
