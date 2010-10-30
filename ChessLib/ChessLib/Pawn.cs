@@ -33,5 +33,15 @@ namespace ChessLib
         /// The name of the Chess piece.
         /// </summary>
         public override string PieceName { get { return "Pawn"; } }
+
+        /// <summary>
+        /// Resets the Chess piece.
+        /// </summary>
+        /// <param name="s">The square that the Chess piece belongs to.</param>
+        public override void Reset(Square s)
+        {
+            base.Reset(s);
+            this.EnPassantable = false;
+        }
     }
 }

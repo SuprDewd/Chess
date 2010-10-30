@@ -112,15 +112,10 @@ namespace ChessLib
                     Location curLoc = new Location(row + 1, column + 1);
                     ChessPiece piece = (from p in this.StartingPieces where p.Key == curLoc select p.Value).SingleOrDefault();
 
-                    if (piece != null)
-                    {
-                        piece.MoveCount = 0;
-                    }
-
                     Square t = (this.Squares[row, column] == null ? new Square(this, curLoc, (row + column) % 2 == 0 ? ChessColor.Black : ChessColor.White) : this.Squares[row, column]);
                     t.Piece = piece;
 
-                    if (t.Piece != null) t.Piece.Square = t;
+                    if (piece != null) piece.Reset(t);
 
                     this.Squares[row, column] = t;
                 }

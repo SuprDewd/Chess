@@ -55,6 +55,16 @@ namespace ChessLib
         }
 
         /// <summary>
+        /// Resets the Chess piece.
+        /// </summary>
+        /// <param name="s">The square that the Chess piece belongs to.</param>
+        public virtual void Reset(Square s)
+        {
+            this.MoveCount = 0;
+            this.Square = s;
+        }
+
+        /// <summary>
         /// All the moves that the Chess piece is able to move.
         /// </summary>
         public IEnumerable<Square> Moves { get { return this.Movement.Moves; } }
