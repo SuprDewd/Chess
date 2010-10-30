@@ -127,12 +127,15 @@ namespace ChessLib.Behaviours
             return false;
         }
 
-
+        /// <summary>
+        /// Handles the en passant rule.
+        /// </summary>
+        /// <param name="b">The square to move to.</param>
+        /// <returns>Whether or not the move was handled.</returns>
+        /// <remarks>Returns false if the situation was not an en passant situation.</remarks>
         public bool HandleEnPassant(Square b)
         {
             Square a = this.Piece.Square;
-
-            // Handle En Passant.
 
             if (!(a.Location.File != b.Location.File && b.Piece == null)) return false;
 

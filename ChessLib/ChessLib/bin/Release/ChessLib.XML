@@ -80,12 +80,6 @@
             How many times the Chess piece has been moved.
             </summary>
         </member>
-        <member name="P:ChessLib.ChessPiece.Hidden">
-            <summary>
-            Whether a Chess piece is hidden or not.
-            </summary>
-            <remarks>Used for movement calculcations.</remarks>
-        </member>
         <member name="E:ChessLib.ChessPiece.Captured">
             <summary>
             An event which will be fired when the Chess piece is captured.
@@ -836,6 +830,14 @@
             <param name="b">The square to move to.</param>
             <returns>Whether or not the move was handled.</returns>
             <remarks>Returns false if the situation was not a promotion situation.</remarks>
+        </member>
+        <member name="M:ChessLib.Behaviours.PawnMovement.HandleEnPassant(ChessLib.Square)">
+            <summary>
+            Handles the en passant rule.
+            </summary>
+            <param name="b">The square to move to.</param>
+            <returns>Whether or not the move was handled.</returns>
+            <remarks>Returns false if the situation was not an en passant situation.</remarks>
         </member>
         <member name="P:ChessLib.Behaviours.PawnMovement.Moves">
             <summary>

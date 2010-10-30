@@ -53,10 +53,10 @@ namespace ChessLib.Behaviours
 
                 if ((this.Direction & MovementDirection.Diagonal) == MovementDirection.Diagonal)
                 {
-                    foreach (var item in this.Piece.Square.SelectRow( 1,  1)
+                    foreach (var item in this.Piece.Square.SelectRow(1, 1)
                                .UnionAll(this.Piece.Square.SelectRow(-1, -1))
-                               .UnionAll(this.Piece.Square.SelectRow( 1, -1))
-                               .UnionAll(this.Piece.Square.SelectRow(-1,  1)))
+                               .UnionAll(this.Piece.Square.SelectRow(1, -1))
+                               .UnionAll(this.Piece.Square.SelectRow(-1, 1)))
                     {
                         yield return item;
                     }
@@ -73,8 +73,8 @@ namespace ChessLib.Behaviours
             {
                 if ((this.Direction & MovementDirection.Horizontal) == MovementDirection.Horizontal)
                 {
-                    foreach (var item in (this.Piece.Square.SelectRow(0,  1).TakeWhileAndOneMore(s => s.Piece.NotHere())
-                                .UnionAll(this.Piece.Square.SelectRow(0, -1).TakeWhileAndOneMore(s => s.Piece.NotHere())))
+                    foreach (var item in (this.Piece.Square.SelectRow(0, 1).TakeWhileAndOneMore(s => s.Piece == null || (s.Piece.GetType() == typeof(King) && s.Piece.Color == this.Piece.Color.Opposite()))
+                                .UnionAll(this.Piece.Square.SelectRow(0, -1).TakeWhileAndOneMore(s => s.Piece == null || (s.Piece.GetType() == typeof(King) && s.Piece.Color == this.Piece.Color.Opposite()))))
                                 .Where(i => i.Piece == null || i.Piece.Color != this.Piece.Color))
                     {
                         yield return item;
@@ -83,8 +83,8 @@ namespace ChessLib.Behaviours
 
                 if ((this.Direction & MovementDirection.Vertical) == MovementDirection.Vertical)
                 {
-                    foreach (var item in (this.Piece.Square.SelectRow( 1, 0).TakeWhileAndOneMore(s => s.Piece.NotHere())
-                                .UnionAll(this.Piece.Square.SelectRow(-1, 0).TakeWhileAndOneMore(s => s.Piece.NotHere())))
+                    foreach (var item in (this.Piece.Square.SelectRow(1, 0).TakeWhileAndOneMore(s => s.Piece == null || (s.Piece.GetType() == typeof(King) && s.Piece.Color == this.Piece.Color.Opposite()))
+                                .UnionAll(this.Piece.Square.SelectRow(-1, 0).TakeWhileAndOneMore(s => s.Piece == null || (s.Piece.GetType() == typeof(King) && s.Piece.Color == this.Piece.Color.Opposite()))))
                                 .Where(i => i.Piece == null || i.Piece.Color != this.Piece.Color))
                     {
                         yield return item;
@@ -93,10 +93,10 @@ namespace ChessLib.Behaviours
 
                 if ((this.Direction & MovementDirection.Diagonal) == MovementDirection.Diagonal)
                 {
-                    foreach (var item in (this.Piece.Square.SelectRow( 1,  1).TakeWhileAndOneMore(s => s.Piece.NotHere())
-                                .UnionAll(this.Piece.Square.SelectRow(-1, -1).TakeWhileAndOneMore(s => s.Piece.NotHere()))
-                                .UnionAll(this.Piece.Square.SelectRow( 1, -1).TakeWhileAndOneMore(s => s.Piece.NotHere()))
-                                .UnionAll(this.Piece.Square.SelectRow(-1,  1).TakeWhileAndOneMore(s => s.Piece.NotHere())))
+                    foreach (var item in (this.Piece.Square.SelectRow(1, 1).TakeWhileAndOneMore(s => s.Piece == null || (s.Piece.GetType() == typeof(King) && s.Piece.Color == this.Piece.Color.Opposite()))
+                                .UnionAll(this.Piece.Square.SelectRow(-1, -1).TakeWhileAndOneMore(s => s.Piece == null || (s.Piece.GetType() == typeof(King) && s.Piece.Color == this.Piece.Color.Opposite())))
+                                .UnionAll(this.Piece.Square.SelectRow(1, -1).TakeWhileAndOneMore(s => s.Piece == null || (s.Piece.GetType() == typeof(King) && s.Piece.Color == this.Piece.Color.Opposite())))
+                                .UnionAll(this.Piece.Square.SelectRow(-1, 1).TakeWhileAndOneMore(s => s.Piece == null || (s.Piece.GetType() == typeof(King) && s.Piece.Color == this.Piece.Color.Opposite()))))
                                 .Where(i => i.Piece == null || i.Piece.Color != this.Piece.Color))
                     {
                         yield return item;

@@ -2,11 +2,11 @@
   - Valid moves for all Chess pieces.
   - Knight movement.
   King check-rules / check-mate-rules.
-  En Passant.
+  - En Passant.
   - Castling.
   - Promotion.
   - King vs. King.
   King cannot be checked after turn is over.
   - Switch between black and white player.
-  History.
-
+  - History.
+  Events.

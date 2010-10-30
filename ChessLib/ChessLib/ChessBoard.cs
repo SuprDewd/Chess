@@ -115,7 +115,6 @@ namespace ChessLib
                     if (piece != null)
                     {
                         piece.MoveCount = 0;
-                        piece.Hidden = false;
                     }
 
                     Square t = (this.Squares[row, column] == null ? new Square(this, curLoc, (row + column) % 2 == 0 ? ChessColor.Black : ChessColor.White) : this.Squares[row, column]);

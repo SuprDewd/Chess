@@ -118,7 +118,7 @@ namespace ChessLib
         /// <returns>Whether the piece should be used in calculations.</returns>
         public static bool NotHere(this ChessPiece piece)
         {
-            return piece == null || piece.Hidden;
+            return piece == null;
         }
     }
 }
