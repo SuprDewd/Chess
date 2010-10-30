@@ -24,7 +24,11 @@ namespace ChessLib
         /// <summary>
         /// The color that should move next.
         /// </summary>
-        public ChessColor Turn { get; private set; }
+        public ChessColor Turn { get; protected set; }
+        /// <summary>
+        /// Whether the game is over.
+        /// </summary>
+        public bool GameOver { get; protected set; }
 
         /// <summary>
         /// The move history.
@@ -52,6 +56,7 @@ namespace ChessLib
         /// <param name="promotion">A function which decides what to promote to when a pawn reaches the end of the Chess board.</param>
         public ChessBoard(Func<ChessBoard, PromotionChoise> promotion)
         {
+            this.GameOver = false;
             this.Promotion = promotion;
             this.History = new List<Move>();
 
@@ -102,6 +107,7 @@ namespace ChessLib
         /// </summary>
         public void Reset()
         {
+            this.GameOver = false;
             this.Turn = ChessColor.White;
             this.Squares = new Square[8, 8];
 
@@ -198,11 +204,17 @@ namespace ChessLib
         /// <returns>Whether or not the move was successful.</returns>
         protected bool Move(Square a, Square b, bool writeHistory)
         {
+            if (this.GameOver) return false;
             if (a.Piece == null) return false;
             if (a.Piece.Color != this.Turn) return false;
 
             King king = (King)this.GetKing(this.Turn).Piece;
-            if (!Object.ReferenceEquals(a, king.Square) && king.Checked) return false;
+            if (!Object.ReferenceEquals(a, king.Square) && king.Checked)
+            {
+                // Check if move will block check, and that king will not be checked afterwards.
+
+                return false;
+            }
 
             if (b.Piece != null && b.Piece.Color == a.Piece.Color) return false;
             if (!a.Piece.Movement.Move(b)) return false;
