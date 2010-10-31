@@ -234,7 +234,7 @@ namespace ChessLib
                 {
                     // Multiple threats.
 
-                    return false;
+                    if (a.Piece != king) return false;
                 }
             }
 
@@ -251,6 +251,12 @@ namespace ChessLib
                 b.Piece = a.Piece;
                 a.Piece = null;
                 b.Piece.MoveCount++;
+            }
+
+            if (king.Checked)
+            {
+                this.PlayHistoryTo(this.CurrentHistory);
+                return false;
             }
 
             foreach (Pawn p in from sq in this where sq.Piece != null && sq.Piece.Color == this.Turn && sq.Piece.GetType() == typeof(Pawn) select (Pawn)sq.Piece)
