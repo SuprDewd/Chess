@@ -30,6 +30,8 @@ namespace ChessLib
         /// </summary>
         public bool GameOver { get; protected set; }
 
+        protected internal bool FireEvents { get; protected set; }
+
         /// <summary>
         /// The move history.
         /// </summary>
@@ -56,6 +58,7 @@ namespace ChessLib
         /// <param name="promotion">A function which decides what to promote to when a pawn reaches the end of the Chess board.</param>
         public ChessBoard(Func<ChessBoard, PromotionChoise> promotion)
         {
+            this.FireEvents = true;
             this.GameOver = false;
             this.Promotion = promotion;
             this.History = new List<Move>();
@@ -127,7 +130,7 @@ namespace ChessLib
                 }
             }
 
-            this.NextTurn.IfNotNull(a => a(this));
+            if (this.FireEvents) this.NextTurn.IfNotNull(a => a(this));
         }
 
         /// <summary>
@@ -172,15 +175,15 @@ namespace ChessLib
 
             if ((from s in this where s.Piece != null select s).Count() == 2 || (blackCheckmate && whiteCheckmate))
             {
-                this.StaleMate.IfNotNull(a => a(this));
+                if (this.FireEvents) this.StaleMate.IfNotNull(a => a(this));
             }
             else if (blackCheckmate || whiteCheckmate)
             {
-                this.CheckMate.IfNotNull(a => a(this, blackCheckmate ? ChessColor.Black : ChessColor.White));
+                if (this.FireEvents) this.CheckMate.IfNotNull(a => a(this, blackCheckmate ? ChessColor.Black : ChessColor.White));
             }
             else
             {
-                this.NextTurn.IfNotNull(a => a(this));
+                if (this.FireEvents) this.NextTurn.IfNotNull(a => a(this));
             }
         }
 
