@@ -123,6 +123,11 @@ namespace ChessTester
                 this.Reset();
                 this.LastTileClicked = null;
             }
+
+            foreach (ChessPiece p in this.Board.GetKing(this.Board.Turn).CheckingPieces)
+            {
+                this.canvases[p.Location.Rank - 1, Location.ConvertFile(p.Location.File) - 1].Background = Brushes.Aqua;
+            }
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)

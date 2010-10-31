@@ -227,6 +227,11 @@
             The color that should move next.
             </summary>
         </member>
+        <member name="P:ChessLib.ChessBoard.GameOver">
+            <summary>
+            Whether the game is over.
+            </summary>
+        </member>
         <member name="P:ChessLib.ChessBoard.History">
             <summary>
             The move history.
@@ -483,6 +488,11 @@
             <param name="chessPiece">The Chess piece that the movement belongs to.</param>
             <param name="direction">The direction(s) that the Chess piece is able move into.</param>
         </member>
+        <member name="M:ChessLib.Behaviours.RowMovement.AllValidMoves(ChessLib.Square)">
+            <summary>
+            All the moves that the Chess piece is able to move, that are also valid.
+            </summary>
+        </member>
         <member name="P:ChessLib.Behaviours.RowMovement.Direction">
             <summary>
             The direction(s) that the Chess piece is able to move into.
@@ -514,6 +524,11 @@
         <member name="P:ChessLib.King.Checked">
             <summary>
             Whether the king is checked or not.
+            </summary>
+        </member>
+        <member name="P:ChessLib.King.CheckingPieces">
+            <summary>
+            The pieces that are checking the King.
             </summary>
         </member>
         <member name="P:ChessLib.King.CheckMated">
