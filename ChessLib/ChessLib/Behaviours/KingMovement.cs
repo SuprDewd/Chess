@@ -113,8 +113,6 @@ namespace ChessLib.Behaviours
 
             if (!(Location.ConvertFile(a.Location.File) == 5 && (bFile == 3 || bFile == 7))) return false;
 
-            // TODO: Handle castling.
-
             Square c = this.Board[rank, bFile == 3 ? 1 : 8];
             Square d = this.Board[rank, bFile == 3 ? 4 : 6];
 
