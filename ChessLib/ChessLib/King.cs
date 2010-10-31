@@ -35,6 +35,17 @@ namespace ChessLib
         }
 
         /// <summary>
+        /// The pieces that are checking the King.
+        /// </summary>
+        public IEnumerable<ChessPiece> CheckingPieces
+        {
+            get
+            {
+                return (from s in this.Board where s.Piece != null && s.Piece.ValidMoves.Contains(this.Square) select s.Piece);
+            }
+        }
+
+        /// <summary>
         /// Whether the king is checkmated or not.
         /// </summary>
         public bool CheckMated

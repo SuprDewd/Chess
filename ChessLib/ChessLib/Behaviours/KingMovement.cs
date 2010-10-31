@@ -88,7 +88,7 @@ namespace ChessLib.Behaviours
         /// <returns>Whether the king with the specified color is surrounding the specified square.</returns>
         private bool SurroundedByKing(Square s, ChessColor kingColor)
         {
-            Square king = this.Board.GetKing(kingColor);
+            Square king = this.Board.GetKing(kingColor).Square;
 
             int kRank = king.Location.Rank;
             int kFile = Location.ConvertFile(king.Location.File);

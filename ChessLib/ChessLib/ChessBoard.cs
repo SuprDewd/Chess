@@ -156,11 +156,11 @@ namespace ChessLib
         /// </summary>
         /// <param name="c">The color of the king to find.</param>
         /// <returns>The square that the king is on.</returns>
-        public Square GetKing(ChessColor c)
+        public King GetKing(ChessColor c)
         {
             return (from s in this
                     where s.Piece != null && s.Piece.Color == c && s.Piece.GetType() == typeof(King)
-                    select s).Single();
+                    select (King)s.Piece).Single();
         }
 
         /// <summary>
@@ -170,8 +170,8 @@ namespace ChessLib
         {
             this.Turn = this.Turn.Opposite();
 
-            bool blackCheckmate = ((King)this.GetKing(ChessColor.Black).Piece).CheckMated;
-            bool whiteCheckmate = ((King)this.GetKing(ChessColor.White).Piece).CheckMated;
+            bool blackCheckmate = this.GetKing(ChessColor.Black).CheckMated;
+            bool whiteCheckmate = this.GetKing(ChessColor.White).CheckMated;
 
             if ((from s in this where s.Piece != null select s).Count() == 2 || (blackCheckmate && whiteCheckmate))
             {
@@ -210,17 +210,36 @@ namespace ChessLib
             if (this.GameOver) return false;
             if (a.Piece == null) return false;
             if (a.Piece.Color != this.Turn) return false;
+            if (b.Piece != null && b.Piece.Color == a.Piece.Color) return false;
+            if (!a.Piece.Movement.Move(b)) return false;
 
-            King king = (King)this.GetKing(this.Turn).Piece;
+            King king = this.GetKing(this.Turn);
             if (!Object.ReferenceEquals(a, king.Square) && king.Checked)
             {
                 // Check if move will block check, and that king will not be checked afterwards.
 
-                return false;
-            }
+                IEnumerable<ChessPiece> threats = king.CheckingPieces;
 
-            if (b.Piece != null && b.Piece.Color == a.Piece.Color) return false;
-            if (!a.Piece.Movement.Move(b)) return false;
+                if (threats.Count() == 1)
+                {
+                    ChessPiece single = threats.Single();
+
+                    if (single.Square != b)
+                    {
+                        if (single.Movement.GetType() != typeof(RowMovement)) return false;
+
+                        RowMovement rm = (RowMovement)single.Movement;
+
+                        if (rm.AllValidMoves(b).Contains(king.Square)) return false;
+                    }
+                }
+                else
+                {
+                    // Multiple threats.
+
+                    if (a.Piece != king) return false;
+                }
+            }
 
             bool pawn = a.Piece.GetType() == typeof(Pawn);
 
@@ -235,6 +254,12 @@ namespace ChessLib
                 b.Piece = a.Piece;
                 a.Piece = null;
                 b.Piece.MoveCount++;
+            }
+
+            if (king.Checked)
+            {
+                this.PlayHistoryTo(this.CurrentHistory);
+                return false;
             }
 
             foreach (Pawn p in from sq in this where sq.Piece != null && sq.Piece.Color == this.Turn && sq.Piece.GetType() == typeof(Pawn) select (Pawn)sq.Piece)
