@@ -243,7 +243,15 @@ namespace ChessLib
 
             bool pawn = a.Piece.GetType() == typeof(Pawn);
 
-            if (!(pawn && (((PawnMovement)a.Piece.Movement).HandlePromotion(b) || ((PawnMovement)a.Piece.Movement).HandleEnPassant(b))) && !(a.Piece.GetType() == typeof(King) && ((KingMovement)a.Piece.Movement).HandleCastling(b)))
+            TempPiece[,] backupBoard = new TempPiece[8, 8];
+
+            foreach (Square s in this)
+            {
+                backupBoard[s.Location.Rank - 1, Location.ConvertFile(s.Location.File) - 1] = new TempPiece(s.Piece);
+            }
+
+            if (!(pawn && (((PawnMovement)a.Piece.Movement).HandlePromotion(b) || ((PawnMovement)a.Piece.Movement).HandleEnPassant(b))) &&
+            !(a.Piece.GetType() == typeof(King) && ((KingMovement)a.Piece.Movement).HandleCastling(b)))
             {
                 if (b.Piece != null)
                 {
@@ -258,7 +266,23 @@ namespace ChessLib
 
             if (king.Checked)
             {
-                this.PlayHistoryTo(this.CurrentHistory);
+                for (int x = 0; x < 8; x++)
+                {
+                    for (int y = 0; y < 8; y++)
+                    {
+                        TempPiece tp = backupBoard[x, y];
+                        Square s = this.Squares[x, y];
+
+                        s.Piece = tp.Piece;
+
+                        if (tp.Piece != null)
+                        {
+                            tp.Piece.Square = s;
+                            tp.Piece.MoveCount = tp.MoveCount;
+                        }
+                    }
+                }
+
                 return false;
             }
 

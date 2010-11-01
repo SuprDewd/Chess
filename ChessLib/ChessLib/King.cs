@@ -41,7 +41,7 @@ namespace ChessLib
         {
             get
             {
-                return (from s in this.Board where s.Piece != null && s.Piece.ValidMoves.Contains(this.Square) select s.Piece);
+                return (from s in this.Board where s.Piece != null && s.Piece.GetType() != typeof(King) && s.Piece.ValidMoves.Contains(this.Square) select s.Piece);
             }
         }
 
