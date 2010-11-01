@@ -68,12 +68,12 @@ namespace ChessTester
                         if (k.Color == ChessColor.White)
                         {
                             whiteKingChecked = k.Checked;
-                            whiteKingCheckeMated = k.CheckMated;
+                            whiteKingCheckeMated = k.CheckMade;
                         }
                         else
                         {
                             blackKingChecked = k.Checked;
-                            blackKingCheckeMated = k.CheckMated;
+                            blackKingCheckeMated = k.CheckMade;
                         }
                     }
 
@@ -83,10 +83,11 @@ namespace ChessTester
                 }
             }
 
-            txtStatus.Text = "Black King Checked:    " + (blackKingChecked ? "yes" : "no") + Environment.NewLine +
-                             "Black King CheckMated: " + (blackKingCheckeMated ? "yes" : "no") + Environment.NewLine +
-                             "White King Checked:    " + (whiteKingChecked ? "yes" : "no") + Environment.NewLine +
-                             "White King CheckMated: " + (whiteKingCheckeMated ? "yes" : "no");
+            txtStatus.Text = "Black Checked:       " + (blackKingChecked ? "yes" : "no") + Environment.NewLine +
+                             "Black CheckMade:  " + (blackKingCheckeMated ? "yes" : "no") + Environment.NewLine +
+                             "White Checked:      " + (whiteKingChecked ? "yes" : "no") + Environment.NewLine +
+                             "White CheckMade: " + (whiteKingCheckeMated ? "yes" : "no") + Environment.NewLine +
+                             "StaleMate:              " + (this.Board.StaleMate ? "yes" : "no");
         }
 
         private Square LastTileClicked = null;
@@ -106,7 +107,7 @@ namespace ChessTester
 
                 c.Background = Brushes.Pink;
 
-                foreach (Square t in this.LastTileClicked.Piece.ValidMoves)
+                foreach (Square t in this.LastTileClicked.Piece.TotallyValidMoves)
                 {
                     this.canvases[t.Location.Rank - 1, Location.ConvertFile(t.Location.File) - 1].Background = Brushes.Green;
                 }
@@ -126,7 +127,7 @@ namespace ChessTester
 
             foreach (ChessPiece p in this.Board.GetKing(this.Board.Turn).CheckingPieces)
             {
-                this.canvases[p.Location.Rank - 1, Location.ConvertFile(p.Location.File) - 1].Background = Brushes.Aqua;
+                //this.canvases[p.Location.Rank - 1, Location.ConvertFile(p.Location.File) - 1].Background = Brushes.Aqua;
             }
         }
 

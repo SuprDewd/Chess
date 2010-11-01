@@ -170,20 +170,23 @@ namespace ChessLib
         {
             this.Turn = this.Turn.Opposite();
 
-            bool blackCheckmate = this.GetKing(ChessColor.Black).CheckMated;
-            bool whiteCheckmate = this.GetKing(ChessColor.White).CheckMated;
+            King blackKing = this.GetKing(ChessColor.Black);
+            King whiteKing = this.GetKing(ChessColor.White);
 
-            if ((from s in this where s.Piece != null select s).Count() == 2 || (blackCheckmate && whiteCheckmate))
+            if (this.StaleMate)
             {
-                if (this.FireEvents) this.StaleMate.IfNotNull(a => a(this));
+                this.GameOver = true;
+                if (this.FireEvents) this.GameEnded.IfNotNull(a => a(this, ChessWinner.StaleMate));
             }
-            else if (blackCheckmate || whiteCheckmate)
+            else if (blackKing.CheckMade)
             {
-                if (this.FireEvents) this.CheckMate.IfNotNull(a => a(this, blackCheckmate ? ChessColor.Black : ChessColor.White));
+                this.GameOver = true;
+                if (this.FireEvents) this.GameEnded.IfNotNull(a => a(this, ChessWinner.Black));
             }
-            else
+            else if (whiteKing.CheckMade)
             {
-                if (this.FireEvents) this.NextTurn.IfNotNull(a => a(this));
+                this.GameOver = true;
+                if (this.FireEvents) this.GameEnded.IfNotNull(a => a(this, ChessWinner.White));
             }
         }
 
@@ -206,6 +209,26 @@ namespace ChessLib
         /// <param name="writeHistory">Whether or not to write the move to the history.</param>
         /// <returns>Whether or not the move was successful.</returns>
         protected bool Move(Square a, Square b, bool writeHistory)
+        {
+            if (!this.CanMove(a, b)) return false;
+
+            foreach (Pawn p in from sq in this where sq.Piece != null && sq.Piece.Color == this.Turn && sq.Piece.GetType() == typeof(Pawn) select (Pawn)sq.Piece)
+            {
+                p.EnPassantable = false;
+            }
+
+            if (b.Piece.GetType() == typeof(Pawn) && Math.Abs(b.Location.Rank - a.Location.Rank) == 2)
+            {
+                ((Pawn)b.Piece).EnPassantable = true;
+            }
+
+            if (writeHistory) this.WriteHistory(a.Location, b.Location);
+
+            this.TurnOver();
+            return true;
+        }
+
+        protected internal bool CanMove(Square a, Square b, bool resetAlways = false)
         {
             if (this.GameOver) return false;
             if (a.Piece == null) return false;
@@ -241,8 +264,6 @@ namespace ChessLib
                 }
             }
 
-            bool pawn = a.Piece.GetType() == typeof(Pawn);
-
             TempPiece[,] backupBoard = new TempPiece[8, 8];
 
             foreach (Square s in this)
@@ -250,7 +271,7 @@ namespace ChessLib
                 backupBoard[s.Location.Rank - 1, Location.ConvertFile(s.Location.File) - 1] = new TempPiece(s.Piece);
             }
 
-            if (!(pawn && (((PawnMovement)a.Piece.Movement).HandlePromotion(b) || ((PawnMovement)a.Piece.Movement).HandleEnPassant(b))) &&
+            if (!(a.Piece.GetType() == typeof(Pawn) && (((PawnMovement)a.Piece.Movement).HandlePromotion(b) || ((PawnMovement)a.Piece.Movement).HandleEnPassant(b))) &&
             !(a.Piece.GetType() == typeof(King) && ((KingMovement)a.Piece.Movement).HandleCastling(b)))
             {
                 if (b.Piece != null)
@@ -264,7 +285,9 @@ namespace ChessLib
                 b.Piece.MoveCount++;
             }
 
-            if (king.Checked)
+            bool kingChecked = king.Checked;
+
+            if (resetAlways || kingChecked)
             {
                 for (int x = 0; x < 8; x++)
                 {
@@ -282,24 +305,9 @@ namespace ChessLib
                         }
                     }
                 }
-
-                return false;
             }
 
-            foreach (Pawn p in from sq in this where sq.Piece != null && sq.Piece.Color == this.Turn && sq.Piece.GetType() == typeof(Pawn) select (Pawn)sq.Piece)
-            {
-                p.EnPassantable = false;
-            }
-
-            if (pawn && Math.Abs(b.Location.Rank - a.Location.Rank) == 2)
-            {
-                ((Pawn)b.Piece).EnPassantable = true;
-            }
-
-            if (writeHistory) this.WriteHistory(a.Location, b.Location);
-
-            this.TurnOver();
-            return true;
+            return !kingChecked;
         }
 
         /// <summary>
@@ -318,20 +326,31 @@ namespace ChessLib
             this._CurrentHistory++;
         }
 
+        public bool StaleMate
+        {
+            get
+            {
+                if (this.Count(s => s.Piece != null) == 2) return true;
+
+                King king = this.GetKing(this.Turn);
+                if (king.Checked) return false;
+
+                foreach (Square square in this.Where(s => s.Piece != null && s.Piece.Color == king.Color))
+                {
+                    if (square.Piece.TotallyValidMoves.Count() != 0) return false;
+                }
+
+                return true;
+            }
+        }
+
         #region Events
 
         /// <summary>
         /// An event that is fired when the next player should move.
         /// </summary>
         public event Action<ChessBoard> NextTurn;
-        /// <summary>
-        /// An event that is fired when there is a checkmate.
-        /// </summary>
-        public event Action<ChessBoard, ChessColor> CheckMate;
-        /// <summary>
-        /// An event that is fired when there is a stalemate.
-        /// </summary>
-        public event Action<ChessBoard> StaleMate;
+        public event Action<ChessBoard, ChessWinner> GameEnded;
 
         #endregion
 

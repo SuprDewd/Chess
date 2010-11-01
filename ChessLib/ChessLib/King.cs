@@ -48,11 +48,18 @@ namespace ChessLib
         /// <summary>
         /// Whether the king is checkmated or not.
         /// </summary>
-        public bool CheckMated
+        public bool CheckMade
         {
             get
             {
-                return this.Checked && !this.Movement.ValidMoves.Any();
+                if (!this.Checked) return false;
+
+                foreach (Square square in this.Board.Where(s => s.Piece != null && s.Piece.Color == this.Color))
+                {
+                    if (square.Piece.TotallyValidMoves.Count() != 0) return false;
+                }
+
+                return true;
             }
         }
 

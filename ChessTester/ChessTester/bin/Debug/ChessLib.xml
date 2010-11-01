@@ -219,7 +219,7 @@
             The pieces that are checking the King.
             </summary>
         </member>
-        <member name="P:ChessLib.King.CheckMated">
+        <member name="P:ChessLib.King.CheckMade">
             <summary>
             Whether the king is checkmated or not.
             </summary>
@@ -796,16 +796,6 @@
         <member name="E:ChessLib.ChessBoard.NextTurn">
             <summary>
             An event that is fired when the next player should move.
-            </summary>
-        </member>
-        <member name="E:ChessLib.ChessBoard.CheckMate">
-            <summary>
-            An event that is fired when there is a checkmate.
-            </summary>
-        </member>
-        <member name="E:ChessLib.ChessBoard.StaleMate">
-            <summary>
-            An event that is fired when there is a stalemate.
             </summary>
         </member>
         <member name="P:ChessLib.ChessBoard.Item(System.Int32,System.Char)">

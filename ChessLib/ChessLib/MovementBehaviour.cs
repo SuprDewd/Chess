@@ -47,5 +47,14 @@ namespace ChessLib
         {
             return this.ValidMoves.Contains(to);
         }
+
+        public virtual IEnumerable<Square> TotallyValidMoves
+        {
+            get
+            {
+                if (this.Piece.GetType() == typeof(King)) return this.ValidMoves;
+                else return this.ValidMoves.Where(b => this.Board.CanMove(this.Piece.Square, b, true));
+            }
+        }
     }
 }
