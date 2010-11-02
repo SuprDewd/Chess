@@ -87,7 +87,8 @@ namespace ChessTester
                              "Black CheckMade:  " + (blackKingCheckeMated ? "yes" : "no") + Environment.NewLine +
                              "White Checked:      " + (whiteKingChecked ? "yes" : "no") + Environment.NewLine +
                              "White CheckMade: " + (whiteKingCheckeMated ? "yes" : "no") + Environment.NewLine +
-                             "StaleMate:              " + (this.Board.StaleMate ? "yes" : "no");
+                             "StaleMate:              " + (this.Board.StaleMate ? "yes" : "no") + Environment.NewLine +
+                             "GameOver:             " + (this.Board.StaleMate ? "yes" : "no");
         }
 
         private Square LastTileClicked = null;
@@ -143,6 +144,18 @@ namespace ChessTester
             this.Board.CurrentHistory++;
             this.Reset();
             //this.Board.PlayHistoryTo(this.Board.CurrentHistory + 1);
+        }
+
+        private void btnImport_Click(object sender, RoutedEventArgs e)
+        {
+            this.Board.Import(this.textBox2.Text);
+            this.Reset();
+        }
+
+        private void button3_Click(object sender, RoutedEventArgs e)
+        {
+            this.Board.Reset(true);
+            this.Reset();
         }
     }
 }

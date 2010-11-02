@@ -52,6 +52,7 @@
     <Compile Include="Bishop.cs" />
     <Compile Include="ChessBoard.cs" />
     <Compile Include="ChessColor.cs" />
+    <Compile Include="ChessMoveParser.cs" />
     <Compile Include="ChessPiece.cs" />
     <Compile Include="ChessWinner.cs" />
     <Compile Include="IBelongToPiece.cs" />

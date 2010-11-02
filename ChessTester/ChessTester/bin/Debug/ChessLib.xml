@@ -394,6 +394,13 @@
             <param name="rank">The rank of the item.</param>
             <param name="file">The file of the item.</param>
         </member>
+        <member name="M:ChessLib.Location.#ctor(System.String)">
+            <summary>
+            The constructor.
+            </summary>
+            <param name="rankFile">The rank and the file of the item.</param>
+            <example>A1, b7 or h8</example>
+        </member>
         <member name="M:ChessLib.Location.op_Equality(ChessLib.Location,ChessLib.Location)">
             <summary>
             The equals operator.
@@ -417,6 +424,9 @@
             <see cref="M:System.Object.GetHashCode"/>
         </member>
         <member name="M:ChessLib.Location.ToString">
+            <see cref="M:System.Object.ToString"/>
+        </member>
+        <member name="M:ChessLib.Location.ToString(System.Text.StringBuilder)">
             <see cref="M:System.Object.ToString"/>
         </member>
         <member name="M:ChessLib.Location.ConvertFile(System.Char)">
@@ -710,7 +720,7 @@
             </summary>
             <param name="promotion">A function which decides what to promote to when a pawn reaches the end of the Chess board.</param>
         </member>
-        <member name="M:ChessLib.ChessBoard.Reset">
+        <member name="M:ChessLib.ChessBoard.Reset(System.Boolean)">
             <summary>
             Resets the Chess board.
             </summary>
@@ -741,7 +751,7 @@
             <param name="b">Square B.</param>
             <returns>Whether or not the move was successful.</returns>
         </member>
-        <member name="M:ChessLib.ChessBoard.Move(ChessLib.Square,ChessLib.Square,System.Boolean)">
+        <member name="M:ChessLib.ChessBoard.Move(ChessLib.Square,ChessLib.Square,System.Boolean,System.Boolean)">
             <summary>
             Moves a Chess piece from A to B.
             </summary>
@@ -762,6 +772,26 @@
         </member>
         <member name="M:ChessLib.ChessBoard.System#Collections#IEnumerable#GetEnumerator">
             <see cref="M:System.Collections.IEnumerable.GetEnumerator"/>
+        </member>
+        <member name="M:ChessLib.ChessBoard.Import(System.String)">
+            <summary>
+            Imports the specified moves.
+            </summary>
+            <param name="moves">The moves.</param>
+            <returns>Whether all moves could be executed.</returns>
+        </member>
+        <member name="M:ChessLib.ChessBoard.Import(ChessLib.Move[])">
+            <summary>
+            Imports the specified moves.
+            </summary>
+            <param name="moves">The moves.</param>
+            <returns>Whether all moves could be executed.</returns>
+        </member>
+        <member name="M:ChessLib.ChessBoard.Export">
+            <summary>
+            Exports the current move history.
+            </summary>
+            <returns>The move history.</returns>
         </member>
         <member name="P:ChessLib.ChessBoard.Squares">
             <summary>
@@ -883,6 +913,18 @@
             <summary>
             The name of the Chess piece.
             </summary>
+        </member>
+        <member name="T:ChessLib.ChessMoveParser">
+            <summary>
+            A Chess move parser.
+            </summary>
+        </member>
+        <member name="M:ChessLib.ChessMoveParser.Parse(System.String)">
+            <summary>
+            Parses a string with moves.
+            </summary>
+            <param name="s">The string.</param>
+            <returns>The moves.</returns>
         </member>
     </members>
 </doc>

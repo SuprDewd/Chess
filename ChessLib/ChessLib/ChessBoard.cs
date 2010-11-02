@@ -102,13 +102,13 @@ namespace ChessLib
                 {new Location(2, 'H'), new Pawn(this, ChessColor.White)},
             };
 
-            this.Reset();
+            this.Reset(true);
         }
 
         /// <summary>
         /// Resets the Chess board.
         /// </summary>
-        public void Reset()
+        public void Reset(bool clearHistory = false)
         {
             this.GameOver = false;
             this.Turn = ChessColor.White;
@@ -130,6 +130,7 @@ namespace ChessLib
                 }
             }
 
+            if (clearHistory) { this.History.Clear(); this._CurrentHistory = 0; }
             if (this.FireEvents) this.NextTurn.IfNotNull(a => a(this));
         }
 
@@ -146,7 +147,7 @@ namespace ChessLib
             {
                 Move m = this.History[i];
 
-                this.Move(this[m.A], this[m.B], false);
+                this.Move(this[m.A], this[m.B], false, false);
                 this._CurrentHistory = i + 1;
             }
         }
@@ -208,9 +209,9 @@ namespace ChessLib
         /// <param name="b">Square B.</param>
         /// <param name="writeHistory">Whether or not to write the move to the history.</param>
         /// <returns>Whether or not the move was successful.</returns>
-        protected bool Move(Square a, Square b, bool writeHistory)
+        protected bool Move(Square a, Square b, bool writeHistory = true, bool validate = true)
         {
-            if (!this.CanMove(a, b)) return false;
+            if (!this.CanMove(a, b, false, validate)) return false;
 
             foreach (Pawn p in from sq in this where sq.Piece != null && sq.Piece.Color == this.Turn && sq.Piece.GetType() == typeof(Pawn) select (Pawn)sq.Piece)
             {
@@ -228,47 +229,57 @@ namespace ChessLib
             return true;
         }
 
-        protected internal bool CanMove(Square a, Square b, bool resetAlways = false)
+        protected internal bool CanMove(Square a, Square b, bool resetAlways = false, bool validate = true)
         {
             if (this.GameOver) return false;
             if (a.Piece == null) return false;
             if (a.Piece.Color != this.Turn) return false;
             if (b.Piece != null && b.Piece.Color == a.Piece.Color) return false;
-            if (!a.Piece.Movement.Move(b)) return false;
+            if (validate && !a.Piece.Movement.Move(b)) return false;
 
-            King king = this.GetKing(this.Turn);
-            if (!Object.ReferenceEquals(a, king.Square) && king.Checked)
+            King king = null;
+
+            if (validate)
             {
-                // Check if move will block check, and that king will not be checked afterwards.
-
-                IEnumerable<ChessPiece> threats = king.CheckingPieces;
-
-                if (threats.Count() == 1)
+                king = this.GetKing(this.Turn);
+                if (!Object.ReferenceEquals(a, king.Square) && king.Checked)
                 {
-                    ChessPiece single = threats.Single();
+                    // Check if move will block check, and that king will not be checked afterwards.
 
-                    if (single.Square != b)
+                    IEnumerable<ChessPiece> threats = king.CheckingPieces;
+
+                    if (threats.Count() == 1)
                     {
-                        if (single.Movement.GetType() != typeof(RowMovement)) return false;
+                        ChessPiece single = threats.Single();
 
-                        RowMovement rm = (RowMovement)single.Movement;
+                        if (single.Square != b)
+                        {
+                            if (single.Movement.GetType() != typeof(RowMovement)) return false;
 
-                        if (rm.AllValidMoves(b).Contains(king.Square)) return false;
+                            RowMovement rm = (RowMovement)single.Movement;
+
+                            if (rm.AllValidMoves(b).Contains(king.Square)) return false;
+                        }
                     }
-                }
-                else
-                {
-                    // Multiple threats.
+                    else
+                    {
+                        // Multiple threats.
 
-                    if (a.Piece != king) return false;
+                        if (a.Piece != king) return false;
+                    }
                 }
             }
 
-            TempPiece[,] backupBoard = new TempPiece[8, 8];
+            TempPiece[,] backupBoard = null;
 
-            foreach (Square s in this)
+            if (validate)
             {
-                backupBoard[s.Location.Rank - 1, Location.ConvertFile(s.Location.File) - 1] = new TempPiece(s.Piece);
+                backupBoard = new TempPiece[8, 8];
+
+                foreach (Square s in this)
+                {
+                    backupBoard[s.Location.Rank - 1, Location.ConvertFile(s.Location.File) - 1] = new TempPiece(s.Piece);
+                }
             }
 
             if (!(a.Piece.GetType() == typeof(Pawn) && (((PawnMovement)a.Piece.Movement).HandlePromotion(b) || ((PawnMovement)a.Piece.Movement).HandleEnPassant(b))) &&
@@ -285,29 +296,33 @@ namespace ChessLib
                 b.Piece.MoveCount++;
             }
 
-            bool kingChecked = king.Checked;
-
-            if (resetAlways || kingChecked)
+            if (validate)
             {
-                for (int x = 0; x < 8; x++)
+                bool kingChecked = king.Checked;
+
+                if (resetAlways || kingChecked)
                 {
-                    for (int y = 0; y < 8; y++)
+                    for (int x = 0; x < 8; x++)
                     {
-                        TempPiece tp = backupBoard[x, y];
-                        Square s = this.Squares[x, y];
-
-                        s.Piece = tp.Piece;
-
-                        if (tp.Piece != null)
+                        for (int y = 0; y < 8; y++)
                         {
-                            tp.Piece.Square = s;
-                            tp.Piece.MoveCount = tp.MoveCount;
+                            TempPiece tp = backupBoard[x, y];
+                            Square s = this.Squares[x, y];
+
+                            s.Piece = tp.Piece;
+
+                            if (tp.Piece != null)
+                            {
+                                tp.Piece.Square = s;
+                                tp.Piece.MoveCount = tp.MoveCount;
+                            }
                         }
                     }
                 }
-            }
 
-            return !kingChecked;
+                return !kingChecked;
+            }
+            else return true;
         }
 
         /// <summary>
@@ -437,6 +452,57 @@ namespace ChessLib
                     yield return this[rank, file];
                 }
             }
+        }
+
+        #endregion
+
+        #region Import / Export
+
+        /// <summary>
+        /// Imports the specified moves.
+        /// </summary>
+        /// <param name="moves">The moves.</param>
+        /// <returns>Whether all moves could be executed.</returns>
+        public bool Import(string moves)
+        {
+            return this.Import(ChessMoveParser.Parse(moves));
+        }
+
+        /// <summary>
+        /// Imports the specified moves.
+        /// </summary>
+        /// <param name="moves">The moves.</param>
+        /// <returns>Whether all moves could be executed.</returns>
+        public bool Import(Move[] moves)
+        {
+            foreach (Move m in moves)
+            {
+                if (!this.Move(this[m.A], this[m.B])) return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Exports the current move history.
+        /// </summary>
+        /// <returns>The move history.</returns>
+        public string Export()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < this.CurrentHistory; i++)
+            {
+                Move m = this.History[i];
+
+                m.A.ToString(sb);
+                sb.Append(' ');
+                m.B.ToString(sb);
+
+                if (i + 1 < this.CurrentHistory) sb.Append('\n');
+            }
+
+            return sb.ToString();
         }
 
         #endregion

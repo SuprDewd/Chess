@@ -59,6 +59,7 @@ namespace ChessLib
         /// <param name="file">The file of the item.</param>
         public Location(int rank, char file)
         {
+            file = file.ToString().ToUpper()[0];
             if (!Location.IsValid(rank, file)) throw new ArgumentException();
 
             this._Rank = rank;
@@ -76,6 +77,23 @@ namespace ChessLib
 
             this._Rank = rank;
             this._File = Location.ConvertFile(file);
+        }
+
+        /// <summary>
+        /// The constructor.
+        /// </summary>
+        /// <param name="rankFile">The rank and the file of the item.</param>
+        /// <example>A1, b7 or h8</example>
+        public Location(string rankFile)
+        {
+            rankFile = rankFile.ToUpper();
+            int rank = Convert.ToInt32(rankFile[1].ToString());
+            char file = rankFile[0];
+
+            if (!Location.IsValid(rank, file)) throw new ArgumentException();
+
+            this._Rank = rank;
+            this._File = file;
         }
 
         /// <summary>
@@ -118,6 +136,13 @@ namespace ChessLib
         public override string ToString()
         {
             return this.File.ToString() + this.Rank.ToString();
+        }
+
+        /// <see cref="Object.ToString()"/>
+        internal void ToString(StringBuilder sb)
+        {
+            sb.Append(this.File.ToString());
+            sb.Append(this.Rank.ToString());
         }
 
         /// <summary>
