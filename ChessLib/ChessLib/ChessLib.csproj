@@ -53,6 +53,7 @@
     <Compile Include="ChessBoard.cs" />
     <Compile Include="ChessColor.cs" />
     <Compile Include="ChessPiece.cs" />
+    <Compile Include="ChessWinner.cs" />
     <Compile Include="IBelongToPiece.cs" />
     <Compile Include="IChessItem.cs" />
     <Compile Include="IColored.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Queen.cs" />
     <Compile Include="Rook.cs" />
     <Compile Include="Square.cs" />
+    <Compile Include="TempPiece.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

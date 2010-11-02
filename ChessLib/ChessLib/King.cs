@@ -41,18 +41,25 @@ namespace ChessLib
         {
             get
             {
-                return (from s in this.Board where s.Piece != null && s.Piece.ValidMoves.Contains(this.Square) select s.Piece);
+                return (from s in this.Board where s.Piece != null && s.Piece.GetType() != typeof(King) && s.Piece.ValidMoves.Contains(this.Square) select s.Piece);
             }
         }
 
         /// <summary>
         /// Whether the king is checkmated or not.
         /// </summary>
-        public bool CheckMated
+        public bool CheckMade
         {
             get
             {
-                return this.Checked && !this.Movement.ValidMoves.Any();
+                if (!this.Checked) return false;
+
+                foreach (Square square in this.Board.Where(s => s.Piece != null && s.Piece.Color == this.Color))
+                {
+                    if (square.Piece.TotallyValidMoves.Count() != 0) return false;
+                }
+
+                return true;
             }
         }
 
