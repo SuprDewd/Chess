@@ -751,7 +751,7 @@
             <param name="b">Square B.</param>
             <returns>Whether or not the move was successful.</returns>
         </member>
-        <member name="M:ChessLib.ChessBoard.Move(ChessLib.Square,ChessLib.Square,System.Boolean)">
+        <member name="M:ChessLib.ChessBoard.Move(ChessLib.Square,ChessLib.Square,System.Boolean,System.Boolean)">
             <summary>
             Moves a Chess piece from A to B.
             </summary>
