@@ -102,13 +102,13 @@ namespace ChessLib
                 {new Location(2, 'H'), new Pawn(this, ChessColor.White)},
             };
 
-            this.Reset();
+            this.Reset(true);
         }
 
         /// <summary>
         /// Resets the Chess board.
         /// </summary>
-        public void Reset()
+        public void Reset(bool clearHistory = false)
         {
             this.GameOver = false;
             this.Turn = ChessColor.White;
@@ -130,6 +130,7 @@ namespace ChessLib
                 }
             }
 
+            if (clearHistory) { this.History.Clear(); this._CurrentHistory = 0; }
             if (this.FireEvents) this.NextTurn.IfNotNull(a => a(this));
         }
 
@@ -437,6 +438,57 @@ namespace ChessLib
                     yield return this[rank, file];
                 }
             }
+        }
+
+        #endregion
+
+        #region Import / Export
+
+        /// <summary>
+        /// Imports the specified moves.
+        /// </summary>
+        /// <param name="moves">The moves.</param>
+        /// <returns>Whether all moves could be executed.</returns>
+        public bool Import(string moves)
+        {
+            return this.Import(ChessMoveParser.Parse(moves));
+        }
+
+        /// <summary>
+        /// Imports the specified moves.
+        /// </summary>
+        /// <param name="moves">The moves.</param>
+        /// <returns>Whether all moves could be executed.</returns>
+        public bool Import(Move[] moves)
+        {
+            foreach (Move m in moves)
+            {
+                if (!this.Move(this[m.A], this[m.B])) return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Exports the current move history.
+        /// </summary>
+        /// <returns>The move history.</returns>
+        public string Export()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < this.CurrentHistory; i++)
+            {
+                Move m = this.History[i];
+
+                m.A.ToString(sb);
+                sb.Append(' ');
+                m.B.ToString(sb);
+
+                if (i + 1 < this.CurrentHistory) sb.Append('\n');
+            }
+
+            return sb.ToString();
         }
 
         #endregion
