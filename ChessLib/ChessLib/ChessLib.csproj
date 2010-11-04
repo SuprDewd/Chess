@@ -34,13 +34,17 @@
     <DocumentationFile>bin\Release\ChessLib.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionDisposable.cs" />
@@ -51,9 +55,11 @@
     <Compile Include="Behaviours\RowMovement.cs" />
     <Compile Include="Bishop.cs" />
     <Compile Include="ChessBoard.cs" />
+    <Compile Include="ChessBoardControl.cs" />
     <Compile Include="ChessColor.cs" />
     <Compile Include="ChessMoveParser.cs" />
     <Compile Include="ChessPiece.cs" />
+    <Compile Include="ChessSquareControl.cs" />
     <Compile Include="ChessWinner.cs" />
     <Compile Include="IBelongToPiece.cs" />
     <Compile Include="IChessItem.cs" />
