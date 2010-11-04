@@ -1,0 +1,16 @@
+﻿<Window x:Class="ChessClient.Chess"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:c="clr-namespace:ChessLib;assembly=ChessLib"
+        xmlns:l="clr-namespace:ChessClient"
+        Title="Chess" Height="650" Width="650">
+    <Grid>
+        <Border Background="#916941" Width="600" Height="600">
+            <c:ChessBoardControl Size="580" x:Name="cbcBoard">
+                <c:ChessBoardControl.Board>
+                    <c:ChessBoard />
+                </c:ChessBoardControl.Board>
+            </c:ChessBoardControl>
+        </Border>
+    </Grid>
+</Window>

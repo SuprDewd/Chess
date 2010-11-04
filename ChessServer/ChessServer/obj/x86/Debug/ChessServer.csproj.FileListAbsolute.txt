@@ -6,3 +6,6 @@ C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessServer\ChessServer\o
 C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessServer\ChessServer\bin\Debug\SharpBag.dll
 C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessServer\ChessServer\bin\Debug\MySql.Data.dll
 C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessServer\ChessServer\bin\Debug\SharpBag.pdb
+C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessServer\ChessServer\bin\Debug\ChessLib.dll
+C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessServer\ChessServer\bin\Debug\ChessLib.pdb
+C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessServer\ChessServer\bin\Debug\ChessLib.xml

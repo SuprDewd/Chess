@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Controls;
 using System.Windows.Media;
-using ChessLib;
 using System.Windows;
 
-namespace LanChess
+namespace ChessLib
 {
     /// <summary>
     /// A Chess board control.

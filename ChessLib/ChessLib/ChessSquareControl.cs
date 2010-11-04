@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Controls;
 using System.Windows.Media;
-using ChessLib;
 using System.Windows.Media.Imaging;
 
-namespace LanChess
+namespace ChessLib
 {
     /// <summary>
     /// A Chess square control.
@@ -43,7 +42,6 @@ namespace LanChess
         /// <summary>
         /// The constructor.
         /// </summary>
-        /// <param name="background">The background of the square.</param>
         public ChessSquareControl(ChessBoardControl boardControl, Square square, Brush darkBrush, Brush lightBrush, ChessColor player)
         {
             this.BoardControl = boardControl;
