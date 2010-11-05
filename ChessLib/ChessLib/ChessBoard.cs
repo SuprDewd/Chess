@@ -182,12 +182,12 @@ namespace ChessLib
             else if (blackKing.CheckMade)
             {
                 this.GameOver = true;
-                if (this.FireEvents) this.GameEnded.IfNotNull(a => a(this, ChessWinner.Black));
+                if (this.FireEvents) this.GameEnded.IfNotNull(a => a(this, ChessWinner.White));
             }
             else if (whiteKing.CheckMade)
             {
                 this.GameOver = true;
-                if (this.FireEvents) this.GameEnded.IfNotNull(a => a(this, ChessWinner.White));
+                if (this.FireEvents) this.GameEnded.IfNotNull(a => a(this, ChessWinner.Black));
             }
         }
 
