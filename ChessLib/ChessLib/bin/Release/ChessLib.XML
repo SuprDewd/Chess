@@ -982,6 +982,11 @@
             Which player is playing.
             </summary>
         </member>
+        <member name="E:ChessLib.ChessBoardControl.GameEnded">
+            <summary>
+            An event that is fired what the game ends.
+            </summary>
+        </member>
         <member name="P:ChessLib.ChessBoardControl.Squares">
             <summary>
             The squares on the board.

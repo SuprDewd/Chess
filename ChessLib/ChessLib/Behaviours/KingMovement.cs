@@ -42,7 +42,7 @@ namespace ChessLib.Behaviours
                 if (Location.IsValid(rn, this.Piece.Square.Location.File)) yield return this.Board[rn, this.Piece.Square.Location.File];
                 if (Location.IsValid(rp, this.Piece.Square.Location.File)) yield return this.Board[rp, this.Piece.Square.Location.File];
 
-                if (this.Piece.MoveCount == 0)
+                if (this.Piece.MoveCount == 0 && !this.Piece.Square.IsAttackedBy(this.Piece.Color.Opposite(), sq => sq.Piece.GetType() != typeof(King)))
                 {
                     int rank = this.Piece.Color == ChessColor.White ? 1 : 8;
 

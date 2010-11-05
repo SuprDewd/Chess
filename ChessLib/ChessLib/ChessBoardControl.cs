@@ -42,6 +42,11 @@ namespace ChessLib
         public ChessColor Player { get { return this._Player; } set { this._Player = value; this.TurnTable(); } }
 
         /// <summary>
+        /// An event that is fired what the game ends.
+        /// </summary>
+        public event Action<ChessBoard, ChessWinner> GameEnded;
+
+        /// <summary>
         /// An empty constructor.
         /// </summary>
         public ChessBoardControl() { this.TurnTable(); }
@@ -78,6 +83,12 @@ namespace ChessLib
         /// </summary>
         private void Initialize()
         {
+            this.Board.GameEnded += (b, w) =>
+                {
+                    this.Reset();
+                    this.GameEnded.IfNotNull(a => a(b, w));
+                };
+
             this.Squares = new ChessSquareControl[8, 8];
 
             for (int rank = 0; rank < 8; rank++)
@@ -134,10 +145,7 @@ namespace ChessLib
             }
             else
             {
-                if (this.LastClicked.Square.To(sq.Square))
-                {
-
-                }
+                this.LastClicked.Square.To(sq.Square);
 
                 this.Reset();
                 this.LastClicked = null;
@@ -175,6 +183,11 @@ namespace ChessLib
                         sq.Update();
                     }
                 }
+            }
+
+            foreach (ChessPiece p in this.Board.GetKing(this.Board.Turn).CheckingPieces)
+            {
+                this.Squares[p.Location.Rank - 1, Location.ConvertFile(p.Location.File) - 1].SetBackground(Brushes.Red);
             }
         }
 
