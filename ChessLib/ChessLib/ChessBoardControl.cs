@@ -16,7 +16,8 @@ namespace ChessLib
         private ChessBoard _Board = null;
         private Brush _DarkBrush = new SolidColorBrush(Color.FromRgb(0xD1, 0x8B, 0x47));
         private Brush _LightBrush = new SolidColorBrush(Color.FromRgb(0xFF, 0xCE, 0x9E));
-        private Brush _SelectBrush = Brushes.IndianRed;
+        private Brush _SelectBrushDark = Brushes.IndianRed;
+        private Brush _SelectBrushLight = Brushes.IndianRed;
 
         /// <summary>
         /// The Chess board the control is representing.
@@ -31,9 +32,17 @@ namespace ChessLib
         /// </summary>
         public Brush LightBrush { get { return this._LightBrush; } set { this._LightBrush = value; this.UpdateColors(); } }
         /// <summary>
-        /// The brush to use when the square is selected.
+        /// The brush to use when a dark square is selected.
         /// </summary>
-        public Brush SelectBrush { get { return this._SelectBrush; } set { this._SelectBrush = value; } }
+        public Brush SelectBrushDark { get { return this._SelectBrushDark; } set { this._SelectBrushDark = value; } }
+        /// <summary>
+        /// The brush to use when a light square is selected.
+        /// </summary>
+        public Brush SelectBrushLight { get { return this._SelectBrushLight; } set { this._SelectBrushLight = value; } }
+        /// <summary>
+        /// Whether to display numbers on the squares.
+        /// </summary>
+        public bool SquareNumbers { get; set; }
 
         private ChessColor _Player = ChessColor.White;
         /// <summary>
@@ -63,7 +72,7 @@ namespace ChessLib
         
         private void TurnTable()
         {
-            if (this.Player == ChessColor.White)
+            if (this.Player == ChessColor.Black)
             {
                 this.LayoutTransform = new RotateTransform(180);
             }
@@ -85,7 +94,7 @@ namespace ChessLib
         {
             this.Board.GameEnded += (b, w) =>
                 {
-                    this.Reset();
+                    this.Repaint();
                     this.GameEnded.IfNotNull(a => a(b, w));
                 };
 
@@ -93,16 +102,18 @@ namespace ChessLib
 
             for (int rank = 0; rank < 8; rank++)
             {
+                int rankR = 7 - rank;
+
                 this.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
 
                 Grid g = new Grid();
-                Grid.SetRow(g, rank);
+                Grid.SetRow(g, rankR);
 
                 for (int file = 0; file < 8; file++)
                 {
                     g.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
 
-                    ChessSquareControl sq = new ChessSquareControl(this, this.Board[rank + 1, file + 1], this._DarkBrush, this._LightBrush, this._Player);
+                    ChessSquareControl sq = new ChessSquareControl(this, rank + 1, file + 1);
                     sq.MouseUp += this.SquareClicked;
 
                     Grid.SetColumn(sq, file);
@@ -113,7 +124,7 @@ namespace ChessLib
                 this.Children.Add(g);
             }
 
-            this.Reset();
+            this.Repaint();
         }
 
         private ChessSquareControl LastClicked = null;
@@ -133,21 +144,21 @@ namespace ChessLib
 
                 foreach (Square s in moves)
                 {
-                    this.Squares[s.Location.Rank - 1, Location.ConvertFile(s.Location.File) - 1].SetBackground(this.SelectBrush);
+                    this.Squares[s.Location.Rank - 1, Location.ConvertFile(s.Location.File) - 1].SetBackground(this.SelectBrushDark, this.SelectBrushLight);
                 }
 
                 this.LastClicked = sq;
             }
             else if (this.LastClicked == sq)
             {
-                this.Reset();
+                this.Repaint();
                 this.LastClicked = null;
             }
             else
             {
                 this.LastClicked.Square.To(sq.Square);
 
-                this.Reset();
+                this.Repaint();
                 this.LastClicked = null;
             }
         }
@@ -169,9 +180,9 @@ namespace ChessLib
         }
 
         /// <summary>
-        /// Resets the control.
+        /// Repaints the board.
         /// </summary>
-        private void Reset()
+        public void Repaint()
         {
             for (int rank = 0; rank < this.Squares.GetLength(0); rank++)
             {
@@ -202,8 +213,7 @@ namespace ChessLib
             {
                 for (int file = 0; file < this.Squares.GetLength(1); file++)
                 {
-                    this.Squares[rank, file].LightBrush = this.LightBrush;
-                    this.Squares[rank, file].DarkBrush = this.DarkBrush;
+                    this.Squares[rank, file].UpdateColor();
                 }
             }
         }

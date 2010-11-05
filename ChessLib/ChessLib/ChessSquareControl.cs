@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows;
 
 namespace ChessLib
 {
@@ -13,45 +14,29 @@ namespace ChessLib
     /// </summary>
     public class ChessSquareControl : StackPanel
     {
-        private Brush _DarkBrush = Brushes.Black;
-        private Brush _LightBrush = Brushes.White;
-        /// <summary>
-        /// The brush to use if the current square is dark.
-        /// </summary>
-        public Brush DarkBrush { get { return this._DarkBrush; } set { this._DarkBrush = value; this.UpdateColor(); } }
-        /// <summary>
-        /// The brush to use if the current square is light.
-        /// </summary>
-        public Brush LightBrush { get { return this._LightBrush; } set { this._LightBrush = value; this.UpdateColor(); } }
-
         /// <summary>
         /// The square that the control is representing.
         /// </summary>
-        public Square Square { get; private set; }
+        public Square Square { get { return this.BoardControl.Board[this.Rank, this.File]; } }
         /// <summary>
         /// The Chess board control the square control belongs to.
         /// </summary>
         public ChessBoardControl BoardControl { get; private set; }
 
-        private ChessColor _Player = ChessColor.White;
-        /// <summary>
-        /// Which player is playing.
-        /// </summary>
-        public ChessColor Player { get { return this._Player; } set { this._Player = value; this.TurnPiece(); } }
+        private int Rank { get; set; }
+        private int File { get; set; }
 
         /// <summary>
         /// The constructor.
         /// </summary>
-        public ChessSquareControl(ChessBoardControl boardControl, Square square, Brush darkBrush, Brush lightBrush, ChessColor player)
+        public ChessSquareControl(ChessBoardControl boardControl, int rank, int file)
         {
+            this.Rank = rank;
+            this.File = file;
             this.BoardControl = boardControl;
-            this.Square = square;
-            this._DarkBrush = darkBrush;
-            this._LightBrush = lightBrush;
             this.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
             this.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
             this.UpdateColor();
-            this.Player = player;
         }
 
         /// <summary>
@@ -64,7 +49,7 @@ namespace ChessLib
 
         private void TurnPiece()
         {
-            if (this.Player == ChessColor.White)
+            if (this.BoardControl.Player == ChessColor.Black)
             {
                 this.LayoutTransform = new RotateTransform(180);
             }
@@ -85,7 +70,7 @@ namespace ChessLib
             }
             set
             {
-                base.Background = value == ChessColor.Black ? this._DarkBrush : this._LightBrush;
+                base.Background = value == ChessColor.Black ? this.BoardControl.DarkBrush : this.BoardControl.LightBrush;
             }
         }
 
@@ -94,16 +79,24 @@ namespace ChessLib
             base.Background = b;
         }
 
+        internal void SetBackground(Brush ifBlack, Brush ifWhite)
+        {
+            base.Background = this.Square.Color == ChessColor.Black ? ifBlack : ifWhite;
+        }
+
         internal void Update()
         {
             this.Children.Clear();
             this.UpdateColor();
 
+            if (this.BoardControl.SquareNumbers) this.Children.Add(new Label() { Content = this.Square.Location.ToString() });
+
             if (this.Square.Piece == null) return;
 
             Image img = new Image
             {
-                Source = new BitmapImage(new Uri(@"C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\NIcons\" + this.Square.Piece.PieceNameShort + ".png"))
+                Source = new BitmapImage(new Uri(@"C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\NIcons\" + this.Square.Piece.PieceNameShort + ".png")),
+                Margin = new Thickness(0, this.BoardControl.SquareNumbers ? -25 : 0, 0, 0)
             };
 
             this.Children.Add(img);

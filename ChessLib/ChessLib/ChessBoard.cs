@@ -147,7 +147,9 @@ namespace ChessLib
             {
                 Move m = this.History[i];
 
+                this.FireEvents = false;
                 this.Move(this[m.A], this[m.B], false, false);
+                this.FireEvents = true;
                 this._CurrentHistory = i + 1;
             }
         }
@@ -167,27 +169,34 @@ namespace ChessLib
         /// <summary>
         /// Tell the Chess board that the current turn is over.
         /// </summary>
-        internal protected void TurnOver()
+        internal protected void TurnOver(bool checkGameOver = true)
         {
             this.Turn = this.Turn.Opposite();
 
-            King blackKing = this.GetKing(ChessColor.Black);
-            King whiteKing = this.GetKing(ChessColor.White);
+            if (checkGameOver)
+            {
+                King blackKing = this.GetKing(ChessColor.Black);
+                King whiteKing = this.GetKing(ChessColor.White);
 
-            if (this.StaleMate)
-            {
-                this.GameOver = true;
-                if (this.FireEvents) this.GameEnded.IfNotNull(a => a(this, ChessWinner.StaleMate));
-            }
-            else if (blackKing.CheckMade)
-            {
-                this.GameOver = true;
-                if (this.FireEvents) this.GameEnded.IfNotNull(a => a(this, ChessWinner.White));
-            }
-            else if (whiteKing.CheckMade)
-            {
-                this.GameOver = true;
-                if (this.FireEvents) this.GameEnded.IfNotNull(a => a(this, ChessWinner.Black));
+                if (this.StaleMate)
+                {
+                    this.GameOver = true;
+                    if (this.FireEvents) this.GameEnded.IfNotNull(a => a(this, ChessWinner.StaleMate));
+                }
+                else if (blackKing.CheckMade)
+                {
+                    this.GameOver = true;
+                    if (this.FireEvents) this.GameEnded.IfNotNull(a => a(this, ChessWinner.White));
+                }
+                else if (whiteKing.CheckMade)
+                {
+                    this.GameOver = true;
+                    if (this.FireEvents) this.GameEnded.IfNotNull(a => a(this, ChessWinner.Black));
+                }
+                else
+                {
+                    if (this.FireEvents) this.NextTurn.IfNotNull(a => a(this));
+                }
             }
         }
 
@@ -225,7 +234,7 @@ namespace ChessLib
 
             if (writeHistory) this.WriteHistory(a.Location, b.Location);
 
-            this.TurnOver();
+            this.TurnOver(validate);
             return true;
         }
 

@@ -108,11 +108,13 @@ namespace ChessServer
 
                     Log.Log("Player connected: " + client.Client.RemoteEndPoint.ToString());
 
+                    UpdateLists();
+
                     while (true)
                     {
                         if (p.Game != null) { Thread.Sleep(500); continue; }
 
-                        string s = p.Receive();
+                        string s = p.Receive().Trim();
 
                         if (s == "q")
                         {
@@ -153,7 +155,7 @@ namespace ChessServer
                                     pl.Send("p " + p.Client.Client.RemoteEndPoint.ToString());
                                     if (pl.Receive() == "y")
                                     {
-                                        if (p.Game != null)
+                                        if (p.Game == null)
                                         {
                                             new Thread(new ThreadStart(new Game(p, pl).Start)).Start();
                                         }
@@ -178,6 +180,24 @@ namespace ChessServer
                     }
                     catch { }
                 }
+            }
+        }
+
+        private static void UpdateLists()
+        {
+            StringBuilder sb = new StringBuilder("ls ");
+
+            lock (Players)
+            {
+                foreach (Player pl in Players.Where(i => i.Game == null))
+                {
+                    sb.AppendLine(pl.Client.Client.RemoteEndPoint.ToString());
+                }
+            }
+
+            foreach (Player p in Players)
+            {
+                p.Send(sb.ToString());
             }
         }
     }

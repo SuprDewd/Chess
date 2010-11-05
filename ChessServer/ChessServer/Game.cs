@@ -44,7 +44,8 @@ namespace ChessServer
                     }
                 };
 
-            this.SendAll("hi");
+            this.Players[0].Send("hi w");
+            this.Players[1].Send("hi b");
 
             int turn = 0;
 

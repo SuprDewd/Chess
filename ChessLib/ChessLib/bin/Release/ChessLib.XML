@@ -182,7 +182,7 @@
             <param name="c">The color of the king to find.</param>
             <returns>The square that the king is on.</returns>
         </member>
-        <member name="M:ChessLib.ChessBoard.TurnOver">
+        <member name="M:ChessLib.ChessBoard.TurnOver(System.Boolean)">
             <summary>
             Tell the Chess board that the current turn is over.
             </summary>
@@ -947,9 +947,9 @@
             Initialize the board.
             </summary>
         </member>
-        <member name="M:ChessLib.ChessBoardControl.Reset">
+        <member name="M:ChessLib.ChessBoardControl.Repaint">
             <summary>
-            Resets the control.
+            Repaints the board.
             </summary>
         </member>
         <member name="M:ChessLib.ChessBoardControl.UpdateColors">
@@ -972,9 +972,19 @@
             The brush to use for light squares.
             </summary>
         </member>
-        <member name="P:ChessLib.ChessBoardControl.SelectBrush">
+        <member name="P:ChessLib.ChessBoardControl.SelectBrushDark">
             <summary>
-            The brush to use when the square is selected.
+            The brush to use when a dark square is selected.
+            </summary>
+        </member>
+        <member name="P:ChessLib.ChessBoardControl.SelectBrushLight">
+            <summary>
+            The brush to use when a light square is selected.
+            </summary>
+        </member>
+        <member name="P:ChessLib.ChessBoardControl.SquareNumbers">
+            <summary>
+            Whether to display numbers on the squares.
             </summary>
         </member>
         <member name="P:ChessLib.ChessBoardControl.Player">
@@ -1002,7 +1012,7 @@
             A Chess square control.
             </summary>
         </member>
-        <member name="M:ChessLib.ChessSquareControl.#ctor(ChessLib.ChessBoardControl,ChessLib.Square,System.Windows.Media.Brush,System.Windows.Media.Brush,ChessLib.ChessColor)">
+        <member name="M:ChessLib.ChessSquareControl.#ctor(ChessLib.ChessBoardControl,System.Int32,System.Int32)">
             <summary>
             The constructor.
             </summary>
@@ -1010,16 +1020,6 @@
         <member name="M:ChessLib.ChessSquareControl.UpdateColor">
             <summary>
             Updates the background color of the square.
-            </summary>
-        </member>
-        <member name="P:ChessLib.ChessSquareControl.DarkBrush">
-            <summary>
-            The brush to use if the current square is dark.
-            </summary>
-        </member>
-        <member name="P:ChessLib.ChessSquareControl.LightBrush">
-            <summary>
-            The brush to use if the current square is light.
             </summary>
         </member>
         <member name="P:ChessLib.ChessSquareControl.Square">
@@ -1030,11 +1030,6 @@
         <member name="P:ChessLib.ChessSquareControl.BoardControl">
             <summary>
             The Chess board control the square control belongs to.
-            </summary>
-        </member>
-        <member name="P:ChessLib.ChessSquareControl.Player">
-            <summary>
-            Which player is playing.
             </summary>
         </member>
         <member name="P:ChessLib.ChessSquareControl.Background">
