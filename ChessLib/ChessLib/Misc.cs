@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
+using System.Reflection;
 
 namespace ChessLib
 {
@@ -10,6 +12,12 @@ namespace ChessLib
     /// </summary>
     internal static class Misc
     {
+        /*private static DirectoryInfo _ExecutableDirectory = new DirectoryInfo(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location));
+        /// <summary>
+        /// Gets the directory where the executable is located.
+        /// </summary>
+        public static DirectoryInfo ExecutableDirectory { get { return _ExecutableDirectory; } }*/
+
         /// <summary>
         /// Executes the specified action, if the current instance is not null.
         /// </summary>

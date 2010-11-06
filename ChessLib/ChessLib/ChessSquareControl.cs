@@ -94,13 +94,17 @@ namespace ChessLib
 
             if (this.Square.Piece == null) return;
 
-            Image img = new Image
+            try
             {
-                Source = new BitmapImage(new Uri(Path.Combine(this.BoardControl.ImageDirectory, this.Square.Piece.PieceNameShort + ".png"))),
-                Margin = new Thickness(0, this.BoardControl.SquareNumbers ? -25 : 0, 0, 0)
-            };
+                Image img = new Image
+                {
+                    Source = new BitmapImage(new Uri(Path.Combine(this.BoardControl.ImageDirectory, this.Square.Piece.PieceNameShort + ".png"))),
+                    Margin = new Thickness(0, this.BoardControl.SquareNumbers ? -25 : 0, 0, 0)
+                };
 
-            this.Children.Add(img);
+                this.Children.Add(img);
+            }
+            catch { }
         }
     }
 }

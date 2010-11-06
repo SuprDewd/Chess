@@ -29,7 +29,7 @@ namespace ChessExplainer
         public MainWindow()
         {
             InitializeComponent();
-            this.cbcBoard.ImageDirectory = this.ImageDirectory;
+            //this.cbcBoard.ImageDirectory = this.ImageDirectory;
             this.UpdateMoves();
 
             this.cbcBoard.Board.GameEnded += (b, r) =>

@@ -46,12 +46,16 @@ namespace ChessLib
         /// </summary>
         public bool SquareNumbers { get; set; }
 
-        private string _ImageDirectory = "";
+        private string _ImageDirectory;
         /// <summary>
         /// The location if the chess icons.
         /// </summary>
         /// <remarks>The icons should be named WKing.png, BKing.png, WQueen.png and so on.</remarks>
-        public string ImageDirectory { get { return this._ImageDirectory; } set { this._ImageDirectory = value; } }
+        public string ImageDirectory
+        {
+            get { return _ImageDirectory; }
+            set { _ImageDirectory = value; }
+        }
 
         private ChessColor _Player = ChessColor.White;
         /// <summary>
@@ -196,6 +200,8 @@ namespace ChessLib
         /// </summary>
         public void Repaint()
         {
+            if (this.Squares == null) return;
+
             for (int rank = 0; rank < this.Squares.GetLength(0); rank++)
             {
                 for (int file = 0; file < this.Squares.GetLength(1); file++)
