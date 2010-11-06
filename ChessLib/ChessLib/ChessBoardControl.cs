@@ -54,7 +54,7 @@ namespace ChessLib
         public string ImageDirectory
         {
             get { return _ImageDirectory; }
-            set { _ImageDirectory = value; }
+            set { _ImageDirectory = value; this.Repaint(); }
         }
 
         private ChessColor _Player = ChessColor.White;
