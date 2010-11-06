@@ -900,12 +900,13 @@
             </summary>
             <param name="chessPiece">The Chess piece that the movement belongs to.</param>
         </member>
-        <member name="M:ChessLib.Behaviours.PawnMovement.HandlePromotion(ChessLib.Square)">
+        <member name="M:ChessLib.Behaviours.PawnMovement.HandlePromotion(ChessLib.Square,System.Boolean)">
             <summary>
             Handles the promotion rule.
             </summary>
             <param name="b">The square to move to.</param>
             <returns>Whether or not the move was handled.</returns>
+            <param name="askForPromotion">Whether to ask which piece to promote into.</param>
             <remarks>Returns false if the situation was not a promotion situation.</remarks>
         </member>
         <member name="M:ChessLib.Behaviours.PawnMovement.HandleEnPassant(ChessLib.Square)">
@@ -936,11 +937,13 @@
             An empty constructor.
             </summary>
         </member>
-        <member name="M:ChessLib.ChessBoardControl.#ctor(ChessLib.ChessBoard,ChessLib.ChessColor)">
+        <member name="M:ChessLib.ChessBoardControl.#ctor(ChessLib.ChessBoard,ChessLib.ChessColor,System.String)">
             <summary>
             The constructor.
             </summary>
             <param name="board">The Chess board the control is representing.</param>
+            <param name="player">The color of the player.</param>
+            <param name="imageDirectory">The location of the images.</param>
         </member>
         <member name="M:ChessLib.ChessBoardControl.Initialize">
             <summary>
@@ -986,6 +989,12 @@
             <summary>
             Whether to display numbers on the squares.
             </summary>
+        </member>
+        <member name="P:ChessLib.ChessBoardControl.ImageDirectory">
+            <summary>
+            The location if the chess icons.
+            </summary>
+            <remarks>The icons should be named WKing.png, BKing.png, WQueen.png and so on.</remarks>
         </member>
         <member name="P:ChessLib.ChessBoardControl.Player">
             <summary>

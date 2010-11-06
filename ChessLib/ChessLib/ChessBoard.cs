@@ -45,7 +45,7 @@ namespace ChessLib
         /// <summary>
         /// A function which decides what to promote to when a pawn reaches the end of the Chess board.
         /// </summary>
-        protected internal Func<ChessBoard, PromotionChoise> Promotion { get; protected set; }
+        public Func<ChessBoard, PromotionChoise> Promotion { get; set; }
 
         /// <summary>
         /// The constructor.
@@ -238,7 +238,7 @@ namespace ChessLib
             return true;
         }
 
-        protected internal bool CanMove(Square a, Square b, bool resetAlways = false, bool validate = true)
+        protected internal bool CanMove(Square a, Square b, bool resetAlways = false, bool validate = true, bool askForPromotion = true)
         {
             if (this.GameOver) return false;
             if (a.Piece == null) return false;
@@ -291,7 +291,7 @@ namespace ChessLib
                 }
             }
 
-            if (!(a.Piece.GetType() == typeof(Pawn) && (((PawnMovement)a.Piece.Movement).HandlePromotion(b) || ((PawnMovement)a.Piece.Movement).HandleEnPassant(b))) &&
+            if (!(a.Piece.GetType() == typeof(Pawn) && (((PawnMovement)a.Piece.Movement).HandlePromotion(b, askForPromotion) || ((PawnMovement)a.Piece.Movement).HandleEnPassant(b))) &&
             !(a.Piece.GetType() == typeof(King) && ((KingMovement)a.Piece.Movement).HandleCastling(b)))
             {
                 if (b.Piece != null)

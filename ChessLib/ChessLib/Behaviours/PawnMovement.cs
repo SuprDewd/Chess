@@ -90,13 +90,22 @@ namespace ChessLib.Behaviours
             }
         }
 
+        public override IEnumerable<Square> TotallyValidMoves
+        {
+            get
+            {
+                return this.ValidMoves.Where(b => this.Board.CanMove(this.Piece.Square, b, true, askForPromotion: false));
+            }
+        }
+
         /// <summary>
         /// Handles the promotion rule.
         /// </summary>
         /// <param name="b">The square to move to.</param>
         /// <returns>Whether or not the move was handled.</returns>
+        /// <param name="askForPromotion">Whether to ask which piece to promote into.</param>
         /// <remarks>Returns false if the situation was not a promotion situation.</remarks>
-        public bool HandlePromotion(Square b)
+        public bool HandlePromotion(Square b, bool askForPromotion)
         {
             Square a = this.Piece.Square;
 
@@ -112,7 +121,7 @@ namespace ChessLib.Behaviours
                 a.Piece = null;
                 b.Piece.MoveCount++;
 
-                PromotionChoise choise = this.Board.Promotion(this.Board);
+                PromotionChoise choise = askForPromotion ? this.Board.Promotion(this.Board) : PromotionChoise.Queen;
                 ChessPiece cp =
                     choise == PromotionChoise.Bishop ? (ChessPiece)new Bishop(this.Board, b.Piece.Color, b.Piece.Square) :
                     choise == PromotionChoise.Knight ? (ChessPiece)new Knight(this.Board, b.Piece.Color, b.Piece.Square) :

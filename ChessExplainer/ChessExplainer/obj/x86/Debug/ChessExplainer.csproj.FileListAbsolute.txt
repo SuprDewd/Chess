@@ -14,3 +14,8 @@ C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessExplainer\ChessExpla
 C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessExplainer\ChessExplainer\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessExplainer\ChessExplainer\obj\x86\Debug\ChessExplainer.exe
 C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessExplainer\ChessExplainer\obj\x86\Debug\ChessExplainer.pdb
+C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessExplainer\ChessExplainer\bin\Debug\SharpBag.dll
+C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessExplainer\ChessExplainer\bin\Debug\MySql.Data.dll
+C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessExplainer\ChessExplainer\bin\Debug\SharpBag.pdb
+C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessExplainer\ChessExplainer\obj\x86\Debug\Promotion.baml
+C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessExplainer\ChessExplainer\obj\x86\Debug\Promotion.g.cs

@@ -2,32 +2,53 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:c="clr-namespace:ChessLib;assembly=ChessLib"
+        xmlns:s="clr-namespace:SharpBag;assembly=SharpBag"
         Title="Chess Explainer" Height="463" Width="711" Background="Gray" KeyDown="Window_KeyDown">
-    <Grid Name="MainGrid" SizeChanged="Grid_SizeChanged">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="150" />
-        </Grid.ColumnDefinitions>
-        
-        <c:ChessBoardControl Name="cbcBoard" Size="400" HorizontalAlignment="Center" VerticalAlignment="Center" SquareNumbers="False" Grid.Column="0">
-            <c:ChessBoardControl.Player>
-                <c:ChessColor>White</c:ChessColor>
-            </c:ChessBoardControl.Player>
-            <c:ChessBoardControl.Board>
-                <c:ChessBoard />
-            </c:ChessBoardControl.Board>
-        </c:ChessBoardControl>
+    <Grid Name="Wrapper">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="26" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0" Height="22" VerticalAlignment="Top">
+            <Menu.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF9A9A9A" Offset="0" />
+                    <GradientStop Color="#FF4B4949" Offset="1" />
+                </LinearGradientBrush>
+            </Menu.Background>
+            <MenuItem Foreground="White" Header="File">
+                <MenuItem Click="Reset" Foreground="Black" Header="Reset" />
+                <MenuItem Click="Import" Foreground="Black" Header="Import" />
+                <MenuItem Click="Export" Foreground="Black" Header="Export" />
+                <MenuItem Click="Exit" Foreground="Black" Header="Exit" />
+            </MenuItem>
+        </Menu>
+        <Grid Name="MainGrid" SizeChanged="Grid_SizeChanged" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="150" />
+            </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="1">
-            <ScrollViewer>
-                <ListBox Name="Moves" SelectionMode="Single" SelectionChanged="Moves_SelectionChanged" HorizontalContentAlignment="Right">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Label Content="{Binding}" />
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </ScrollViewer>
-        </StackPanel>
+            <c:ChessBoardControl Name="cbcBoard" Size="400" HorizontalAlignment="Center" VerticalAlignment="Center" SquareNumbers="False" Grid.Column="0" ImageDirectory="C:\\Users\\SuprDewd\\Desktop\\Projects\\TSkoli\\FOR403\\Chess\\ChessExplainer\\ChessExplainer\\bin\\Debug\\Icons">
+                <c:ChessBoardControl.Player>
+                    <c:ChessColor>White</c:ChessColor>
+                </c:ChessBoardControl.Player>
+                <c:ChessBoardControl.Board>
+                    <c:ChessBoard />
+                </c:ChessBoardControl.Board>
+            </c:ChessBoardControl>
+
+            <StackPanel Grid.Column="1">
+                <ScrollViewer Name="scvMoves" VerticalScrollBarVisibility="Auto" MaxHeight="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}, Path=ActualHeight}">
+                    <ListBox Name="Moves" SelectionMode="Single" SelectionChanged="Moves_SelectionChanged" HorizontalContentAlignment="Right">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding}" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </ScrollViewer>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

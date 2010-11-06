@@ -29,5 +29,10 @@ namespace ChessLib
             this._A = a;
             this._B = b;
         }
+
+        public override string ToString()
+        {
+            return this.A.ToString() + " " + this.B.ToString();
+        }
     }
 }

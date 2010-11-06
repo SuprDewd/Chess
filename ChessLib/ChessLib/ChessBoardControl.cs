@@ -5,6 +5,8 @@ using System.Text;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows;
+using System.IO;
+using System.Reflection;
 
 namespace ChessLib
 {
@@ -44,6 +46,13 @@ namespace ChessLib
         /// </summary>
         public bool SquareNumbers { get; set; }
 
+        private string _ImageDirectory = "";
+        /// <summary>
+        /// The location if the chess icons.
+        /// </summary>
+        /// <remarks>The icons should be named WKing.png, BKing.png, WQueen.png and so on.</remarks>
+        public string ImageDirectory { get { return this._ImageDirectory; } set { this._ImageDirectory = value; } }
+
         private ChessColor _Player = ChessColor.White;
         /// <summary>
         /// Which player is playing.
@@ -64,8 +73,11 @@ namespace ChessLib
         /// The constructor.
         /// </summary>
         /// <param name="board">The Chess board the control is representing.</param>
-        public ChessBoardControl(ChessBoard board, ChessColor player)
+        /// <param name="player">The color of the player.</param>
+        /// <param name="imageDirectory">The location of the images.</param>
+        public ChessBoardControl(ChessBoard board, ChessColor player, string imageDirectory)
         {
+            this.ImageDirectory = imageDirectory;
             this.Board = board;
             this.Player = player;
         }

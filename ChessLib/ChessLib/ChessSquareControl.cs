@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows;
+using System.IO;
 
 namespace ChessLib
 {
@@ -95,7 +96,7 @@ namespace ChessLib
 
             Image img = new Image
             {
-                Source = new BitmapImage(new Uri(@"C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\NIcons\" + this.Square.Piece.PieceNameShort + ".png")),
+                Source = new BitmapImage(new Uri(Path.Combine(this.BoardControl.ImageDirectory, this.Square.Piece.PieceNameShort + ".png"))),
                 Margin = new Thickness(0, this.BoardControl.SquareNumbers ? -25 : 0, 0, 0)
             };
 
