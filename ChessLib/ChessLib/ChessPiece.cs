@@ -72,6 +72,9 @@ namespace ChessLib
         /// All the moves that the Chess piece is able to move, that are also valid.
         /// </summary>
         public IEnumerable<Square> ValidMoves { get { return this.Movement.ValidMoves; } }
+        /// <summary>
+        /// All valid moves, that will not result in the king being checked etc.
+        /// </summary>
         public IEnumerable<Square> TotallyValidMoves { get { return this.Movement.TotallyValidMoves; } }
 
         /// <summary>

@@ -101,6 +101,11 @@
             All the moves that the Chess piece is able to move, that are also valid.
             </summary>
         </member>
+        <member name="P:ChessLib.ChessPiece.TotallyValidMoves">
+            <summary>
+            All valid moves, that will not result in the king being checked etc.
+            </summary>
+        </member>
         <member name="P:ChessLib.ChessPiece.PieceName">
             <summary>
             The name of the Chess piece.
@@ -202,7 +207,19 @@
             <param name="a">Square A.</param>
             <param name="b">Square B.</param>
             <param name="writeHistory">Whether or not to write the move to the history.</param>
+            <param name="validate">Wether to validate the move.</param>
             <returns>Whether or not the move was successful.</returns>
+        </member>
+        <member name="M:ChessLib.ChessBoard.CanMove(ChessLib.Square,ChessLib.Square,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Checks whether the the piece on a can be moved to b.
+            </summary>
+            <param name="a">Square a.</param>
+            <param name="b">Square b.</param>
+            <param name="resetAlways">Whether to reset the board when the check is done.</param>
+            <param name="validate">Whether to validate.</param>
+            <param name="askForPromotion">Whether to ask for promotion.</param>
+            <returns>Whether the piece on a can be move to b.</returns>
         </member>
         <member name="M:ChessLib.ChessBoard.WriteHistory(ChessLib.Location,ChessLib.Location)">
             <summary>
@@ -252,6 +269,11 @@
             Whether the game is over.
             </summary>
         </member>
+        <member name="P:ChessLib.ChessBoard.FireEvents">
+            <summary>
+            Whether to fire events.
+            </summary>
+        </member>
         <member name="P:ChessLib.ChessBoard.History">
             <summary>
             The move history.
@@ -267,9 +289,19 @@
             A function which decides what to promote to when a pawn reaches the end of the Chess board.
             </summary>
         </member>
+        <member name="P:ChessLib.ChessBoard.StaleMate">
+            <summary>
+            Whether a stalemate has occured.
+            </summary>
+        </member>
         <member name="E:ChessLib.ChessBoard.NextTurn">
             <summary>
             An event that is fired when the next player should move.
+            </summary>
+        </member>
+        <member name="E:ChessLib.ChessBoard.GameEnded">
+            <summary>
+            An event that is fired when the game has ended.
             </summary>
         </member>
         <member name="P:ChessLib.ChessBoard.Item(System.Int32,System.Char)">
@@ -501,6 +533,11 @@
         <member name="P:ChessLib.MovementBehaviour.ValidMoves">
             <summary>
             All the moves that the Chess piece is able to move, that are also valid.
+            </summary>
+        </member>
+        <member name="P:ChessLib.MovementBehaviour.TotallyValidMoves">
+            <summary>
+            All valid moves, that will not result in the king being checked etc.
             </summary>
         </member>
         <member name="M:ChessLib.Behaviours.RowMovement.#ctor(ChessLib.ChessPiece,ChessLib.Behaviours.MovementDirection)">
@@ -861,6 +898,9 @@
             The constructor.
             </summary>
         </member>
+        <member name="M:ChessLib.Move.ToString">
+            <see cref="M:System.Object.ToString"/>
+        </member>
         <member name="P:ChessLib.Move.A">
             <summary>
             From.
@@ -887,6 +927,26 @@
         <member name="P:ChessLib.Knight.PieceName">
             <summary>
             The name of the Chess piece.
+            </summary>
+        </member>
+        <member name="T:ChessLib.ChessWinner">
+            <summary>
+            The winner of a Chess game.
+            </summary>
+        </member>
+        <member name="F:ChessLib.ChessWinner.Black">
+            <summary>
+            Black is the winner.
+            </summary>
+        </member>
+        <member name="F:ChessLib.ChessWinner.White">
+            <summary>
+            White is the winner.
+            </summary>
+        </member>
+        <member name="F:ChessLib.ChessWinner.StaleMate">
+            <summary>
+            Tie.
             </summary>
         </member>
         <member name="T:ChessLib.Behaviours.PawnMovement">
@@ -925,6 +985,11 @@
         <member name="P:ChessLib.Behaviours.PawnMovement.ValidMoves">
             <summary>
             All the moves that the Chess piece is able to move, that are also valid.
+            </summary>
+        </member>
+        <member name="P:ChessLib.Behaviours.PawnMovement.TotallyValidMoves">
+            <summary>
+            All valid moves, that will not result in the king being checked etc.
             </summary>
         </member>
         <member name="T:ChessLib.ChessBoardControl">

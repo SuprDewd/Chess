@@ -48,6 +48,9 @@ namespace ChessLib
             return this.ValidMoves.Contains(to);
         }
 
+        /// <summary>
+        /// All valid moves, that will not result in the king being checked etc.
+        /// </summary>
         public virtual IEnumerable<Square> TotallyValidMoves
         {
             get

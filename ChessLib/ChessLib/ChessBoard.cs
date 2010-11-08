@@ -30,6 +30,9 @@ namespace ChessLib
         /// </summary>
         public bool GameOver { get; protected set; }
 
+        /// <summary>
+        /// Whether to fire events.
+        /// </summary>
         protected internal bool FireEvents { get; protected set; }
 
         /// <summary>
@@ -217,6 +220,7 @@ namespace ChessLib
         /// <param name="a">Square A.</param>
         /// <param name="b">Square B.</param>
         /// <param name="writeHistory">Whether or not to write the move to the history.</param>
+        /// <param name="validate">Wether to validate the move.</param>
         /// <returns>Whether or not the move was successful.</returns>
         protected bool Move(Square a, Square b, bool writeHistory = true, bool validate = true)
         {
@@ -238,6 +242,15 @@ namespace ChessLib
             return true;
         }
 
+        /// <summary>
+        /// Checks whether the the piece on a can be moved to b.
+        /// </summary>
+        /// <param name="a">Square a.</param>
+        /// <param name="b">Square b.</param>
+        /// <param name="resetAlways">Whether to reset the board when the check is done.</param>
+        /// <param name="validate">Whether to validate.</param>
+        /// <param name="askForPromotion">Whether to ask for promotion.</param>
+        /// <returns>Whether the piece on a can be move to b.</returns>
         protected internal bool CanMove(Square a, Square b, bool resetAlways = false, bool validate = true, bool askForPromotion = true)
         {
             if (this.GameOver) return false;
@@ -350,6 +363,9 @@ namespace ChessLib
             this._CurrentHistory++;
         }
 
+        /// <summary>
+        /// Whether a stalemate has occured.
+        /// </summary>
         public bool StaleMate
         {
             get
@@ -374,6 +390,9 @@ namespace ChessLib
         /// An event that is fired when the next player should move.
         /// </summary>
         public event Action<ChessBoard> NextTurn;
+        /// <summary>
+        /// An event that is fired when the game has ended.
+        /// </summary>
         public event Action<ChessBoard, ChessWinner> GameEnded;
 
         #endregion

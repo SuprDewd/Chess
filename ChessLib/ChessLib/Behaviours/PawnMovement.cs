@@ -90,6 +90,9 @@ namespace ChessLib.Behaviours
             }
         }
 
+        /// <summary>
+        /// All valid moves, that will not result in the king being checked etc.
+        /// </summary>
         public override IEnumerable<Square> TotallyValidMoves
         {
             get

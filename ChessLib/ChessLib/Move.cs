@@ -30,6 +30,7 @@ namespace ChessLib
             this._B = b;
         }
 
+        ///<see cref="Object.ToString()"/>
         public override string ToString()
         {
             return this.A.ToString() + " " + this.B.ToString();
