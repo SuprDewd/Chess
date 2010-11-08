@@ -59,8 +59,10 @@ namespace ChessExplainer
 
         private void Moves_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            this.cbcBoard.ClearSelected();
             if (this._UpdatingMoves) return;
-            this.Focus();
+            //this.Focus();
+            this.cbcBoard.Focus();
 
             this.cbcBoard.Board.CurrentHistory = this.Moves.SelectedIndex;
             this.cbcBoard.Repaint();

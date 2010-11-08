@@ -143,6 +143,14 @@ namespace ChessLib
             this.Repaint();
         }
 
+        /// <summary>
+        /// Clears the current selected square.
+        /// </summary>
+        public void ClearSelected()
+        {
+            this.LastClicked = null;
+        }
+
         private ChessSquareControl LastClicked = null;
 
         private void SquareClicked(object o, RoutedEventArgs ea)

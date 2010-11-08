@@ -950,6 +950,11 @@
             Initialize the board.
             </summary>
         </member>
+        <member name="M:ChessLib.ChessBoardControl.ClearSelected">
+            <summary>
+            Clears the current selected square.
+            </summary>
+        </member>
         <member name="M:ChessLib.ChessBoardControl.Repaint">
             <summary>
             Repaints the board.
