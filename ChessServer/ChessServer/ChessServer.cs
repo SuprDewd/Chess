@@ -14,48 +14,60 @@ namespace ChessServer
     public class ChessServer : IDisposable
     {
         protected TcpServer Server { get; set; }
-        protected internal List<ChessPlayer> Clients { get; set; }
+        protected internal List<ChessServerPlayer> Clients { get; set; }
+        protected internal List<ChessServerGame> Games { get; set; }
         protected internal Logger Logger { get; protected set; }
 
         public bool Debug { get; set; }
 
-        public ChessServer(IEnumerable<int> ports, Logger logger)
+        public ChessServer(IEnumerable<int> ports, Logger logger, bool debug = false)
         {
-            this.Debug = false;
+            this.Debug = debug;
             this.Logger = logger;
-            this.Clients = new List<ChessPlayer>();
+            this.Clients = new List<ChessServerPlayer>();
+            this.Games = new List<ChessServerGame>();
             this.Server = TcpServer.Create(ports);
             this.Server.ClientReceived += ClientReceived;
 
-            this.Logger.Log("Chess server started listening on " + this.Server.Listener.Server.RemoteEndPoint.ToString() + ".");
+            this.Logger.Log("Chess server started listening on " + this.Server.Listener.Server.LocalEndPoint.ToString() + ".");
         }
 
         private void ClientReceived(TcpServer server, TcpClientHandler client)
         {
             this.Logger.Log("Client connected from " + client.Client.Client.RemoteEndPoint.ToString() + ".");
-            this.Clients.Add(new ChessPlayer(this, client));
+            this.Clients.Add(new ChessServerPlayer(this, client));
             this.UpdateAllPlayerLists();
+        }
+
+        protected internal Tuple<string, string> GetParts(string message)
+        {
+            int space = message.IndexOf(' ');
+
+            if (space >= 0)
+            {
+                return new Tuple<string, string>(message.Substring(0, space), message.Substring(space));
+            }
+            else return new Tuple<string, string>(message, "");
         }
 
         internal void UpdateAllPlayerLists()
         {
-            foreach (ChessPlayer player in this.Clients)
+            foreach (ChessServerPlayer player in this.Clients)
             {
                 this.SendAllPlayers(player);
             }
         }
 
-        private void SendAllPlayers(ChessPlayer client)
+        private void SendAllPlayers(ChessServerPlayer client)
         {
             StringBuilder sb = new StringBuilder("ListPlayers ");
 
-            foreach (ChessPlayer c in this.Clients)
+            foreach (ChessServerPlayer c in this.Clients)
             {
                 if (c.Client != client.Client)
                 {
-                    sb.Append(c.Client.Client.Client.RemoteEndPoint.ToString());
-                    sb.Append(':');
-                    sb.AppendLine(c.Name ?? "");
+                    c.ToString(sb);
+                    sb.AppendLine();
                 }
             }
 
@@ -64,7 +76,12 @@ namespace ChessServer
 
         public void Dispose()
         {
-            foreach (ChessPlayer player in this.Clients)
+            foreach (ChessServerGame game in this.Games)
+            {
+                game.Dispose();
+            }
+
+            foreach (ChessServerPlayer player in this.Clients)
             {
                 player.Dispose();
             }

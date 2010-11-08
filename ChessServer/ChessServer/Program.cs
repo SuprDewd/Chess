@@ -42,10 +42,18 @@ namespace ChessServer
         {
             if (msg == "LISTPLAYERS")
             {
-                Logger.Log("Players:");
-                foreach (ChessPlayer client in Server.Clients)
+                Logger.Log("Players (" + Server.Clients.Count + "):");
+                foreach (ChessServerPlayer client in Server.Clients)
                 {
                     Logger.Log(client.Client.Client.Client.RemoteEndPoint.ToString());
+                }
+            }
+            else if (msg == "LISTGAMES")
+            {
+                Logger.Log("Games (" + Server.Games.Count + "):");
+                foreach (ChessServerGame game in Server.Games)
+                {
+                    Logger.Log(game.ToString());
                 }
             }
         }

@@ -34,10 +34,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ChessLib">
+    <Reference Include="ChessLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\ChessLib\ChessLib\bin\Release\ChessLib.dll</HintPath>
     </Reference>
-    <Reference Include="SharpBag">
+    <Reference Include="SharpBag, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\..\Forritun\SharpBag\SharpBag\bin\Release\SharpBag.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -50,8 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChessPlayer.cs" />
+    <Compile Include="ChessServerPlayer.cs" />
     <Compile Include="ChessServer.cs" />
+    <Compile Include="ChessServerGame.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
