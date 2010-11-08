@@ -35,10 +35,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ChessLib">
-      <HintPath>..\..\..\..\TSkoli\FOR403\Chess\ChessLib\ChessLib\bin\Release\ChessLib.dll</HintPath>
+      <HintPath>..\..\ChessLib\ChessLib\bin\Release\ChessLib.dll</HintPath>
     </Reference>
     <Reference Include="SharpBag">
-      <HintPath>..\..\..\..\Forritun\SharpBag\SharpBag\bin\Release\SharpBag.dll</HintPath>
+      <HintPath>..\..\..\..\..\Forritun\SharpBag\SharpBag\bin\Release\SharpBag.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChessPlayer.cs" />
     <Compile Include="ChessServer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

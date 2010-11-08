@@ -13,16 +13,19 @@ namespace ChessServer
 {
     public class ChessServer : IDisposable
     {
-        private TcpServer Server { get; set; }
-        private List<TcpClientHandler> Clients { get; set; }
-        private Logger Logger { get; set; }
+        protected TcpServer Server { get; set; }
+        protected internal List<ChessPlayer> Clients { get; set; }
+        protected internal Logger Logger { get; protected set; }
+
+        public bool Debug { get; set; }
 
         public ChessServer(IEnumerable<int> ports, Logger logger)
         {
+            this.Debug = false;
             this.Logger = logger;
-            this.Clients = new List<TcpClientHandler>();
+            this.Clients = new List<ChessPlayer>();
             this.Server = TcpServer.Create(ports);
-            this.Server.ClientReceived += new Action<TcpServer, TcpClientHandler>(ClientReceived);
+            this.Server.ClientReceived += ClientReceived;
 
             this.Logger.Log("Chess server started listening on " + this.Server.Listener.Server.RemoteEndPoint.ToString() + ".");
         }
@@ -30,19 +33,42 @@ namespace ChessServer
         private void ClientReceived(TcpServer server, TcpClientHandler client)
         {
             this.Logger.Log("Client connected from " + client.Client.Client.RemoteEndPoint.ToString() + ".");
-
-            client.MessageReceived += new Action<TcpClientHandler, string>(MessageReceived);
+            this.Clients.Add(new ChessPlayer(this, client));
+            this.UpdateAllPlayerLists();
         }
 
-        private void MessageReceived(TcpClientHandler client, string message)
+        internal void UpdateAllPlayerLists()
         {
-            this.Logger.Log("Received message: " + message);
+            foreach (ChessPlayer player in this.Clients)
+            {
+                this.SendAllPlayers(player);
+            }
+        }
 
-            // TODO: 
+        private void SendAllPlayers(ChessPlayer client)
+        {
+            StringBuilder sb = new StringBuilder("ListPlayers ");
+
+            foreach (ChessPlayer c in this.Clients)
+            {
+                if (c.Client != client.Client)
+                {
+                    sb.Append(c.Client.Client.Client.RemoteEndPoint.ToString());
+                    sb.Append(':');
+                    sb.AppendLine(c.Name ?? "");
+                }
+            }
+
+            client.Client.SendMessage(sb.ToString());
         }
 
         public void Dispose()
         {
+            foreach (ChessPlayer player in this.Clients)
+            {
+                player.Dispose();
+            }
+
             this.Server.Dispose();
         }
     }

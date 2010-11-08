@@ -14,14 +14,39 @@ namespace ChessServer
 {
     public class Program
     {
+        private static Logger Logger;
+        private static ChessServer Server;
+
         public static void Main(string[] args)
         {
             InteractiveConsole IConsole = new InteractiveConsole();
-            Logger logger = new Logger(s => IConsole.WriteLine(s));
+            Logger = new Logger(s => IConsole.WriteLine(s));
 
-            using (ChessServer server = new ChessServer(1337.To(13337), logger))
+            string[] quitMsgs = new string[] { "QUIT", "STOP", "EXIT", "END", "Q" };
+
+            using (Server = new ChessServer(1337.To(13337), Logger))
             {
+                string msg = null;
 
+                do
+                {
+                    msg = IConsole.ReadCommand().Trim().ToUpper();
+                    ParseMessage(msg);
+                } while (!quitMsgs.Contains(msg));
+            }
+
+            Environment.Exit(0);
+        }
+
+        private static void ParseMessage(string msg)
+        {
+            if (msg == "LISTPLAYERS")
+            {
+                Logger.Log("Players:");
+                foreach (ChessPlayer client in Server.Clients)
+                {
+                    Logger.Log(client.Client.Client.Client.RemoteEndPoint.ToString());
+                }
             }
         }
     }
