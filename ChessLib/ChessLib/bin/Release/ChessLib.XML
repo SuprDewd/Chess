@@ -694,6 +694,11 @@
             Whether to display numbers on the squares.
             </summary>
         </member>
+        <member name="P:ChessLib.Controls.ChessBoardControl.Turn">
+            <summary>
+            Whether it's the players turn.
+            </summary>
+        </member>
         <member name="P:ChessLib.Controls.ChessBoardControl.ImageDirectory">
             <summary>
             The location if the chess icons.
@@ -748,6 +753,11 @@
         <member name="P:ChessLib.Controls.ChessSquareControl.BoardControl">
             <summary>
             The Chess board control the square control belongs to.
+            </summary>
+        </member>
+        <member name="P:ChessLib.Controls.ChessSquareControl.Size">
+            <summary>
+            The size of the square.
             </summary>
         </member>
         <member name="P:ChessLib.Controls.ChessSquareControl.Background">
@@ -1220,6 +1230,13 @@
             <param name="client">The client the message came from.</param>
             <param name="message">The message.</param>
         </member>
+        <member name="M:ChessLib.Server.ChessServerGame.ActionSend(SharpBag.Net.TcpClientHandler,System.String)">
+            <summary>
+            The send action.
+            </summary>
+            <param name="client">The client that sent the message.</param>
+            <param name="message">The move.</param>
+        </member>
         <member name="M:ChessLib.Server.ChessServerGame.ActionMove(SharpBag.Net.TcpClientHandler,System.String)">
             <summary>
             The move action.
@@ -1270,7 +1287,7 @@
         </member>
         <member name="T:ChessLib.Server.ChessServerPlayer">
             <summary>
-            A Chess server player.
+            A server-side Chess player.
             </summary>
         </member>
         <member name="M:ChessLib.Server.ChessServerPlayer.#ctor(ChessLib.Server.ChessServer,SharpBag.Net.TcpClientHandler)">
@@ -1287,60 +1304,53 @@
             <param name="client">The client sending the message.</param>
             <param name="message">The message.</param>
         </member>
-        <member name="M:ChessLib.Server.ChessServerPlayer.ActionListPlayers(SharpBag.Net.TcpClientHandler,System.String)">
+        <member name="M:ChessLib.Server.ChessServerPlayer.ActionListPlayers(System.String)">
             <summary>
             An action for sending client a list of all the players.
             </summary>
-            <param name="client">The client sending the message.</param>
             <param name="message">The message.</param>
         </member>
-        <member name="M:ChessLib.Server.ChessServerPlayer.ActionSetName(SharpBag.Net.TcpClientHandler,System.String)">
+        <member name="M:ChessLib.Server.ChessServerPlayer.ActionSetName(System.String)">
             <summary>
             An action for changing the name of a player.
             </summary>
-            <param name="client">The client sending the message.</param>
             <param name="message">The message.</param>
         </member>
-        <member name="M:ChessLib.Server.ChessServerPlayer.ActionSend(SharpBag.Net.TcpClientHandler,System.String)">
+        <member name="M:ChessLib.Server.ChessServerPlayer.ActionSend(System.String)">
             <summary>
             An action for sending messages to all players.
             </summary>
-            <param name="client">The client sending the message.</param>
             <param name="message">The message.</param>
         </member>
-        <member name="M:ChessLib.Server.ChessServerPlayer.ActionPlayerQuit(SharpBag.Net.TcpClientHandler,System.String)">
+        <member name="M:ChessLib.Server.ChessServerPlayer.ActionPlayerQuit(System.String)">
             <summary>
             An action to handle a player that is leaving.
             </summary>
-            <param name="client">The client that is leaving.</param>
             <param name="message">The message.</param>
         </member>
-        <member name="M:ChessLib.Server.ChessServerPlayer.ActionGame(SharpBag.Net.TcpClientHandler,System.String)">
+        <member name="M:ChessLib.Server.ChessServerPlayer.ActionGame(System.String)">
             <summary>
             An action that forwards messages to the correct game.
             </summary>
-            <param name="client">The client sending the message.</param>
             <param name="message">The message.</param>
         </member>
-        <member name="M:ChessLib.Server.ChessServerPlayer.ActionPlay(SharpBag.Net.TcpClientHandler,System.String)">
+        <member name="M:ChessLib.Server.ChessServerPlayer.ActionPlay(System.String)">
             <summary>
             An action that handles play requests.
             </summary>
-            <param name="client">The client requesting to play.</param>
             <param name="message">The message.</param>
         </member>
-        <member name="M:ChessLib.Server.ChessServerPlayer.ActionPlayOk(SharpBag.Net.TcpClientHandler,System.String)">
+        <member name="M:ChessLib.Server.ChessServerPlayer.ActionPlayOk(System.String)">
             <summary>
             An action that handles starting games.
             </summary>
-            <param name="client">The client.</param>
             <param name="message">The message.</param>
         </member>
         <member name="M:ChessLib.Server.ChessServerPlayer.Disconnected(SharpBag.Net.TcpClientHandler)">
             <summary>
             A method that handles a disconnected client.
             </summary>
-            <param name="client">The client that disconnected.</param>
+            <param name="client">The disconnecting client.</param>
         </member>
         <member name="M:ChessLib.Server.ChessServerPlayer.op_Equality(ChessLib.Server.ChessServerPlayer,ChessLib.Server.ChessServerPlayer)">
             <summary>
@@ -1410,6 +1420,96 @@
         <member name="P:ChessLib.Pieces.Bishop.PieceName">
             <summary>
             The name of the Chess piece.
+            </summary>
+        </member>
+        <member name="T:ChessLib.Client.ChessClientPlayer">
+            <summary>
+            A client-side Chess player.
+            </summary>
+        </member>
+        <member name="M:ChessLib.Client.ChessClientPlayer.#ctor(ChessLib.Controls.ChessBoardControl,SharpBag.Net.TcpClientHandler)">
+            <summary>
+            The constructor.
+            </summary>
+            <param name="boardControl">The Chess board control.</param>
+            <param name="client">The client.</param>
+        </member>
+        <member name="M:ChessLib.Client.ChessClientPlayer.Connect(System.String,System.Int32)">
+            <summary>
+            Connects to the specifed hostname and port.
+            </summary>
+            <param name="hostname">The hostname.</param>
+            <param name="port">The port.</param>
+            <returns>Whether the connect was successful.</returns>
+        </member>
+        <member name="M:ChessLib.Client.ChessClientPlayer.ListPlayers">
+            <summary>
+            Makes the server send an updated player list.
+            </summary>
+        </member>
+        <member name="P:ChessLib.Client.ChessClientPlayer.BoardControl">
+            <summary>
+            The Chess board.
+            </summary>
+        </member>
+        <member name="P:ChessLib.Client.ChessClientPlayer.Client">
+            <summary>
+            The client handler.
+            </summary>
+        </member>
+        <member name="P:ChessLib.Client.ChessClientPlayer.Actions">
+            <summary>
+            The actions.
+            </summary>
+        </member>
+        <member name="P:ChessLib.Client.ChessClientPlayer.InGame">
+            <summary>
+            Whether the player is in a game.
+            </summary>
+        </member>
+        <member name="P:ChessLib.Client.ChessClientPlayer.MyTurn">
+            <summary>
+            Whether it's the players turn.
+            </summary>
+        </member>
+        <member name="E:ChessLib.Client.ChessClientPlayer.PlayerListUpdated">
+            <summary>
+            An event that is fired when the player list updates.
+            </summary>
+        </member>
+        <member name="E:ChessLib.Client.ChessClientPlayer.ChatMessageReceived">
+            <summary>
+            An event that is fired when a chat message is received.
+            </summary>
+        </member>
+        <member name="E:ChessLib.Client.ChessClientPlayer.GameChatMessageReceived">
+            <summary>
+            An event that is fired when an in-game chat message is received.
+            </summary>
+        </member>
+        <member name="E:ChessLib.Client.ChessClientPlayer.InGameChanged">
+            <summary>
+            An event that is fired when the player enter or exits a game.
+            </summary>
+        </member>
+        <member name="E:ChessLib.Client.ChessClientPlayer.ServerDisconnected">
+            <summary>
+            An event that is fired when the server disconnects.
+            </summary>
+        </member>
+        <member name="E:ChessLib.Client.ChessClientPlayer.GameOver">
+            <summary>
+            An event that is fired when the game is over.
+            </summary>
+        </member>
+        <member name="P:ChessLib.Client.ChessClientPlayer.Name">
+            <summary>
+            The name of the player.
+            </summary>
+        </member>
+        <member name="P:ChessLib.Client.ChessClientPlayer.PlayRequest">
+            <summary>
+            A function that returns whether a play request is accepted.
             </summary>
         </member>
     </members>

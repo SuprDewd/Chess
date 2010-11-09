@@ -48,7 +48,8 @@ namespace ChessLib.Server
         {
             this.Actions = new Dictionary<string, Action<TcpClientHandler, string>>
             {
-                {"Move", ActionMove}
+                {"Move", ActionMove},
+                {"Send", ActionSend}
             };
 
             this.Server = server;
@@ -94,18 +95,36 @@ namespace ChessLib.Server
         /// <param name="message">The message.</param>
         protected internal void ReceivedMessage(TcpClientHandler client, string message)
         {
-            if (this.BlackPlayer.Client != client && this.WhitePlayer.Client != client) return;
-
-            Tuple<string, string> parts = this.Server.GetParts(message);
-
-            if (this.Actions.ContainsKey(parts.Item1))
+            try
             {
-                this.Actions[parts.Item1](client, parts.Item2);
+                if (this.BlackPlayer.Client != client && this.WhitePlayer.Client != client) return;
+
+                Tuple<string, string> parts = ChessServer.GetParts(message);
+
+                if (this.Actions.ContainsKey(parts.Item1))
+                {
+                    this.Actions[parts.Item1](client, parts.Item2);
+                }
+                else
+                {
+                    client.SendMessage("WTF");
+                }
             }
-            else
-            {
-                client.SendMessage("WTF");
-            }
+            catch { }
+        }
+
+        #region Actions
+
+        /// <summary>
+        /// The send action.
+        /// </summary>
+        /// <param name="client">The client that sent the message.</param>
+        /// <param name="message">The move.</param>
+        private void ActionSend(TcpClientHandler client, string message)
+        {
+            string name = (client == this.BlackPlayer.Client ? this.BlackPlayer.Name : this.WhitePlayer.Name);
+
+            this.SendMessageToAll("GameSend " + (name ?? client.Client.Client.RemoteEndPoint.ToString()) + ": " + message);
         }
 
         /// <summary>
@@ -123,8 +142,14 @@ namespace ChessLib.Server
                     this.SendMessageToAll("Moved " + sqs[0] + " " + sqs[1]);
                     this.NextTurn();
                 }
+                else
+                {
+                    client.SendMessage("YourTurn");
+                }
             }
         }
+
+        #endregion
 
         /// <summary>
         /// Progresses the game to the next turn.

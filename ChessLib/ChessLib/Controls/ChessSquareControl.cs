@@ -29,6 +29,19 @@ namespace ChessLib.Controls
         private int File { get; set; }
 
         /// <summary>
+        /// The size of the square.
+        /// </summary>
+        public double Size
+        {
+            get { return this.Width; }
+            set
+            {
+                this.Width = value;
+                this.Height = value;
+            }
+        }
+
+        /// <summary>
         /// The constructor.
         /// </summary>
         public ChessSquareControl(ChessBoardControl boardControl, int rank, int file)

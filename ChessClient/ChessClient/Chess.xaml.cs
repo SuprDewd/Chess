@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SharpBag;
 
 namespace ChessClient
 {
@@ -21,11 +22,14 @@ namespace ChessClient
         public Chess()
         {
             InitializeComponent();
+
+            this.cbcBoard.Turn = false;
+            this.cbcBoard.ImageDirectory = System.IO.Path.Combine(Settings.ExecutableDirectory.ToString(), "Icons");
         }
 
-        private void Grid_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void Wrapper_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            this.cbcBoard.Size = Math.Min(this.ActualHeight, this.ActualWidth);
+            this.cbcBoard.Size = Math.Min(this.BoardWrapper.ActualHeight, this.BoardWrapper.ActualWidth);
         }
     }
 }

@@ -58,6 +58,10 @@ namespace ChessLib.Controls
         /// Whether to display numbers on the squares.
         /// </summary>
         public bool SquareNumbers { get; set; }
+        /// <summary>
+        /// Whether it's the players turn.
+        /// </summary>
+        public bool Turn { get; set; }
 
         private string _ImageDirectory;
         /// <summary>
@@ -84,7 +88,7 @@ namespace ChessLib.Controls
         /// <summary>
         /// An empty constructor.
         /// </summary>
-        public ChessBoardControl() { this.TurnTable(); }
+        public ChessBoardControl() { this.Turn = true; this.TurnTable(); }
 
         /// <summary>
         /// The constructor.
@@ -94,6 +98,7 @@ namespace ChessLib.Controls
         /// <param name="imageDirectory">The location of the images.</param>
         public ChessBoardControl(ChessBoard board, ChessColor player, string imageDirectory)
         {
+            this.Turn = true;
             this.ImageDirectory = imageDirectory;
             this.Board = board;
             this.Player = player;
@@ -179,6 +184,13 @@ namespace ChessLib.Controls
 
         private void SquareClicked(object o, RoutedEventArgs ea)
         {
+            if (!this.Turn)
+            {
+                this.LastClicked = null;
+                this.Repaint();
+                return;
+            }
+
             ChessSquareControl sq = (ChessSquareControl)o;
 
             if (this.LastClicked == null)

@@ -23,15 +23,15 @@ namespace ChessLib.Server
         /// <summary>
         /// A list of clients.
         /// </summary>
-        protected internal List<ChessServerPlayer> Clients { get; set; }
+        public List<ChessServerPlayer> Clients { get; set; }
         /// <summary>
         /// A list of games.
         /// </summary>
-        protected internal List<ChessServerGame> Games { get; set; }
+        public List<ChessServerGame> Games { get; set; }
         /// <summary>
         /// The logger.
         /// </summary>
-        protected internal Logger Logger { get; protected set; }
+        public Logger Logger { get; protected set; }
 
         /// <summary>
         /// Whether the server should log debug messages.
@@ -73,7 +73,7 @@ namespace ChessLib.Server
         /// </summary>
         /// <param name="message">The message to split.</param>
         /// <returns>The action to call and the message.</returns>
-        protected internal Tuple<string, string> GetParts(string message)
+        internal static Tuple<string, string> GetParts(string message)
         {
             int split = Math.Min(message.IndexOf(' '), message.IndexOf('.'));
 
@@ -89,7 +89,7 @@ namespace ChessLib.Server
         /// </summary>
         /// <param name="cParts">The parts.</param>
         /// <returns>The ip, port and username of the client.</returns>
-        protected internal Tuple<string, int, string> GetClientParts(string cParts)
+        static internal Tuple<string, int, string> GetClientParts(string cParts)
         {
             List<string> parts = cParts.Split(':').ToList();
 

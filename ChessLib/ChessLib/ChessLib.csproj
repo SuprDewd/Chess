@@ -55,6 +55,7 @@
     <Compile Include="Behaviours\KnightMovement.cs" />
     <Compile Include="Behaviours\MovementDirection.cs" />
     <Compile Include="Behaviours\RowMovement.cs" />
+    <Compile Include="Client\ChessClientPlayer.cs" />
     <Compile Include="Pieces\Bishop.cs" />
     <Compile Include="ChessBoard.cs" />
     <Compile Include="Controls\ChessBoardControl.cs" />

@@ -7,6 +7,7 @@ using SharpBag.Net;
 using SharpBag.IO;
 using SharpBag.Logging;
 using ChessLib;
+using CS = ChessLib.Server;
 using System.Net;
 using System.Net.Sockets;
 
@@ -15,7 +16,7 @@ namespace ChessServer
     public class Program
     {
         private static Logger Logger;
-        private static ChessServer Server;
+        private static CS.ChessServer Server;
 
         public static void Main(string[] args)
         {
@@ -24,7 +25,7 @@ namespace ChessServer
 
             string[] quitMsgs = new string[] { "QUIT", "STOP", "EXIT", "END", "Q" };
 
-            using (Server = new ChessServer(1337.To(13337), Logger, true))
+            using (Server = new CS.ChessServer(1337.To(13337), Logger, true))
             {
                 string msg = null;
 
@@ -43,7 +44,7 @@ namespace ChessServer
             if (msg == "LISTPLAYERS")
             {
                 Logger.Log("Players (" + Server.Clients.Count + "):");
-                foreach (ChessServerPlayer client in Server.Clients)
+                foreach (CS.ChessServerPlayer client in Server.Clients)
                 {
                     Logger.Log(client.Client.Client.Client.RemoteEndPoint.ToString());
                 }
@@ -51,7 +52,7 @@ namespace ChessServer
             else if (msg == "LISTGAMES")
             {
                 Logger.Log("Games (" + Server.Games.Count + "):");
-                foreach (ChessServerGame game in Server.Games)
+                foreach (CS.ChessServerGame game in Server.Games)
                 {
                     Logger.Log(game.ToString());
                 }
