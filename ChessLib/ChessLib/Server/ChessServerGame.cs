@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using ChessLib;
 using SharpBag.Net;
+using ChessLib.Enums;
 
 namespace ChessLib.Server
 {

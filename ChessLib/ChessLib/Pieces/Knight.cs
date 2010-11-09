@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ChessLib.Behaviours;
+using ChessLib.Enums;
 
-namespace ChessLib
+namespace ChessLib.Pieces
 {
     /// <summary>
     /// The Knight Chess piece.

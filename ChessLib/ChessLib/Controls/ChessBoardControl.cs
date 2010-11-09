@@ -7,6 +7,8 @@ using System.Windows.Media;
 using System.Windows;
 using System.IO;
 using System.Reflection;
+using ChessLib.Pieces;
+using ChessLib.Enums;
 
 namespace ChessLib.Controls
 {

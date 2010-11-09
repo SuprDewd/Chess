@@ -7,6 +7,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows;
 using System.IO;
+using ChessLib.Enums;
 
 namespace ChessLib.Controls
 {

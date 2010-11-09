@@ -249,5 +249,11 @@ namespace ChessLib.Server
             sb.Append(':');
             sb.Append(this.Name ?? "");
         }
+
+        /// <see cref="Object.GetHashCode()"/>
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }

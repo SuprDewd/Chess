@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ChessLib
+namespace ChessLib.Enums
 {
     /// <summary>
     /// The winner of a Chess game.

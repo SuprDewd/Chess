@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ChessLib.Pieces;
 
-namespace ChessLib
+namespace ChessLib.Behaviours
 {
     /// <summary>
     /// An abstract class describing a movement behaviour.

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Reflection;
+using ChessLib.Pieces;
+using ChessLib.Enums;
 
 namespace ChessLib
 {

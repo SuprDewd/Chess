@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ChessLib
+namespace ChessLib.Enums
 {
     /// <summary>
     /// The color of Chess pieces and squares.
