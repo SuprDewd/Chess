@@ -36,6 +36,9 @@
   <ItemGroup>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="SharpBag">
+      <HintPath>..\..\..\..\..\Forritun\SharpBag\SharpBag\bin\Release\SharpBag.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xaml" />
@@ -47,7 +50,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActionDisposable.cs" />
     <Compile Include="Behaviours\PawnMovement.cs" />
     <Compile Include="Behaviours\KingMovement.cs" />
     <Compile Include="Behaviours\KnightMovement.cs" />
@@ -55,30 +57,33 @@
     <Compile Include="Behaviours\RowMovement.cs" />
     <Compile Include="Bishop.cs" />
     <Compile Include="ChessBoard.cs" />
-    <Compile Include="ChessBoardControl.cs" />
-    <Compile Include="ChessColor.cs" />
+    <Compile Include="Controls\ChessBoardControl.cs" />
+    <Compile Include="Enums\ChessColor.cs" />
     <Compile Include="ChessMoveParser.cs" />
-    <Compile Include="ChessPiece.cs" />
-    <Compile Include="ChessSquareControl.cs" />
-    <Compile Include="ChessWinner.cs" />
+    <Compile Include="Pieces\ChessPiece.cs" />
+    <Compile Include="Controls\ChessSquareControl.cs" />
+    <Compile Include="Enums\ChessWinner.cs" />
     <Compile Include="IBelongToPiece.cs" />
     <Compile Include="IChessItem.cs" />
     <Compile Include="IColored.cs" />
     <Compile Include="ILocated.cs" />
-    <Compile Include="King.cs" />
-    <Compile Include="Knight.cs" />
+    <Compile Include="Pieces\King.cs" />
+    <Compile Include="Pieces\Knight.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Misc.cs" />
     <Compile Include="Move.cs" />
-    <Compile Include="MovementBehaviour.cs" />
-    <Compile Include="Pawn.cs" />
+    <Compile Include="Behaviours\MovementBehaviour.cs" />
+    <Compile Include="Pieces\Pawn.cs" />
     <Compile Include="Player.cs" />
-    <Compile Include="PromotionChoise.cs" />
+    <Compile Include="Enums\PromotionChoise.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Queen.cs" />
-    <Compile Include="Rook.cs" />
+    <Compile Include="Pieces\Queen.cs" />
+    <Compile Include="Pieces\Rook.cs" />
+    <Compile Include="Server\ChessServer.cs" />
+    <Compile Include="Server\ChessServerGame.cs" />
+    <Compile Include="Server\ChessServerPlayer.cs" />
     <Compile Include="Square.cs" />
-    <Compile Include="TempPiece.cs" />
+    <Compile Include="Pieces\TempPiece.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
@@ -86,6 +91,7 @@
   <ItemGroup>
     <None Include="TODO" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

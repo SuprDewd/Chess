@@ -38,3 +38,5 @@ C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessClient\ChessClient\b
 C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessClient\ChessClient\obj\x86\Debug\Chess.baml
 C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessClient\ChessClient\obj\x86\Debug\Chess.g.cs
 C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessClient\ChessClient\bin\Debug\ChessLib.dll
+C:\Users\Bjarki\Desktop\Projects\TSkoli\FOR403\Chess\ChessClient\ChessClient\obj\x86\Debug\ChessClient.exe
+C:\Users\Bjarki\Desktop\Projects\TSkoli\FOR403\Chess\ChessClient\ChessClient\obj\x86\Debug\ChessClient.pdb

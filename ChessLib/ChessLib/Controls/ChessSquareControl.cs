@@ -8,7 +8,7 @@ using System.Windows.Media.Imaging;
 using System.Windows;
 using System.IO;
 
-namespace ChessLib
+namespace ChessLib.Controls
 {
     /// <summary>
     /// A Chess square control.

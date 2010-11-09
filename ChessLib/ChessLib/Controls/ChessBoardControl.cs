@@ -8,7 +8,7 @@ using System.Windows;
 using System.IO;
 using System.Reflection;
 
-namespace ChessLib
+namespace ChessLib.Controls
 {
     /// <summary>
     /// A Chess board control.
@@ -96,7 +96,7 @@ namespace ChessLib
             this.Board = board;
             this.Player = player;
         }
-        
+
         private void TurnTable()
         {
             if (this.Player == ChessColor.Black)
