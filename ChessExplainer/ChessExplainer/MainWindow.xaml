@@ -29,10 +29,7 @@
                 <ColumnDefinition Width="150" />
             </Grid.ColumnDefinitions>
 
-            <c:ChessBoardControl Name="cbcBoard" Size="400" HorizontalAlignment="Center" VerticalAlignment="Center" SquareNumbers="False" Grid.Column="0" ImageDirectory="C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessExplainer\ChessExplainer\bin\Debug\Icons">
-                <c:ChessBoardControl.Player>
-                    <c:ChessColor>White</c:ChessColor>
-                </c:ChessBoardControl.Player>
+            <c:ChessBoardControl Name="cbcBoard" Player="White" Size="400" HorizontalAlignment="Center" VerticalAlignment="Center" SquareNumbers="False" Grid.Column="0" ImageDirectory="C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessExplainer\ChessExplainer\bin\Debug\Icons">
                 <c:ChessBoardControl.Board>
                     <c:ChessBoard />
                 </c:ChessBoardControl.Board>

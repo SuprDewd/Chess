@@ -21,6 +21,17 @@ namespace ChessLib
         private Brush _SelectBrushDark = Brushes.IndianRed;
         private Brush _SelectBrushLight = Brushes.IndianRed;
 
+        private Func<ChessBoardControl, Move, bool> _Moved = (c, m) => true;
+        /// <summary>
+        /// A function that is executed every time a Chess piece is moved.
+        /// The move will only be executed if the function returns true.
+        /// </summary>
+        public Func<ChessBoardControl, Move, bool> Moved
+        {
+            get { return this._Moved; }
+            set { this._Moved = value; }
+        }
+
         /// <summary>
         /// The Chess board the control is representing.
         /// </summary>
@@ -91,6 +102,17 @@ namespace ChessLib
             if (this.Player == ChessColor.Black)
             {
                 this.LayoutTransform = new RotateTransform(180);
+
+                if (this.Squares == null) return;
+
+                for (int rank = 0; rank < 8; rank++)
+                {
+                    for (int file = 0; file < 8; file++)
+                    {
+                        if (this.Squares[rank, file] == null) continue;
+                        this.Squares[rank, file].TurnPiece();
+                    }
+                }
             }
             else
             {
@@ -180,7 +202,8 @@ namespace ChessLib
             }
             else
             {
-                this.LastClicked.Square.To(sq.Square);
+                Move m = new Move(this.LastClicked.Square.Location, sq.Square.Location);
+                if (this.Moved(this, m)) this.LastClicked.Square.To(sq.Square);
 
                 this.Repaint();
                 this.LastClicked = null;

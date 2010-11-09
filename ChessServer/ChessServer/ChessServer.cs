@@ -45,9 +45,21 @@ namespace ChessServer
 
             if (space >= 0)
             {
-                return new Tuple<string, string>(message.Substring(0, space), message.Substring(space));
+                return new Tuple<string, string>(message.Substring(0, space), message.Substring(space + 1));
             }
             else return new Tuple<string, string>(message, "");
+        }
+
+        protected internal Tuple<string, int, string> GetClientParts(string cParts)
+        {
+            List<string> parts = cParts.Split(':').ToList();
+
+            string ip = parts[0];
+            parts.RemoveAt(0);
+            int port = parts[0].ToInt();
+            parts.RemoveAt(0);
+
+            return new Tuple<string, int, string>(ip, port, String.Join(":", parts.ToArray()));
         }
 
         internal void UpdateAllPlayerLists()
@@ -76,11 +88,6 @@ namespace ChessServer
 
         public void Dispose()
         {
-            foreach (ChessServerGame game in this.Games)
-            {
-                game.Dispose();
-            }
-
             foreach (ChessServerPlayer player in this.Clients)
             {
                 player.Dispose();

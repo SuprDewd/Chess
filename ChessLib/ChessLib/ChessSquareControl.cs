@@ -38,6 +38,7 @@ namespace ChessLib
             this.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
             this.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
             this.UpdateColor();
+            this.TurnPiece();
         }
 
         /// <summary>
@@ -48,7 +49,10 @@ namespace ChessLib
             this.Background = this.Square.Color;
         }
 
-        private void TurnPiece()
+        /// <summary>
+        /// Turns the piece.
+        /// </summary>
+        internal void TurnPiece()
         {
             if (this.BoardControl.Player == ChessColor.Black)
             {

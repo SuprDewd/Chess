@@ -24,7 +24,7 @@ namespace ChessServer
 
             string[] quitMsgs = new string[] { "QUIT", "STOP", "EXIT", "END", "Q" };
 
-            using (Server = new ChessServer(1337.To(13337), Logger))
+            using (Server = new ChessServer(1337.To(13337), Logger, true))
             {
                 string msg = null;
 

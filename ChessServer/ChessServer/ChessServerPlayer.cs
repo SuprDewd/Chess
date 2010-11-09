@@ -16,7 +16,6 @@ namespace ChessServer
         protected Dictionary<string, Action<TcpClientHandler, string>> Actions { get; set; }
         protected internal TcpClientHandler Client { get; protected set; }
         protected ChessServer Server { get; set; }
-        protected internal List<ChessServerGame> Games { get; protected set; }
 
         /// <summary>
         /// The name of the Chess player.
@@ -30,6 +29,7 @@ namespace ChessServer
                 {"ListPlayers", ActionListPlayers},
                 {"Quit",        ActionPlayerQuit},
                 {"Play",        ActionPlay},
+                {"PlayOk",      ActionPlayOk},
                 {"SetName",     ActionSetName},
                 {"Game",        ActionGame}
             };
@@ -86,29 +86,57 @@ namespace ChessServer
 
         private void ActionGame(TcpClientHandler client, string message)
         {
-            this.Games.FirstOrDefault(g => g.WhitePlayer.Client == client || g.BlackPlayer.Client == client).IfNotNull(a => a.ReceivedMessage(client, message));
+            this.Server.Games.FirstOrDefault(g => g.WhitePlayer.Client == client || g.BlackPlayer.Client == client).IfNotNull(a => a.ReceivedMessage(client, message));
         }
 
         private void ActionPlay(TcpClientHandler client, string message)
+        {
+            /*ChessServerPlayer playClient = this.Server.Clients.FirstOrDefault(p => p.Client.Client.Client.RemoteEndPoint.ToString() == message);
+            if (playClient == null) return;
+            if (playClient.Client == client) return;
+            if (this.Server.Games.Any(g => g.WhitePlayer == playClient || g.BlackPlayer == playClient)) return;
+            
+            this.Server.Games.Add(new ChessServerGame(this.Server, this, playClient));*/
+
+            //Tuple<string, int, string> cParts = this.Server.GetClientParts(message);
+            //string rep = cParts.Item1 + ":" + cParts.Item2;
+            ChessServerPlayer playClient = this.Server.Clients.FirstOrDefault(p => p.Client.Client.Client.RemoteEndPoint.ToString() == message);
+            if (playClient == null) return;
+            if (playClient.Client == client) return;
+            if (this.Server.Games.Any(g => g.WhitePlayer == playClient || g.BlackPlayer == playClient)) return;
+
+            //this.Server.Games.Add(new ChessServerGame(this.Server, playClient, this));
+
+            playClient.Client.SendMessage("Play " + client.Client.Client.RemoteEndPoint.ToString());
+        }
+
+        private void ActionPlayOk(TcpClientHandler client, string message)
         {
             ChessServerPlayer playClient = this.Server.Clients.FirstOrDefault(p => p.Client.Client.Client.RemoteEndPoint.ToString() == message);
             if (playClient == null) return;
             if (playClient.Client == client) return;
             if (this.Server.Games.Any(g => g.WhitePlayer == playClient || g.BlackPlayer == playClient)) return;
 
-            this.Server.Games.Add(new ChessServerGame(this.Server, this, playClient));
+            this.Server.Games.Add(new ChessServerGame(this.Server, playClient, this));
         }
 
         private void Disconnected(TcpClientHandler client)
         {
-            this.Client.Dispose();
             this.Server.Clients.Remove(this);
             this.Server.UpdateAllPlayerLists();
+            this.Client.Dispose();
         }
 
         public static bool operator ==(ChessServerPlayer a, ChessServerPlayer b)
         {
-            return a.Client == b.Client;
+            try
+            {
+                return a.Client == b.Client;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public static bool operator !=(ChessServerPlayer a, ChessServerPlayer b)
@@ -118,9 +146,16 @@ namespace ChessServer
 
         public override bool Equals(object obj)
         {
-            if (!(obj is ChessServerPlayer)) return false;
+            try
+            {
+                if (!(obj is ChessServerPlayer)) return false;
 
-            return this.Client.Equals((obj as ChessServerPlayer).Client);
+                return this.Client.Equals((obj as ChessServerPlayer).Client);
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public void Dispose()
