@@ -16,6 +16,7 @@ using WF = System.Windows.Forms;
 using System.IO;
 using ChessLib;
 using System.Threading;
+using ChessLib.Enums;
 
 namespace ChessExplainer
 {
@@ -24,12 +25,9 @@ namespace ChessExplainer
     /// </summary>
     public partial class MainWindow : Window
     {
-        public string ImageDirectory { get { return System.IO.Path.Combine(Settings.ExecutableDirectory.ToString(), "Icons"); } }
-
         public MainWindow()
         {
             InitializeComponent();
-            this.cbcBoard.ImageDirectory = this.ImageDirectory;
             this.UpdateMoves();
 
             this.cbcBoard.Board.GameEnded += (b, r) =>

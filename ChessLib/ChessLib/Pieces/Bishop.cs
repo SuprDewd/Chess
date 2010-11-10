@@ -5,6 +5,7 @@ using System.Text;
 using ChessLib.Behaviours;
 using ChessLib.Pieces;
 using ChessLib.Enums;
+using System.Windows.Media.Imaging;
 
 namespace ChessLib.Pieces
 {

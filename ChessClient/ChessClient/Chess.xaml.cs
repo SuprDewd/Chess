@@ -24,7 +24,6 @@ namespace ChessClient
             InitializeComponent();
 
             this.cbcBoard.Turn = false;
-            this.cbcBoard.ImageDirectory = System.IO.Path.Combine(Settings.ExecutableDirectory.ToString(), "Icons");
         }
 
         private void Wrapper_SizeChanged(object sender, SizeChangedEventArgs e)

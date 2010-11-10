@@ -12,3 +12,6 @@ C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessLib\ChessLib\obj\Rel
 C:\Users\Bjarki\Desktop\Projects\TSkoli\FOR403\Chess\ChessLib\ChessLib\bin\Release\SharpBag.dll
 C:\Users\Bjarki\Desktop\Projects\TSkoli\FOR403\Chess\ChessLib\ChessLib\bin\Release\SharpBag.pdb
 C:\Users\Bjarki\Desktop\Projects\TSkoli\FOR403\Chess\ChessLib\ChessLib\bin\Release\ChessLib.XML
+C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessLib\ChessLib\bin\Release\SharpBag.dll
+C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessLib\ChessLib\bin\Release\SharpBag.pdb
+C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessLib\ChessLib\bin\Release\MySql.Data.dll

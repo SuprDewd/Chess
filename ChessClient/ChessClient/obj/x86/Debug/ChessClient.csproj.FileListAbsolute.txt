@@ -21,7 +21,6 @@ C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessClient\ChessClient\o
 C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessClient\ChessClient\obj\x86\Debug\ChessClient.pdb
 C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessClient\ChessClient\bin\Debug\ChessClient.exe
 C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessClient\ChessClient\bin\Debug\ChessClient.pdb
-C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessClient\ChessClient\bin\Debug\MySql.Data.dll
 C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessClient\ChessClient\bin\Debug\ChessLib.pdb
 C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessClient\ChessClient\bin\Debug\ChessLib.xml
 C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessClient\ChessClient\bin\Debug\SharpBag.pdb
@@ -60,3 +59,6 @@ C:\Users\Bjarki\Desktop\Projects\TSkoli\FOR403\Chess\ChessClient\ChessClient\bin
 C:\Users\Bjarki\Desktop\Projects\TSkoli\FOR403\Chess\ChessClient\ChessClient\bin\Debug\SharpBag.pdb
 C:\Users\Bjarki\Desktop\Projects\TSkoli\FOR403\Chess\ChessClient\ChessClient\obj\x86\Debug\Server.baml
 C:\Users\Bjarki\Desktop\Projects\TSkoli\FOR403\Chess\ChessClient\ChessClient\obj\x86\Debug\Server.g.cs
+C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessClient\ChessClient\obj\x86\Debug\Server.baml
+C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessClient\ChessClient\obj\x86\Debug\Server.g.cs
+C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessClient\ChessClient\bin\Debug\MySql.Data.dll

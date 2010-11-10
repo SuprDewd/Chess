@@ -19,3 +19,4 @@ C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessExplainer\ChessExpla
 C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessExplainer\ChessExplainer\bin\Debug\SharpBag.pdb
 C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessExplainer\ChessExplainer\obj\x86\Debug\Promotion.baml
 C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessExplainer\ChessExplainer\obj\x86\Debug\Promotion.g.cs
+C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessExplainer\ChessExplainer\bin\Debug\ChessExplainer.exe.config

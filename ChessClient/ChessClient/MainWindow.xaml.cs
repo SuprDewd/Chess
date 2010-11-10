@@ -17,6 +17,7 @@ using SharpBag.IO;
 using ChessLib;
 using ChessLib.Client;
 using ChessLib.Controls;
+using ChessLib.Pieces;
 using ChessLib.Enums;
 using System.Net.Sockets;
 

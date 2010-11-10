@@ -9,6 +9,7 @@ using System.IO;
 using System.Reflection;
 using ChessLib.Pieces;
 using ChessLib.Enums;
+using System.Windows.Media.Imaging;
 
 namespace ChessLib.Controls
 {
@@ -33,6 +34,70 @@ namespace ChessLib.Controls
             get { return this._Moved; }
             set { this._Moved = value; }
         }
+
+        private BitmapSource _BlackBishopIcon = null;
+        private BitmapSource _BlackKingIcon = null;
+        private BitmapSource _BlackKnightIcon = null;
+        private BitmapSource _BlackPawnIcon = null;
+        private BitmapSource _BlackQueenIcon = null;
+        private BitmapSource _BlackRookIcon = null;
+
+        private BitmapSource _WhiteBishopIcon = null;
+        private BitmapSource _WhiteKingIcon = null;
+        private BitmapSource _WhiteKnightIcon = null;
+        private BitmapSource _WhitePawnIcon = null;
+        private BitmapSource _WhiteQueenIcon = null;
+        private BitmapSource _WhiteRookIcon = null;
+
+        /// <summary>
+        /// An icon for the white bishop.
+        /// </summary>
+        public BitmapSource WhiteBishopIcon { get { return this._WhiteBishopIcon; } set { this._WhiteBishopIcon = value; this.Repaint(); } }
+        /// <summary>
+        /// An icon for the white king.
+        /// </summary>
+        public BitmapSource WhiteKingIcon { get { return this._WhiteKingIcon; } set { this._WhiteKingIcon = value; this.Repaint(); } }
+        /// <summary>
+        /// An icon for the white knight.
+        /// </summary>
+        public BitmapSource WhiteKnightIcon { get { return this._WhiteKnightIcon; } set { this._WhiteKnightIcon = value; this.Repaint(); } }
+        /// <summary>
+        /// An icon for the white pawn.
+        /// </summary>
+        public BitmapSource WhitePawnIcon { get { return this._WhitePawnIcon; } set { this._WhitePawnIcon = value; this.Repaint(); } }
+        /// <summary>
+        /// An icon for the white queen.
+        /// </summary>
+        public BitmapSource WhiteQueenIcon { get { return this._WhiteQueenIcon; } set { this._WhiteQueenIcon = value; this.Repaint(); } }
+        /// <summary>
+        /// An icon for the white rook.
+        /// </summary>
+        public BitmapSource WhiteRookIcon { get { return this._WhiteRookIcon; } set { this._WhiteRookIcon = value; this.Repaint(); } }
+
+        /// <summary>
+        /// An icon for the black bishop.
+        /// </summary>
+        public BitmapSource BlackBishopIcon { get { return this._BlackBishopIcon; } set { this._BlackBishopIcon = value; this.Repaint(); } }
+        /// <summary>
+        /// An icon for the black king.
+        /// </summary>
+        public BitmapSource BlackKingIcon { get { return this._BlackKingIcon; } set { this._BlackKingIcon = value; this.Repaint(); } }
+        /// <summary>
+        /// An icon for the black knight.
+        /// </summary>
+        public BitmapSource BlackKnightIcon { get { return this._BlackKnightIcon; } set { this._BlackKnightIcon = value; this.Repaint(); } }
+        /// <summary>
+        /// An icon for the black pawn.
+        /// </summary>
+        public BitmapSource BlackPawnIcon { get { return this._BlackPawnIcon; } set { this._BlackPawnIcon = value; this.Repaint(); } }
+        /// <summary>
+        /// An icon for the black queen.
+        /// </summary>
+        public BitmapSource BlackQueenIcon { get { return this._BlackQueenIcon; } set { this._BlackQueenIcon = value; this.Repaint(); } }
+        /// <summary>
+        /// An icon for the black rook.
+        /// </summary>
+        public BitmapSource BlackRookIcon { get { return this._BlackRookIcon; } set { this._BlackRookIcon = value; this.Repaint(); } }
 
         /// <summary>
         /// The Chess board the control is representing.
@@ -63,17 +128,6 @@ namespace ChessLib.Controls
         /// </summary>
         public bool Turn { get; set; }
 
-        private string _ImageDirectory;
-        /// <summary>
-        /// The location if the chess icons.
-        /// </summary>
-        /// <remarks>The icons should be named WKing.png, BKing.png, WQueen.png and so on.</remarks>
-        public string ImageDirectory
-        {
-            get { return _ImageDirectory; }
-            set { _ImageDirectory = value; this.Repaint(); }
-        }
-
         private ChessColor _Player = ChessColor.White;
         /// <summary>
         /// Which player is playing.
@@ -95,11 +149,9 @@ namespace ChessLib.Controls
         /// </summary>
         /// <param name="board">The Chess board the control is representing.</param>
         /// <param name="player">The color of the player.</param>
-        /// <param name="imageDirectory">The location of the images.</param>
-        public ChessBoardControl(ChessBoard board, ChessColor player, string imageDirectory)
+        public ChessBoardControl(ChessBoard board, ChessColor player)
         {
             this.Turn = true;
-            this.ImageDirectory = imageDirectory;
             this.Board = board;
             this.Player = player;
         }

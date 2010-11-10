@@ -116,13 +116,31 @@ namespace ChessLib.Controls
             {
                 Image img = new Image
                 {
-                    Source = new BitmapImage(new Uri(Path.Combine(this.BoardControl.ImageDirectory, this.Square.Piece.PieceNameShort + ".png"))),
+                    Source = this.GetIcon(),
                     Margin = new Thickness(0, this.BoardControl.SquareNumbers ? -25 : 0, 0, 0)
                 };
 
                 this.Children.Add(img);
             }
             catch { }
+        }
+
+        /// <summary>
+        /// Gets the current Chess pieces icon.
+        /// </summary>
+        /// <returns>The icon.</returns>
+        internal BitmapSource GetIcon()
+        {
+            switch (this.Square.Piece.PieceName)
+            {
+                case "Bishop": return this.Square.Piece.Color == ChessColor.White ? this.BoardControl.WhiteBishopIcon : this.BoardControl.BlackBishopIcon;
+                case "King": return this.Square.Piece.Color == ChessColor.White ? this.BoardControl.WhiteKingIcon : this.BoardControl.BlackKingIcon;
+                case "Knight": return this.Square.Piece.Color == ChessColor.White ? this.BoardControl.WhiteKnightIcon : this.BoardControl.BlackKnightIcon;
+                case "Pawn": return this.Square.Piece.Color == ChessColor.White ? this.BoardControl.WhitePawnIcon : this.BoardControl.BlackPawnIcon;
+                case "Queen": return this.Square.Piece.Color == ChessColor.White ? this.BoardControl.WhiteQueenIcon : this.BoardControl.BlackQueenIcon;
+                case "Rook": return this.Square.Piece.Color == ChessColor.White ? this.BoardControl.WhiteRookIcon : this.BoardControl.BlackRookIcon;
+                default: return null;
+            }
         }
     }
 }

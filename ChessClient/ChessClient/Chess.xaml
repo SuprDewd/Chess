@@ -7,7 +7,7 @@
         Title="Chess" Height="488" Width="441">
     <Grid Name="MainGrid">
         <Border Name="BoardWrapper" SizeChanged="Wrapper_SizeChanged">
-            <c:ChessBoardControl Player="White" Name="cbcBoard" Size="400" HorizontalAlignment="Center" VerticalAlignment="Center" SquareNumbers="False" Grid.Column="0" ImageDirectory="C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessExplainer\ChessExplainer\bin\Debug\Icons">
+            <c:ChessBoardControl Player="White" Name="cbcBoard" Size="400" HorizontalAlignment="Center" VerticalAlignment="Center" SquareNumbers="False" Grid.Column="0" BlackBishopIcon="/ChessClient;component/Icons/BBishop.png" BlackKingIcon="/ChessClient;component/Icons/BKing.png" BlackKnightIcon="/ChessClient;component/Icons/BKnight.png" BlackPawnIcon="/ChessClient;component/Icons/BPawn.png" BlackQueenIcon="/ChessClient;component/Icons/BQueen.png" BlackRookIcon="/ChessClient;component/Icons/BRook.png" WhiteBishopIcon="/ChessClient;component/Icons/WBishop.png" WhiteKingIcon="/ChessClient;component/Icons/WKing.png" WhiteKnightIcon="/ChessClient;component/Icons/WKnight.png" WhitePawnIcon="/ChessClient;component/Icons/WPawn.png" WhiteQueenIcon="/ChessClient;component/Icons/WQueen.png" WhiteRookIcon="/ChessClient;component/Icons/WRook.png">
                 <c:ChessBoardControl.Board>
                     <cb:ChessBoard />
                 </c:ChessBoardControl.Board>
