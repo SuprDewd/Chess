@@ -1,5 +1,0 @@
-C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessLib\ChessLib\bin\Debug\ChessLib.dll
-C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessLib\ChessLib\bin\Debug\ChessLib.pdb
-C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessLib\ChessLib\obj\Debug\ResolveAssemblyReference.cache
-C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessLib\ChessLib\obj\Debug\ChessLib.dll
-C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ChessLib\ChessLib\obj\Debug\ChessLib.pdb
