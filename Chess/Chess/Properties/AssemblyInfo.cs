@@ -7,12 +7,12 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ChessClient")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Chess")]
+[assembly: AssemblyDescription("Chess Software")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("ChessClient")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2010")]
+[assembly: AssemblyCompany("SuprDewd")]
+[assembly: AssemblyProduct("Chess")]
+[assembly: AssemblyCopyright("Copyright © SuprDewd 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

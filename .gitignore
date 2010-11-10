@@ -1,0 +1,7 @@
+Chess/Chess/bin
+Chess/Chess/obj
+ChessLib/ChessLib/bin
+ChessLib/ChessLib/obj
+ChessServer/ChessServer/bin
+ChessServer/ChessServer/obj
+*.suo
