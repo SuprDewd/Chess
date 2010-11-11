@@ -29,6 +29,7 @@ namespace Chess
             InitializeComponent();
 
             this.Logger = new Logger(s => this.Log.InvokeIfRequired(() => { this.Log.Text += s + Environment.NewLine; this.Log.ScrollToEnd(); }));
+            this.Port.Focus();
         }
 
         private void Input_KeyDown(object sender, KeyEventArgs e)

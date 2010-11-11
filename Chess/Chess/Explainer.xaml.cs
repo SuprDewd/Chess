@@ -103,7 +103,7 @@ namespace Chess
 
         private void Exit(object sender, RoutedEventArgs e)
         {
-            Environment.Exit(0);
+            this.Close();
         }
 
         private string _LastSelectedFile = null;
