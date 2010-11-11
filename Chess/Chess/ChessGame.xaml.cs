@@ -11,6 +11,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using SharpBag;
+using ChessLib.Client;
+using ChessLib.Enums;
 
 namespace Chess
 {
@@ -19,11 +21,29 @@ namespace Chess
     /// </summary>
     public partial class ChessGame : Window
     {
+        private ChessClientPlayer _Player = null;
+        public ChessClientPlayer Player
+        {
+            get { return this.Player; }
+            set
+            {
+                this._Player = value;
+                this._Player.GameOver += GameOver;
+                this._Player.ServerDisconnected += p => { this.InvokeIfRequired(() => { this.Hide(); this.cbcBoard.Board.Reset(); }); };
+            }
+        }
+
         public ChessGame()
         {
             InitializeComponent();
+        }
 
-            this.cbcBoard.Turn = false;
+        private void GameOver(ChessClientPlayer player, ChessWinner r)
+        {
+            MessageBox.Show((r == ChessWinner.StaleMate ? "Stalemate" : r.ToString() + " wins") + "!", "Game Over");
+            this.Hide();
+            this.cbcBoard.Board.Reset();
+            this.cbcBoard.Repaint();
         }
 
         private void Wrapper_SizeChanged(object sender, SizeChangedEventArgs e)

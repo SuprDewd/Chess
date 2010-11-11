@@ -180,9 +180,18 @@ namespace ChessLib.Server
         /// <param name="client">The disconnecting client.</param>
         private void Disconnected(TcpClientHandler client)
         {
+            string s;
+
+            try
+            {
+                s = ": " + client.Client.Client.RemoteEndPoint.ToString();
+            }
+            catch { s = "."; };
+
             this.Server.Clients.Remove(this);
             this.Server.UpdateAllPlayerLists();
             this.Client.Dispose();
+            this.Server.Logger.Log("Player disconnected" + s);
         }
 
         /// <summary>

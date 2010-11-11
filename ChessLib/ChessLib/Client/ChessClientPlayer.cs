@@ -10,6 +10,7 @@ using System.Net;
 using ChessLib.Server;
 using ChessLib.Enums;
 using System.Net.Sockets;
+using SharpBag;
 
 namespace ChessLib.Client
 {
@@ -33,11 +34,13 @@ namespace ChessLib.Client
             {
                 this._Client = value;
 
-                if (this._Client != null)
+                try
                 {
-                    this._Client.Disconnected += new Action<TcpClientHandler>(ServerDisconnectedHandler);
-                    this._Client.MessageReceived += new Action<TcpClientHandler, string>(MessageReceieved);
+                    this._Client.Disconnected += ServerDisconnectedHandler;
+                    this._Client.MessageReceived += MessageReceived;
+                    this._Client.PingInterval = 2000;
                 }
+                catch { }
             }
         }
         /// <summary>
@@ -121,8 +124,22 @@ namespace ChessLib.Client
             this.InGame = false;
             this.MyTurn = false;
 
-            this.BoardControl.Moved = (b, m) => { this.MyTurn = false; this.Client.SendMessage("Move " + m.A.ToString() + " " + m.B.ToString()); return false; };
+            this.BoardControl.Moved = (b, m) => { this.MyTurn = false; this.Move(m); return false; };
             this.Client = client;
+        }
+
+        /// <summary>
+        /// Disconnects from the server.
+        /// </summary>
+        public void Disconnect()
+        {
+            this.Client.Dispose();
+            this.Client = null;
+        }
+
+        private void Disconnected(TcpClientHandler client)
+        {
+            this.ServerDisconnected.IfNotNull(a => a(this));
         }
 
         /// <summary>
@@ -136,7 +153,7 @@ namespace ChessLib.Client
             try
             {
                 this.Client = new TcpClientHandler(new TcpClient(hostname, port), ping: 2000);
-                if (this.Name != null) this.Client.SendMessage("SetName " + this.Name);
+                if (this.Name != null) this.SendMessage("SetName " + this.Name);
                 return true;
             }
             catch
@@ -150,7 +167,7 @@ namespace ChessLib.Client
         /// </summary>
         public void ListPlayers()
         {
-            this.Client.SendMessage("ListPlayers");
+            this.SendMessage("ListPlayers");
         }
 
         #region Actions
@@ -160,7 +177,7 @@ namespace ChessLib.Client
             this.MyTurn = false;
             this.InGame = false;
             this.BoardControl.Board.Reset();
-            this.BoardControl.Repaint();
+            this.BoardControl.InvokeIfRequired(() => this.BoardControl.Repaint());
 
             this.GameOver.IfNotNull(a => a(this, message == "White" ? ChessWinner.White : message == "Black" ? ChessWinner.Black : ChessWinner.StaleMate));
         }
@@ -180,7 +197,7 @@ namespace ChessLib.Client
             this.InGame = false;
             this.MyTurn = false;
             this.BoardControl.Board.Reset();
-            this.BoardControl.Repaint();
+            this.BoardControl.InvokeIfRequired(() => this.BoardControl.Repaint());
 
             this.GameChatMessageReceived.IfNotNull(a => a(this, "A player quit the game."));
             this.InGameChanged.IfNotNull(a => a(this, this.InGame));
@@ -191,7 +208,7 @@ namespace ChessLib.Client
             this.InGame = true;
             int space = message.IndexOf(' ');
             ChessColor color = message.Substring(0, space) == "White" ? ChessColor.White : ChessColor.Black;
-            this.BoardControl.Player = color;
+            this.BoardControl.InvokeIfRequired(() => this.BoardControl.Player = color);
             this.InGameChanged.IfNotNull(a => a(this, this.InGame));
             //message = message.Substring(space + 1);
             //Tuple<string, int, string> cParts = ChessServer.GetClientParts(message);
@@ -204,6 +221,7 @@ namespace ChessLib.Client
             string[] split = message.Split(' ');
 
             this.BoardControl.Board[split[0]].To(this.BoardControl.Board[split[1]]);
+            this.BoardControl.InvokeIfRequired(() => this.BoardControl.Repaint());
         }
 
         private void ActionGameSend(string message)
@@ -220,7 +238,7 @@ namespace ChessLib.Client
         {
             if (this.PlayRequest == null || this.PlayRequest(this, message))
             {
-                this.Client.SendMessage("PlayOk " + message);
+                this.SendMessage("PlayOk " + message);
             }
         }
 
@@ -231,7 +249,7 @@ namespace ChessLib.Client
 
         #endregion
 
-        private void MessageReceieved(TcpClientHandler client, string message)
+        private void MessageReceived(TcpClientHandler client, string message)
         {
             try
             {
@@ -243,6 +261,51 @@ namespace ChessLib.Client
                 }
             }
             catch { }
+        }
+
+        /// <summary>
+        /// Sends the move to the server.
+        /// </summary>
+        /// <param name="m">The move.</param>
+        public void Move(Move m)
+        {
+            this.SendMessage("Game Move " + m.A.ToString() + " " + m.B.ToString());
+        }
+
+        /// <summary>
+        /// Sends a message to the server.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        private void SendMessage(string message)
+        {
+            this.Client.IfNotNull(c => c.SendMessage(message));
+        }
+
+        /// <summary>
+        /// Sends an in-game chat message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        public void SendChatMessage(string message)
+        {
+            this.SendMessage("Send " + message);
+        }
+
+        /// <summary>
+        /// Sends an in-game chat message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        public void SendGameChatMessage(string message)
+        {
+            this.SendMessage("Game Send " + message);
+        }
+
+        /// <summary>
+        /// Sends a play request to the specified player.
+        /// </summary>
+        /// <param name="player">The player.</param>
+        public void Play(string player)
+        {
+            this.SendMessage("Play " + player);
         }
 
         private void ServerDisconnectedHandler(TcpClientHandler client)

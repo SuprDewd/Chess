@@ -1,8 +1,33 @@
 ﻿<Window x:Class="Chess.Local"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Local" Height="300" Width="300">
-    <Grid>
-        
+        xmlns:c="clr-namespace:ChessLib;assembly=ChessLib"
+        xmlns:cc="clr-namespace:ChessLib.Controls;assembly=ChessLib"
+        xmlns:s="clr-namespace:SharpBag;assembly=SharpBag"
+        WindowStartupLocation="CenterScreen"
+        Title="Chess" Height="463" Width="711" Background="Gray" Icon="/Chess;component/chess.ico">
+    <Grid Name="Wrapper" SizeChanged="Grid_SizeChanged">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="26" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0" Height="22" VerticalAlignment="Top">
+            <Menu.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF9A9A9A" Offset="0" />
+                    <GradientStop Color="#FF727272" Offset="1" />
+                </LinearGradientBrush>
+            </Menu.Background>
+            <MenuItem Foreground="White" Header="File">
+                <MenuItem Click="Reset" Foreground="Black" Header="Reset" />
+                <MenuItem Name="TurnEffect" Foreground="Black" IsCheckable="True" IsChecked="True" Header="Turn Effect" />
+                <MenuItem Click="Exit" Foreground="Black" Header="Exit" />
+            </MenuItem>
+        </Menu>
+        <cc:ChessBoardControl Grid.Row="1" Name="cbcBoard" Player="White" Size="400" HorizontalAlignment="Center" VerticalAlignment="Center" SquareNumbers="False" BlackBishopIcon="/Chess;component/Icons/BBishop.png" BlackKingIcon="/Chess;component/Icons/BKing.png" BlackKnightIcon="/Chess;component/Icons/BKnight.png" BlackPawnIcon="/Chess;component/Icons/BPawn.png" BlackQueenIcon="/Chess;component/Icons/BQueen.png" BlackRookIcon="/Chess;component/Icons/BRook.png" WhiteBishopIcon="/Chess;component/Icons/WBishop.png" WhiteKingIcon="/Chess;component/Icons/WKing.png" WhiteKnightIcon="/Chess;component/Icons/WKnight.png" WhitePawnIcon="/Chess;component/Icons/WPawn.png" WhiteQueenIcon="/Chess;component/Icons/WQueen.png" WhiteRookIcon="/Chess;component/Icons/WRook.png">
+            <cc:ChessBoardControl.Board>
+                <c:ChessBoard />
+            </cc:ChessBoardControl.Board>
+        </cc:ChessBoardControl>
     </Grid>
 </Window>

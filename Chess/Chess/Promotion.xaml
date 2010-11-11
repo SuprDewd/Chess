@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         WindowStartupLocation="CenterScreen"
-        Title="Promotion" Height="300" Width="300" Closing="Window_Closing">
+        Title="Promotion" Height="300" Width="300" Closing="Window_Closing" Icon="/Chess;component/chess.ico">
     <Grid Background="Gray">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />

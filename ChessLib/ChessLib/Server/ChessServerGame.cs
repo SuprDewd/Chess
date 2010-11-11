@@ -66,6 +66,8 @@ namespace ChessLib.Server
             this.BlackPlayer.Client.SendMessage("Welcome Black " + this.WhitePlayer.ToString());
 
             this.NextTurn();
+
+            this.Server.Logger.Log("Game created: " + this.ToString());
         }
 
         /// <summary>
@@ -139,11 +141,13 @@ namespace ChessLib.Server
                 string[] sqs = message.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 if (this.Board[sqs[0]].To(this.Board[sqs[1]]))
                 {
+                    this.Server.Logger.LogIf(this.Server.Debug, "Move: " + message + " (" + client.Client.Client.RemoteEndPoint.ToString() + ")");
                     this.SendMessageToAll("Moved " + sqs[0] + " " + sqs[1]);
                     this.NextTurn();
                 }
                 else
                 {
+                    this.Server.Logger.LogIf(this.Server.Debug, "Invalid move: " + message + " (" + client.Client.Client.RemoteEndPoint.ToString() + ")");
                     client.SendMessage("YourTurn");
                 }
             }
@@ -179,6 +183,8 @@ namespace ChessLib.Server
 
                 this.WhitePlayer.Client.Disconnected -= PlayerDisconnected;
                 this.BlackPlayer.Client.Disconnected -= PlayerDisconnected;
+
+                this.Server.Logger.Log("Game disposed: " + this.ToString());
             }
             catch { }
         }

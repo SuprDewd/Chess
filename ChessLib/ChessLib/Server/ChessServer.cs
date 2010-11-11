@@ -75,7 +75,14 @@ namespace ChessLib.Server
         /// <returns>The action to call and the message.</returns>
         internal static Tuple<string, string> GetParts(string message)
         {
-            int split = Math.Min(message.IndexOf(' '), message.IndexOf('.'));
+            int bsplit = message.IndexOf(' ');
+            int psplit = message.IndexOf('.');
+
+            int split = bsplit;
+            if (psplit < split && psplit != -1)
+            {
+                split = psplit;
+            }
 
             if (split >= 0)
             {
@@ -89,7 +96,7 @@ namespace ChessLib.Server
         /// </summary>
         /// <param name="cParts">The parts.</param>
         /// <returns>The ip, port and username of the client.</returns>
-        static internal Tuple<string, int, string> GetClientParts(string cParts)
+        public static Tuple<string, int, string> GetClientParts(string cParts)
         {
             List<string> parts = cParts.Split(':').ToList();
 

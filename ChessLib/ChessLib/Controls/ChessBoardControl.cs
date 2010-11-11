@@ -161,9 +161,15 @@ namespace ChessLib.Controls
             if (this.Player == ChessColor.Black)
             {
                 this.LayoutTransform = new RotateTransform(180);
+            }
+            else
+            {
+                this.LayoutTransform = null;
+            }
 
-                if (this.Squares == null) return;
-
+            if (this.Squares == null) return;
+            else
+            {
                 for (int rank = 0; rank < 8; rank++)
                 {
                     for (int file = 0; file < 8; file++)
@@ -172,10 +178,6 @@ namespace ChessLib.Controls
                         this.Squares[rank, file].TurnPiece();
                     }
                 }
-            }
-            else
-            {
-                this.LayoutTransform = null;
             }
         }
 

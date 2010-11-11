@@ -5,7 +5,7 @@
         xmlns:cc="clr-namespace:ChessLib.Controls;assembly=ChessLib"
         xmlns:s="clr-namespace:SharpBag;assembly=SharpBag"
         WindowStartupLocation="CenterScreen"
-        Title="Chess Explainer" Height="463" Width="711" Background="Gray" KeyDown="Window_KeyDown">
+        Title="Chess Explainer" Height="463" Width="711" Background="Gray" KeyDown="Window_KeyDown" Icon="/Chess;component/chess.ico">
     <Grid Name="Wrapper">
         <Grid.RowDefinitions>
             <RowDefinition Height="26" />
@@ -31,7 +31,7 @@
                 <ColumnDefinition Width="150" />
             </Grid.ColumnDefinitions>
 
-            <cc:ChessBoardControl Name="cbcBoard" Player="White" Size="400" HorizontalAlignment="Center" VerticalAlignment="Center" SquareNumbers="False" Grid.Column="0" BlackBishopIcon="/ChessClient;component/Icons/BBishop.png" BlackKingIcon="/ChessClient;component/Icons/BKing.png" BlackKnightIcon="/ChessClient;component/Icons/BKnight.png" BlackPawnIcon="/ChessClient;component/Icons/BPawn.png" BlackQueenIcon="/ChessClient;component/Icons/BQueen.png" BlackRookIcon="/ChessClient;component/Icons/BRook.png" WhiteBishopIcon="/ChessClient;component/Icons/WBishop.png" WhiteKingIcon="/ChessClient;component/Icons/WKing.png" WhiteKnightIcon="/ChessClient;component/Icons/WKnight.png" WhitePawnIcon="/ChessClient;component/Icons/WPawn.png" WhiteQueenIcon="/ChessClient;component/Icons/WQueen.png" WhiteRookIcon="/ChessClient;component/Icons/WRook.png">
+            <cc:ChessBoardControl Name="cbcBoard" Player="White" Size="400" HorizontalAlignment="Center" VerticalAlignment="Center" SquareNumbers="False" Grid.Column="0" BlackBishopIcon="/Chess;component/Icons/BBishop.png" BlackKingIcon="/Chess;component/Icons/BKing.png" BlackKnightIcon="/Chess;component/Icons/BKnight.png" BlackPawnIcon="/Chess;component/Icons/BPawn.png" BlackQueenIcon="/Chess;component/Icons/BQueen.png" BlackRookIcon="/Chess;component/Icons/BRook.png" WhiteBishopIcon="/Chess;component/Icons/WBishop.png" WhiteKingIcon="/Chess;component/Icons/WKing.png" WhiteKnightIcon="/Chess;component/Icons/WKnight.png" WhitePawnIcon="/Chess;component/Icons/WPawn.png" WhiteQueenIcon="/Chess;component/Icons/WQueen.png" WhiteRookIcon="/Chess;component/Icons/WRook.png">
                 <cc:ChessBoardControl.Board>
                     <c:ChessBoard />
                 </cc:ChessBoardControl.Board>
