@@ -39,8 +39,8 @@
     <ApplicationIcon>chess.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ChessLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\ChessLib\ChessLib\bin\Release\ChessLib.dll</HintPath>
+    <Reference Include="ChessLib">
+      <HintPath>..\..\ChessLib\ChessLib\bin\Debug\ChessLib.dll</HintPath>
     </Reference>
     <Reference Include="SharpBag, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\..\Forritun\SharpBag\SharpBag\bin\Release\SharpBag.dll</HintPath>

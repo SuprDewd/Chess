@@ -170,6 +170,7 @@ namespace ChessLib.Server
             if (this.Server.Games.Any(g => g.WhitePlayer == playClient || g.BlackPlayer == playClient)) return;
 
             this.Server.Games.Add(new ChessServerGame(this.Server, playClient, this));
+            this.Server.UpdateAllPlayerLists();
         }
 
         #endregion

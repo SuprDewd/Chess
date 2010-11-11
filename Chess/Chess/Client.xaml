@@ -34,7 +34,7 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
-        <TextBox Name="txtChat" Grid.RowSpan="2" Grid.Column="2" Grid.Row="0" Margin="0,0,0,22" Background="Transparent" Cursor="Arrow" IsReadOnly="True" />
+        <TextBox TextWrapping="Wrap" Foreground="White" Name="txtChat" Grid.RowSpan="2" Grid.Column="2" Grid.Row="0" Margin="0,0,0,22" Background="Transparent" Cursor="Arrow" IsReadOnly="True" />
         <TextBox Name="txtInput" VerticalAlignment="Bottom" Grid.RowSpan="2" Grid.Column="2" KeyDown="txtInput_KeyDown" Grid.Row="0" />
     </Grid>
 </Window>

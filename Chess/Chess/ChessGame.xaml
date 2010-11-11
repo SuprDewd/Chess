@@ -5,14 +5,23 @@
         xmlns:cb="clr-namespace:ChessLib;assembly=ChessLib"
         xmlns:s="clr-namespace:SharpBag;assembly=SharpBag"
         WindowStartupLocation="CenterScreen"
-        Title="Chess" Height="488" Width="441" Icon="/Chess;component/chess.ico">
+        Title="Chess" Height="488" Width="600" Icon="/Chess;component/chess.ico" Background="Gray" Closed="Window_Closed">
     <Grid Name="MainGrid">
-        <Border Name="BoardWrapper" SizeChanged="Wrapper_SizeChanged">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="390*" />
+            <ColumnDefinition Width="150*" />
+        </Grid.ColumnDefinitions>
+        <Border Name="BoardWrapper" SizeChanged="Wrapper_SizeChanged" Grid.Column="0">
             <c:ChessBoardControl Player="White" Name="cbcBoard" Size="400" HorizontalAlignment="Center" VerticalAlignment="Center" SquareNumbers="False" Grid.Column="0" BlackBishopIcon="/Chess;component/Icons/BBishop.png" BlackKingIcon="/Chess;component/Icons/BKing.png" BlackKnightIcon="/Chess;component/Icons/BKnight.png" BlackPawnIcon="/Chess;component/Icons/BPawn.png" BlackQueenIcon="/Chess;component/Icons/BQueen.png" BlackRookIcon="/Chess;component/Icons/BRook.png" WhiteBishopIcon="/Chess;component/Icons/WBishop.png" WhiteKingIcon="/Chess;component/Icons/WKing.png" WhiteKnightIcon="/Chess;component/Icons/WKnight.png" WhitePawnIcon="/Chess;component/Icons/WPawn.png" WhiteQueenIcon="/Chess;component/Icons/WQueen.png" WhiteRookIcon="/Chess;component/Icons/WRook.png">
                 <c:ChessBoardControl.Board>
                     <cb:ChessBoard />
                 </c:ChessBoardControl.Board>
             </c:ChessBoardControl>
         </Border>
+
+        <ScrollViewer Margin="0,0,0,25" Grid.Column="1" VerticalScrollBarVisibility="Auto">
+            <TextBox TextWrapping="Wrap" Background="Transparent" Foreground="White" IsReadOnly="True" Name="txtChat" Cursor="Arrow" />
+        </ScrollViewer>
+        <TextBox Cursor="Arrow" Height="23" Name="txtInput" KeyUp="TextBox_KeyUp" VerticalAlignment="Bottom" Grid.Column="1" />
     </Grid>
 </Window>

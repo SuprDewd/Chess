@@ -11,6 +11,7 @@ using ChessLib.Server;
 using ChessLib.Enums;
 using System.Net.Sockets;
 using SharpBag;
+using System.Threading;
 
 namespace ChessLib.Client
 {
@@ -19,10 +20,6 @@ namespace ChessLib.Client
     /// </summary>
     public class ChessClientPlayer
     {
-        /// <summary>
-        /// The Chess board.
-        /// </summary>
-        public ChessBoardControl BoardControl { get; private set; }
         private TcpClientHandler _Client = null;
         /// <summary>
         /// The client handler.
@@ -52,10 +49,6 @@ namespace ChessLib.Client
         /// Whether the player is in a game.
         /// </summary>
         public bool InGame { get; private set; }
-        /// <summary>
-        /// Whether it's the players turn.
-        /// </summary>
-        public bool MyTurn { get { return this.BoardControl.Turn; } private set { this.BoardControl.Turn = value; } }
 
         /// <summary>
         /// An event that is fired when the player list updates.
@@ -100,9 +93,8 @@ namespace ChessLib.Client
         /// <summary>
         /// The constructor.
         /// </summary>
-        /// <param name="boardControl">The Chess board control.</param>
         /// <param name="client">The client.</param>
-        public ChessClientPlayer(ChessBoardControl boardControl, TcpClientHandler client = null)
+        public ChessClientPlayer(TcpClientHandler client = null)
         {
             this.Actions = new Dictionary<string, Action<string>>
             {
@@ -119,12 +111,8 @@ namespace ChessLib.Client
               //{"WTF",         ActionWTF}
             };
 
-            this.BoardControl = boardControl;
-
             this.InGame = false;
-            this.MyTurn = false;
 
-            this.BoardControl.Moved = (b, m) => { this.MyTurn = false; this.Move(m); return false; };
             this.Client = client;
         }
 
@@ -133,7 +121,7 @@ namespace ChessLib.Client
         /// </summary>
         public void Disconnect()
         {
-            this.Client.Dispose();
+            if (Thread.CurrentThread != this.Client.Thread) this.Client.IfNotNull(() => this.Client.Dispose());
             this.Client = null;
         }
 
@@ -163,6 +151,24 @@ namespace ChessLib.Client
         }
 
         /// <summary>
+        /// Connects to the specifed hostname and port.
+        /// </summary>
+        /// <param name="client">The TcpClient.</param>
+        public bool Connect(TcpClient client)
+        {
+            try
+            {
+                this.Client = new TcpClientHandler(client, ping: 2000);
+                if (this.Name != null) this.SendMessage("SetName " + this.Name);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Makes the server send an updated player list.
         /// </summary>
         public void ListPlayers()
@@ -174,11 +180,9 @@ namespace ChessLib.Client
 
         private void ActionGameOver(string message)
         {
-            this.MyTurn = false;
             this.InGame = false;
-            this.BoardControl.Board.Reset();
-            this.BoardControl.InvokeIfRequired(() => this.BoardControl.Repaint());
 
+            this.InGameChanged.IfNotNull(a => a(this, this.InGame));
             this.GameOver.IfNotNull(a => a(this, message == "White" ? ChessWinner.White : message == "Black" ? ChessWinner.Black : ChessWinner.StaleMate));
         }
 
@@ -187,41 +191,51 @@ namespace ChessLib.Client
             this.ServerDisconnectedHandler(this.Client);
         }
 
+        /// <summary>
+        /// An event that is fired when it's the players turn.
+        /// </summary>
+        public event Action<ChessClientPlayer> MyTurn;
+
         private void ActionYourTurn(string message)
         {
-            this.MyTurn = true;
+            this.MyTurn.IfNotNull(a => a(this));
         }
 
         private void ActionGameQuit(string message)
         {
             this.InGame = false;
-            this.MyTurn = false;
-            this.BoardControl.Board.Reset();
-            this.BoardControl.InvokeIfRequired(() => this.BoardControl.Repaint());
 
             this.GameChatMessageReceived.IfNotNull(a => a(this, "A player quit the game."));
             this.InGameChanged.IfNotNull(a => a(this, this.InGame));
+            this.GameOver.IfNotNull(a => a(this, (ChessWinner)0));
         }
+
+        /// <summary>
+        /// An event that is fired when the players color changes.
+        /// </summary>
+        public event Action<ChessClientPlayer, ChessColor> PlayerColorChanged;
 
         private void ActionWelcome(string message)
         {
             this.InGame = true;
             int space = message.IndexOf(' ');
             ChessColor color = message.Substring(0, space) == "White" ? ChessColor.White : ChessColor.Black;
-            this.BoardControl.InvokeIfRequired(() => this.BoardControl.Player = color);
-            this.InGameChanged.IfNotNull(a => a(this, this.InGame));
+            this.PlayerColorChanged.IfNotNull(a => a(this, color));
             //message = message.Substring(space + 1);
             //Tuple<string, int, string> cParts = ChessServer.GetClientParts(message);
         }
+
+        /// <summary>
+        /// An event that is fired when a player moved.
+        /// </summary>
+        public event Action<ChessClientPlayer, Move> Moved;
 
         private void ActionMoved(string message)
         {
             if (!this.InGame) return;
 
             string[] split = message.Split(' ');
-
-            this.BoardControl.Board[split[0]].To(this.BoardControl.Board[split[1]]);
-            this.BoardControl.InvokeIfRequired(() => this.BoardControl.Repaint());
+            this.Moved.IfNotNull(a => a(this, new Move(new Location(split[0]), new Location(split[1]))));
         }
 
         private void ActionGameSend(string message)
@@ -260,7 +274,7 @@ namespace ChessLib.Client
                     this.Actions[parts.Item1](parts.Item2);
                 }
             }
-            catch { }
+            catch (Exception e) { this.ChatMessageReceived(this, "Exception: " + e.Message + Environment.NewLine + "Stack: " + e.StackTrace); }
         }
 
         /// <summary>
@@ -311,9 +325,6 @@ namespace ChessLib.Client
         private void ServerDisconnectedHandler(TcpClientHandler client)
         {
             this.InGame = false;
-            this.MyTurn = false;
-            this.BoardControl.Board.Reset();
-            this.BoardControl.Repaint();
 
             this.ChatMessageReceived.IfNotNull(a => a(this, "Server disconnected."));
             this.ServerDisconnected.IfNotNull(a => a(this));

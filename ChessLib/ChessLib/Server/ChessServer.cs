@@ -46,11 +46,28 @@ namespace ChessLib.Server
         /// <param name="debug">Whether the server should log debug messages.</param>
         public ChessServer(IEnumerable<int> ports, Logger logger, bool debug = false)
         {
+            this.Initialize(TcpServer.Create(ports), logger, debug);
+        }
+
+        /// <summary>
+        /// The constructor.
+        /// </summary>
+        /// <param name="ip">The ip to listen to.</param>
+        /// <param name="ports">A collection of port numbers. The first free port will be used.</param>
+        /// <param name="logger">The logger.</param>
+        /// <param name="debug">Whether the server should log debug messages.</param>
+        public ChessServer(IPAddress ip, IEnumerable<int> ports, Logger logger, bool debug = false)
+        {
+            this.Initialize(new TcpServer(new TcpListener(ip, ports.First(p => Internet.IsPortFree(p)))), logger, debug);
+        }
+
+        private void Initialize(TcpServer server, Logger logger, bool debug = false)
+        {
             this.Debug = debug;
             this.Logger = logger;
             this.Clients = new List<ChessServerPlayer>();
             this.Games = new List<ChessServerGame>();
-            this.Server = TcpServer.Create(ports);
+            this.Server = server;
             this.Server.ClientReceived += ClientReceived;
 
             this.Logger.Log("Chess server started listening on " + this.Server.Listener.Server.LocalEndPoint.ToString() + ".");
@@ -113,9 +130,13 @@ namespace ChessLib.Server
         /// </summary>
         internal void UpdateAllPlayerLists()
         {
-            foreach (ChessServerPlayer player in this.Clients)
+            for (int i = 0; i < this.Clients.Count; i++)
             {
-                this.SendAllPlayers(player);
+                try
+                {
+                    this.SendAllPlayers(this.Clients[i]);
+                }
+                catch { }
             }
         }
 
@@ -143,13 +164,10 @@ namespace ChessLib.Server
         {
             StringBuilder sb = new StringBuilder("ListPlayers ");
 
-            foreach (ChessServerPlayer c in this.Clients)
+            foreach (ChessServerPlayer c in this.Clients.Where(c => c != client && !this.Games.Any(g => g.BlackPlayer == c || g.WhitePlayer == c)))
             {
-                if (c.Client != client.Client)
-                {
-                    c.ToString(sb);
-                    sb.AppendLine();
-                }
+                c.ToString(sb);
+                sb.AppendLine();
             }
 
             client.Client.SendMessage(sb.ToString());

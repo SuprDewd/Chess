@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using SharpBag;
 using SharpBag.Logging;
 using ChessLib.Server;
+using System.Net;
 
 namespace Chess
 {
@@ -30,6 +31,10 @@ namespace Chess
 
             this.Logger = new Logger(s => this.Log.InvokeIfRequired(() => { this.Log.Text += s + Environment.NewLine; this.Log.ScrollToEnd(); }));
             this.Port.Focus();
+            this.cmbIPs.ItemsSource = from ip in SharpBag.Net.Internet.LocalIPAddresses
+                                      orderby ip.AddressFamily
+                                      select ip.ToString();
+            this.cmbIPs.SelectedIndex = 0;
         }
 
         private void Input_KeyDown(object sender, KeyEventArgs e)
@@ -76,21 +81,22 @@ namespace Chess
 
         private void Window_Closed(object sender, EventArgs e)
         {
+            try
+            {
+                this.ChessServer.Dispose();
+            }
+            catch { }
+
             Environment.Exit(0);
         }
 
         private void ToggleConnect()
         {
-            if (this.ChessServer == null)
-            {
-                this.Port.IsEnabled = true;
-                this.Connect.Content = "Start";
-            }
-            else
-            {
-                this.Port.IsEnabled = false;
-                this.Connect.Content = "Stop";
-            }
+            bool connected = this.ChessServer != null;
+
+            this.Port.IsEnabled = !connected;
+            this.Connect.Content = connected ? "Stop" : "Start";
+            this.cmbIPs.IsEnabled = !connected;
         }
 
         private void Connect_Click(object sender, RoutedEventArgs e)
@@ -100,7 +106,7 @@ namespace Chess
                 try
                 {
                     this.Logger.Log("Attempting to start a server.");
-                    this.ChessServer = new ChessServer(Utils.Single(this.Port.Text.ToInt()), this.Logger, true);
+                    this.ChessServer = new ChessServer(IPAddress.Parse((string)this.cmbIPs.SelectedValue), Utils.Single(this.Port.Text.ToInt()), this.Logger, true);
                 }
                 catch (Exception x)
                 {

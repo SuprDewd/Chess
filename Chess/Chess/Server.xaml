@@ -9,9 +9,11 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="23" />
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Width="160" VerticalAlignment="Center" Orientation="Horizontal">
-            <Label Foreground="WhiteSmoke">Port:</Label>
-            <TextBox Name="Port" Width="60" />
+        <StackPanel Grid.Row="0" Width="290" VerticalAlignment="Center" Orientation="Horizontal">
+            <Label Foreground="White">Ip: </Label>
+            <ComboBox Width="100" Name="cmbIPs" />
+            <Label Foreground="White">Port:</Label>
+            <TextBox Name="Port" Width="60" Text="1337" />
             <Button Name="Connect" Margin="10,0,0,0" Width="55" Click="Connect_Click">Start</Button>
         </StackPanel>
         <TextBox ForceCursor="True" VerticalScrollBarVisibility="Visible" Cursor="Arrow" Foreground="WhiteSmoke" Name="Log" IsReadOnly="True" Background="Transparent" Grid.Row="1"></TextBox>

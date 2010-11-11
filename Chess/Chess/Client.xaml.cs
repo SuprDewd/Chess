@@ -30,9 +30,7 @@ namespace Chess
         {
             InitializeComponent();
 
-            this.Board = new ChessGame();
-            this.Player = new ChessClientPlayer(this.Board.cbcBoard);
-            this.Board.Player = this.Player;
+            this.Player = new ChessClientPlayer();
             this.Player.PlayerListUpdated += (p, l) =>
             {
                 this.PlayerList.InvokeIfRequired(() =>
@@ -41,6 +39,21 @@ namespace Chess
                                                    let split = ChessServer.GetClientParts(i)
                                                    select new { Name = split.Item3.Trim() != "" ? split.Item3 : split.Item1 + ":" + split.Item2, Ip = split.Item1 + ":" + split.Item2 }).ToArray();
                 });
+            };
+            this.Player.ChatMessageReceived += (p, m) =>
+            {
+                this.txtChat.InvokeIfRequired(() =>
+                {
+                    this.txtChat.Text += m + Environment.NewLine;
+                    this.txtChat.ScrollToEnd();
+                });
+            };
+
+            this.Player.ServerDisconnected += p =>
+            {
+                this.Player.Disconnect();
+                this.InvokeIfRequired(() => this.ToggleConnect(true));
+                this.Player.Name = null;
             };
 
             this.Player.InGameChanged += GameChanged;
@@ -52,7 +65,17 @@ namespace Chess
             };
 
             this.Host.Text = Internet.LocalIPAddresses.FirstOrDefault(i => i.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork).ToString() ?? "";
-            this.Port.Text = 1337.To(1350).FirstOrDefault(i => !Internet.IsPortFree(i)).ToString() ?? "";
+            int port = 1337.To(1350).FirstOrDefault(i => !Internet.IsPortFree(i));
+            this.Port.Text = port != 0 ? port.ToString() : "1337";
+            this.PlayerName.Focus();
+        }
+
+        private void Log(string s)
+        {
+            this.txtChat.InvokeIfRequired(() =>
+                {
+                    this.txtChat.Text += s + Environment.NewLine;
+                });
         }
 
         private void GameChanged(ChessClientPlayer player, bool inGame)
@@ -61,6 +84,8 @@ namespace Chess
             {
                 this.InvokeIfRequired(() =>
                     {
+                        this.Board = this.CreateGame();
+                        this.Board.Player = this.Player;
                         this.Toggle(false);
                         this.Board.Show();
                         this.Board.Activate();
@@ -76,22 +101,63 @@ namespace Chess
             }
         }
 
+        private ChessGame CreateGame()
+        {
+            ChessGame game = new ChessGame();
+            game.Player = this.Player;
+            this.Player.Moved += (p, m) => game.cbcBoard.InvokeIfRequired(() => { game.cbcBoard.Turn = false; game.cbcBoard.Board[m.A].To(game.cbcBoard.Board[m.B]); game.cbcBoard.Repaint(); });
+            this.Player.PlayerColorChanged += (p, c) => game.cbcBoard.InvokeIfRequired(() => { game.cbcBoard.Player = c; game.cbcBoard.Repaint(); });
+            this.Player.MyTurn += p => game.cbcBoard.Turn = true;
+            return game;
+        }
+
         private void Toggle(bool state)
         {
-            this.btnConnect.IsEnabled = state;
             this.PlayerList.IsEnabled = state;
+        }
+
+        private void ToggleConnect(bool state)
+        {
+            this.btnConnect.Content = state ? "Connect" : "Disconnect";
+            this.PlayerName.IsEnabled = state;
+            this.Host.IsEnabled = state;
+            this.Port.IsEnabled = state;
         }
 
         private void Connect(object sender, RoutedEventArgs e)
         {
-            try
+            bool connected = true;
+
+            if (this.Player.Client == null)
             {
-                if (!this.Player.Connect(this.Host.Text, this.Port.Text.ToInt())) MessageBox.Show("Could not connect to server.", "Error");
+                try
+                {
+                    if (!this.Player.Connect(this.Host.Text, this.Port.Text.ToInt()))
+                    {
+                        this.Log("Could not connect to server.");
+                        connected = false;
+                    }
+                    else
+                    {
+                        this.Log("Connected to server.");
+                        if (this.PlayerName.Text.Trim() != "") this.Player.Name = this.PlayerName.Text.Trim();
+                    }
+                }
+                catch
+                {
+                    this.Log("An error came up when connecting to server.");
+                    connected = false;
+                }
             }
-            catch
+            else
             {
-                MessageBox.Show("An error came up when connecting to server.", "Error");
+                this.Log("Disconnected from server.");
+                this.Player.Disconnect();
+                this.Player.Name = null;
+                connected = false;
             }
+
+            this.ToggleConnect(!connected);
         }
 
         private void RequestPlay(object sender, RoutedEventArgs e)

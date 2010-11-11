@@ -185,6 +185,8 @@ namespace ChessLib.Server
                 this.BlackPlayer.Client.Disconnected -= PlayerDisconnected;
 
                 this.Server.Logger.Log("Game disposed: " + this.ToString());
+
+                this.Server.UpdateAllPlayerLists();
             }
             catch { }
         }
