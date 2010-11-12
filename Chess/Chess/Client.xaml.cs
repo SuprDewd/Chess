@@ -52,7 +52,7 @@ namespace Chess
             this.Player.ServerDisconnected += p =>
             {
                 this.Player.Disconnect();
-                this.InvokeIfRequired(() => this.ToggleConnect(true));
+                this.InvokeIfRequired(() => { this.ToggleConnect(true); this.PlayerList.ItemsSource = null; });
                 this.Player.Name = null;
             };
 
@@ -104,6 +104,7 @@ namespace Chess
         {
             ChessGame game = new ChessGame();
             game.Player = this.Player;
+            game.cbcBoard.Turn = false;
             game.cbcBoard.Moved = (b, m) => { this.Player.Move(m); return false; };
             this.Player.Moved += (p, m) => game.cbcBoard.InvokeIfRequired(() => { game.cbcBoard.Turn = false; game.cbcBoard.Board[m.A].To(game.cbcBoard.Board[m.B]); game.cbcBoard.Repaint(); });
             this.Player.PlayerColorChanged += (p, c) => game.cbcBoard.InvokeIfRequired(() => { game.cbcBoard.Player = c; game.cbcBoard.Repaint(); });
