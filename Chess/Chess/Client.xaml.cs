@@ -105,9 +105,11 @@ namespace Chess
         {
             ChessGame game = new ChessGame();
             game.Player = this.Player;
+            game.cbcBoard.Moved = (b, m) => { this.Player.Move(m); return false; };
             this.Player.Moved += (p, m) => game.cbcBoard.InvokeIfRequired(() => { game.cbcBoard.Turn = false; game.cbcBoard.Board[m.A].To(game.cbcBoard.Board[m.B]); game.cbcBoard.Repaint(); });
             this.Player.PlayerColorChanged += (p, c) => game.cbcBoard.InvokeIfRequired(() => { game.cbcBoard.Player = c; game.cbcBoard.Repaint(); });
             this.Player.MyTurn += p => game.cbcBoard.Turn = true;
+            game.Closed += (o, ea) => { this.Toggle(true); this.Activate(); };
             return game;
         }
 

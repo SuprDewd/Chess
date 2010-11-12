@@ -40,7 +40,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ChessLib">
-      <HintPath>..\..\ChessLib\ChessLib\bin\Debug\ChessLib.dll</HintPath>
+      <HintPath>..\..\ChessLib\ChessLib\bin\Release\ChessLib.dll</HintPath>
     </Reference>
     <Reference Include="SharpBag, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\..\Forritun\SharpBag\SharpBag\bin\Release\SharpBag.dll</HintPath>

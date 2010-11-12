@@ -220,6 +220,7 @@ namespace ChessLib.Client
             this.InGame = true;
             int space = message.IndexOf(' ');
             ChessColor color = message.Substring(0, space) == "White" ? ChessColor.White : ChessColor.Black;
+            this.InGameChanged.IfNotNull(a => a(this, this.InGame));
             this.PlayerColorChanged.IfNotNull(a => a(this, color));
             //message = message.Substring(space + 1);
             //Tuple<string, int, string> cParts = ChessServer.GetClientParts(message);
@@ -274,6 +275,7 @@ namespace ChessLib.Client
                     this.Actions[parts.Item1](parts.Item2);
                 }
             }
+            catch (ThreadAbortException) { }
             catch (Exception e) { this.ChatMessageReceived(this, "Exception: " + e.Message + Environment.NewLine + "Stack: " + e.StackTrace); }
         }
 
@@ -284,6 +286,22 @@ namespace ChessLib.Client
         public void Move(Move m)
         {
             this.SendMessage("Game Move " + m.A.ToString() + " " + m.B.ToString());
+        }
+
+        /// <summary>
+        /// Resets the GameChatMessageReceived event.
+        /// </summary>
+        public void ClearGameChatEvent()
+        {
+            this.GameChatMessageReceived = null;
+        }
+
+        /// <summary>
+        /// Resets the GameOver event.
+        /// </summary>
+        public void ClearGameOverEvent()
+        {
+            this.GameOver = null;
         }
 
         /// <summary>

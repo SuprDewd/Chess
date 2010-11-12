@@ -28,9 +28,11 @@ namespace Chess
             set
             {
                 this._Player = value;
+                this._Player.ClearGameOverEvent();
                 this._Player.GameOver += GameOver;
                 this._Player.ServerDisconnected += p => { this.InvokeIfRequired(() => { this.Hide(); this.cbcBoard.Board.Reset(); this.cbcBoard.Repaint(); }); };
-                this._Player.GameChatMessageReceived += (p, m) => { this.txtChat.InvokeIfRequired(() => { this.txtChat.Text += m + Environment.NewLine; }); };
+                this._Player.ClearGameChatEvent();
+                this._Player.GameChatMessageReceived += (p, m) => { this.txtChat.InvokeIfRequired(() => { this.txtChat.Text += m + Environment.NewLine; this.txtChat.ScrollToEnd(); }); };
             }
         }
 
