@@ -4,4 +4,6 @@ ChessLib/ChessLib/bin
 ChessLib/ChessLib/obj
 ChessServer/ChessServer/bin
 ChessServer/ChessServer/obj
+ConsoleChess/ConsoleChess/bin
+ConsoleChess/ConsoleChess/obj
 *.suo
