@@ -31,9 +31,9 @@ namespace Chess
 
             this.Logger = new Logger(s => this.Log.InvokeIfRequired(() => { this.Log.Text += s + Environment.NewLine; this.Log.ScrollToEnd(); }));
             this.Port.Focus();
-            this.cmbIPs.ItemsSource = from ip in SharpBag.Net.Internet.LocalIPAddresses
-                                      orderby ip.AddressFamily
-                                      select ip.ToString();
+            this.cmbIPs.ItemsSource = (from ip in SharpBag.Net.Internet.LocalIPAddresses
+                                       orderby ip.AddressFamily
+                                       select ip.ToString()).Union(Enumerable.Repeat("127.0.0.1", 1));
             this.cmbIPs.SelectedIndex = 0;
         }
 

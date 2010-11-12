@@ -251,9 +251,13 @@ namespace ChessLib.Client
 
         private void ActionPlay(string message)
         {
-            if (this.PlayRequest == null || this.PlayRequest(this, message))
+            Tuple<string, int, string> parts = ChessServer.GetClientParts(message);
+
+            string n = parts.Item3.Trim();
+            string ipport = parts.Item1 + ":" + parts.Item2;
+            if (this.PlayRequest == null || this.PlayRequest(this, n != "" ? n : ipport))
             {
-                this.SendMessage("PlayOk " + message);
+                this.SendMessage("PlayOk " + ipport);
             }
         }
 

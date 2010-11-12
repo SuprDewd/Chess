@@ -60,11 +60,10 @@ namespace Chess
 
             this.Player.PlayRequest = (p, m) =>
             {
-                // TODO: Check if player accepts.
-                return true;
+                return MessageBox.Show(m + " challanged you to a chess game." + Environment.NewLine + "Do you want to play?", "Game Invitation", MessageBoxButton.YesNo) == MessageBoxResult.Yes;
             };
 
-            this.Host.Text = Internet.LocalIPAddresses.FirstOrDefault(i => i.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork).ToString() ?? "";
+            this.Host.Text = Internet.LocalIPAddresses.FirstOrDefault(i => i.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork).ToString() ?? "127.0.0.1";
             int port = 1337.To(1350).FirstOrDefault(i => !Internet.IsPortFree(i));
             this.Port.Text = port != 0 ? port.ToString() : "1337";
             this.PlayerName.Focus();

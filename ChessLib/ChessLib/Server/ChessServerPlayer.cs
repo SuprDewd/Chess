@@ -155,7 +155,7 @@ namespace ChessLib.Server
             if (playClient.Client == this.Client) return;
             if (this.Server.Games.Any(g => g.WhitePlayer == playClient || g.BlackPlayer == playClient)) return;
 
-            playClient.Client.SendMessage("Play " + this.Client.Client.Client.RemoteEndPoint.ToString());
+            playClient.Client.SendMessage("Play " + this.Client.Client.Client.RemoteEndPoint.ToString() + ":" + this.Name);
         }
 
         /// <summary>
