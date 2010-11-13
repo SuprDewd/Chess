@@ -63,7 +63,7 @@ namespace ChessLib.Behaviours
                 {
                     Square lSq = this.Board[this.Piece.Location.Rank, file - 1];
 
-                    if (lSq.Piece != null && lSq.Piece.GetType() == typeof(Pawn) && ((Pawn)lSq.Piece).EnPassantable)
+                    if (lSq.Piece != null && lSq.Piece.GetType() == typeof(Pawn) && lSq.Piece.Color != this.Piece.Color && ((Pawn)lSq.Piece).EnPassantable)
                     {
                         yield return this.Board[rnxt, file - 1];
                     }
@@ -73,7 +73,7 @@ namespace ChessLib.Behaviours
                 {
                     Square rSq = this.Board[this.Piece.Location.Rank, file + 1];
 
-                    if (rSq.Piece != null && rSq.Piece.GetType() == typeof(Pawn) && ((Pawn)rSq.Piece).EnPassantable)
+                    if (rSq.Piece != null && rSq.Piece.GetType() == typeof(Pawn) && rSq.Piece.Color != this.Piece.Color && ((Pawn)rSq.Piece).EnPassantable)
                     {
                         yield return this.Board[rnxt, file + 1];
                     }
@@ -154,6 +154,9 @@ namespace ChessLib.Behaviours
             if (!(a.Location.File != b.Location.File && b.Piece == null)) return false;
 
             Square c = this.Board[a.Location.Rank, b.Location.File];
+
+            if (c.Piece == null || a.Piece == null) return false;
+            if (c.Piece.Color == a.Piece.Color) return false;
 
             c.Piece.Capture();
             c.Piece = null;

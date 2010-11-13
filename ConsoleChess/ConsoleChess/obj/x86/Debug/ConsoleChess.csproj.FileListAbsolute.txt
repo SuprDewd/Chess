@@ -19,3 +19,4 @@ C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ConsoleChess\ConsoleChess
 C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ConsoleChess\ConsoleChess\bin\Debug\ChessLib.xml
 C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ConsoleChess\ConsoleChess\bin\Debug\SharpBag.pdb
 C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ConsoleChess\ConsoleChess\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\SuprDewd\Desktop\Projects\TSkoli\FOR403\Chess\ConsoleChess\ConsoleChess\bin\Debug\ChessLib.dll
