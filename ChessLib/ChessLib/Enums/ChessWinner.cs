@@ -13,14 +13,14 @@ namespace ChessLib.Enums
         /// <summary>
         /// Black is the winner.
         /// </summary>
-        Black,
+        Black = 1,
         /// <summary>
         /// White is the winner.
         /// </summary>
-        White,
+        White = 2,
         /// <summary>
         /// Tie.
         /// </summary>
-        StaleMate
+        StaleMate = 3
     }
 }
