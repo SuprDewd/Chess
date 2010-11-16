@@ -19,7 +19,8 @@
             </c:ChessBoardControl>
         </Border>
 
-        <ScrollViewer Margin="0,0,0,25" Grid.Column="1" VerticalScrollBarVisibility="Auto">
+        <TextBlock HorizontalAlignment="Center" Margin="0,3,0,0" FontSize="15" Height="20" VerticalAlignment="Top" Foreground="White" Grid.Column="1" Name="txtTurn"></TextBlock>
+        <ScrollViewer Margin="0,30,0,25" Grid.Column="1" VerticalScrollBarVisibility="Auto">
             <TextBox TextWrapping="Wrap" Background="Transparent" Foreground="White" IsReadOnly="True" Name="txtChat" Cursor="Arrow" />
         </ScrollViewer>
         <TextBox Cursor="Arrow" Height="23" Name="txtInput" KeyUp="TextBox_KeyUp" VerticalAlignment="Bottom" Grid.Column="1" />

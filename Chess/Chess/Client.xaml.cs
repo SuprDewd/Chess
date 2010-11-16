@@ -15,6 +15,7 @@ using ChessLib.Server;
 using SharpBag;
 using SharpBag.Net;
 using System.Threading;
+using ChessLib;
 
 namespace Chess
 {
@@ -105,10 +106,23 @@ namespace Chess
             ChessGame game = new ChessGame();
             game.Player = this.Player;
             game.cbcBoard.Turn = false;
-            game.cbcBoard.Moved = (b, m) => { this.Player.Move(m); return false; };
+            game.txtTurn.Text = "Other Players Turn";
+            game.cbcBoard.Moved = (b, m) =>
+            {
+                Square A = game.cbcBoard.Board[m.A];
+                Square B = game.cbcBoard.Board[m.B];
+
+                if (A.Piece != null && A.Piece.TotallyValidMoves.Contains(B))
+                {
+                    game.txtTurn.Text = "Other Players Turn";
+                    this.Player.Move(m);
+                }
+
+                return false;
+            };
             this.Player.Moved += (p, m) => game.cbcBoard.InvokeIfRequired(() => { game.cbcBoard.Turn = false; game.cbcBoard.Board[m.A].To(game.cbcBoard.Board[m.B]); game.cbcBoard.Repaint(); });
             this.Player.PlayerColorChanged += (p, c) => game.cbcBoard.InvokeIfRequired(() => { game.cbcBoard.Player = c; game.cbcBoard.Repaint(); });
-            this.Player.MyTurn += p => game.cbcBoard.Turn = true;
+            this.Player.MyTurn += p => { game.cbcBoard.Turn = true; game.InvokeIfRequired(() => { game.txtTurn.Text = "Your Turn"; }); };
             game.Closed += (o, ea) => { this.Toggle(true); this.Activate(); };
             return game;
         }
@@ -129,6 +143,7 @@ namespace Chess
         private void Connect(object sender, RoutedEventArgs e)
         {
             bool connected = true;
+            this.PlayerList.ItemsSource = null;
 
             if (this.Player.Client == null)
             {
