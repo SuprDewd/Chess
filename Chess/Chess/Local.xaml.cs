@@ -30,6 +30,14 @@ namespace Chess
                 MessageBox.Show((r == ChessWinner.StaleMate ? "Stalemate" : r.ToString() + " wins") + "!", "Game Over");
             };
 
+            this.cbcBoard.Board.Promotion = b =>
+                {
+                    Promotion p = new Promotion();
+                    p.ShowDialog();
+
+                    return p.Choise;
+                };
+
             this.cbcBoard.Board.NextTurn += b =>
                 {
                     this.cbcBoard.Repaint();
@@ -70,6 +78,7 @@ namespace Chess
 
         private void Reset(object sender, RoutedEventArgs e)
         {
+            this.cbcBoard.Player = ChessColor.Black;
             this.cbcBoard.Board.Reset();
             this.cbcBoard.Repaint();
         }

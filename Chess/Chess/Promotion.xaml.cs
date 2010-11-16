@@ -13,7 +13,7 @@ using System.Windows.Shapes;
 using ChessLib;
 using ChessLib.Enums;
 
-namespace ChessExplainer
+namespace Chess
 {
     /// <summary>
     /// Interaction logic for Promotion.xaml
@@ -25,7 +25,7 @@ namespace ChessExplainer
             InitializeComponent();
         }
 
-        public PromotionChoise Choise = 0;
+        public PromotionChoise Choise = (PromotionChoise)(-1);
 
         private void Clicked(object sender, RoutedEventArgs e)
         {
@@ -40,7 +40,7 @@ namespace ChessExplainer
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (this.Choise == 0)
+            if ((int)this.Choise == -1)
             {
                 this.Choise = PromotionChoise.Queen;
             }
