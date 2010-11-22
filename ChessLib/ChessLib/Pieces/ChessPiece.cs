@@ -39,11 +39,6 @@ namespace ChessLib.Pieces
         public int MoveCount { get; protected internal set; }
 
         /// <summary>
-        /// An event which will be fired when the Chess piece is captured.
-        /// </summary>
-        public event Action<ChessPiece> Captured;
-
-        /// <summary>
         /// The constructor.
         /// </summary>
         /// <param name="board">The board where the Chess piece is located.</param>
@@ -99,14 +94,6 @@ namespace ChessLib.Pieces
         public override string ToString()
         {
             return this.Color.ToString() + " " + this.PieceName;
-        }
-
-        /// <summary>
-        /// Capture the Chess piece.
-        /// </summary>
-        internal void Capture()
-        {
-            this.Captured.IfNotNull(a => a(this));
         }
     }
 }

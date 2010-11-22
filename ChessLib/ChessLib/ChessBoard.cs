@@ -309,11 +309,6 @@ namespace ChessLib
             if (!(a.Piece.GetType() == typeof(Pawn) && (((PawnMovement)a.Piece.Movement).HandlePromotion(b, askForPromotion) || ((PawnMovement)a.Piece.Movement).HandleEnPassant(b))) &&
             !(a.Piece.GetType() == typeof(King) && ((KingMovement)a.Piece.Movement).HandleCastling(b)))
             {
-                if (b.Piece != null)
-                {
-                    b.Piece.Capture();
-                }
-
                 a.Piece.Square = b;
                 b.Piece = a.Piece;
                 a.Piece = null;

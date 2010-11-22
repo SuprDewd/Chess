@@ -116,11 +116,6 @@ namespace ChessLib.Behaviours
 
             if (b.Location.Rank == 1 || b.Location.Rank == 8)
             {
-                if (b.Piece != null)
-                {
-                    b.Piece.Capture();
-                }
-
                 a.Piece.Square = b;
                 b.Piece = a.Piece;
                 a.Piece = null;
@@ -158,7 +153,6 @@ namespace ChessLib.Behaviours
             if (c.Piece == null || a.Piece == null) return false;
             if (c.Piece.Color == a.Piece.Color) return false;
 
-            c.Piece.Capture();
             c.Piece = null;
 
             a.Piece.Square = b;

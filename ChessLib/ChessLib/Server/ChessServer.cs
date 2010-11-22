@@ -119,7 +119,7 @@ namespace ChessLib.Server
 
             string ip = parts[0];
             parts.RemoveAt(0);
-            int port = parts[0].ToInt();
+            int port = Convert.ToInt32(parts[0]);
             parts.RemoveAt(0);
 
             return new Tuple<string, int, string>(ip, port, String.Join(":", parts.ToArray()));
