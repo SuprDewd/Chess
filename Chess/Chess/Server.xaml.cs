@@ -106,7 +106,7 @@ namespace Chess
                 try
                 {
                     this.Logger.Log("Attempting to start a server.");
-                    this.ChessServer = new ChessServer(IPAddress.Parse((string)this.cmbIPs.SelectedValue), Utils.Single(this.Port.Text.ToInt()), this.Logger, true);
+                    this.ChessServer = new ChessServer(IPAddress.Parse((string)this.cmbIPs.SelectedValue), Utils.Single(Convert.ToInt32(this.Port.Text)), this.Logger, true);
                 }
                 catch (Exception x)
                 {

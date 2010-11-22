@@ -70,7 +70,7 @@ namespace Chess
         {
             string[] hport = this.Player.Client.Client.Client.RemoteEndPoint.ToString().Split(':');
             this.Player.Disconnect();
-            this.Player.Connect(hport[0], hport[1].ToInt());
+            this.Player.Connect(hport[0], Convert.ToInt32(hport[1]));
         }
     }
 }

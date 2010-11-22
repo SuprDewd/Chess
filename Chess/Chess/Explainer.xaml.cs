@@ -48,6 +48,8 @@ namespace Chess
                 {
                     this.UpdateMoves();
                 };
+
+            this.Moves.Focus();
         }
 
         private void Grid_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -110,30 +112,37 @@ namespace Chess
 
         private void Import(object sender, RoutedEventArgs e)
         {
-            try
-            {
+
                 WF.OpenFileDialog ofDlg = new WF.OpenFileDialog();
                 ofDlg.FileName = this._LastSelectedFile;
 
                 if (ofDlg.ShowDialog() == WF.DialogResult.OK)
                 {
-                    this._LastSelectedFile = ofDlg.FileName;
-
-                    StringBuilder sb = new StringBuilder();
-                    using (StreamReader sr = new StreamReader(this._LastSelectedFile))
-                    {
-                        string line;
-
-                        while ((line = sr.ReadLine()) != null)
-                        {
-                            sb.AppendLine(line);
-                        }
-                    }
-
-                    this.cbcBoard.Board.Reset(true);
-                    if (!this.cbcBoard.Board.Import(sb.ToString())) { MessageBox.Show("Not all moves could be imported.", "Warning"); }
-                    this.cbcBoard.Repaint();
+                    this.Import(ofDlg.FileName);
                 }
+            
+        }
+
+        private void Import(string file)
+        {
+            try
+            {
+                this._LastSelectedFile = file;
+
+                StringBuilder sb = new StringBuilder();
+                using (StreamReader sr = new StreamReader(this._LastSelectedFile))
+                {
+                    string line;
+
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        sb.AppendLine(line);
+                    }
+                }
+
+                this.cbcBoard.Board.Reset(true);
+                if (!this.cbcBoard.Board.Import(sb.ToString())) { MessageBox.Show("Not all moves could be imported.", "Warning"); }
+                this.cbcBoard.Repaint();
             }
             catch
             {
@@ -165,6 +174,15 @@ namespace Chess
             {
                 MessageBox.Show("Couldn't export game.", "Error");
             }
+        }
+
+        private void Window_Drop(object sender, DragEventArgs e)
+        {
+            try
+            {
+                this.Import(((string[])e.Data.GetData(DataFormats.FileDrop)).First());
+            }
+            catch { MessageBox.Show("Couldn't import game.", "Error"); }
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:cc="clr-namespace:ChessLib.Controls;assembly=ChessLib"
         xmlns:s="clr-namespace:SharpBag;assembly=SharpBag"
         WindowStartupLocation="CenterScreen"
-        Title="Chess Explainer" Height="463" Width="711" Background="Gray" KeyDown="Window_KeyDown" Icon="/Chess;component/chess.ico">
+        Title="Chess Explainer" Height="463" Width="711" Background="Gray" KeyDown="Window_KeyDown" Icon="/Chess;component/chess.ico" Drop="Window_Drop" AllowDrop="True">
     <Grid Name="Wrapper">
         <Grid.RowDefinitions>
             <RowDefinition Height="26" />
@@ -39,7 +39,7 @@
 
             <StackPanel Grid.Column="1">
                 <ScrollViewer Name="scvMoves" VerticalScrollBarVisibility="Auto" MaxHeight="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}, Path=ActualHeight}">
-                    <ListBox Name="Moves" SelectionMode="Single" SelectionChanged="Moves_SelectionChanged" HorizontalContentAlignment="Right">
+                    <ListBox Name="Moves" SelectionMode="Single" SelectionChanged="Moves_SelectionChanged" HorizontalContentAlignment="Right" Focusable="False">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Label Content="{Binding}" />

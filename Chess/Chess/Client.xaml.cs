@@ -149,7 +149,7 @@ namespace Chess
             {
                 try
                 {
-                    if (!this.Player.Connect(this.Host.Text, this.Port.Text.ToInt()))
+                    if (!this.Player.Connect(this.Host.Text, Convert.ToInt32(this.Port.Text)))
                     {
                         this.Log("Could not connect to server.");
                         connected = false;
