@@ -141,7 +141,7 @@ namespace Chess
                 }
 
                 this.cbcBoard.Board.Reset(true);
-                if (!this.cbcBoard.Board.Import(sb.ToString())) { MessageBox.Show("Not all moves could be imported.", "Warning"); }
+                if (!this.cbcBoard.Board.Import(sb.ToString(), true)) { MessageBox.Show("Not all moves could be imported.", "Warning"); }
                 this.cbcBoard.Repaint();
             }
             catch

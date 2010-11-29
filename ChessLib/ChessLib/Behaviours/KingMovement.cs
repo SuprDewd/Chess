@@ -48,7 +48,7 @@ namespace ChessLib.Behaviours
                 {
                     int rank = this.Piece.Color == ChessColor.White ? 1 : 8;
 
-                    if (this.Board[rank, 2].Piece == null && this.Board[rank, 3].Piece == null)
+                    if (this.Board[rank, 2].Piece == null && this.Board[rank, 3].Piece == null && this.Board[rank, 4].Piece == null)
                     {
                         Square s = this.Board[rank, 1];
                         if (s.Piece != null && s.Piece.MoveCount == 0 && !this.Board[rank, 4].IsAttackedBy(this.Piece.Color.Opposite(), sq => sq.Piece.GetType() != typeof(King)))
@@ -56,7 +56,8 @@ namespace ChessLib.Behaviours
                             yield return this.Board[rank, 3];
                         }
                     }
-                    else if (this.Board[rank, 6].Piece == null && this.Board[rank, 7].Piece == null)
+                    
+                    if (this.Board[rank, 6].Piece == null && this.Board[rank, 7].Piece == null)
                     {
                         Square s = this.Board[rank, 8];
                         if (s.Piece != null && s.Piece.MoveCount == 0 && !this.Board[rank, 6].IsAttackedBy(this.Piece.Color.Opposite(), sq => sq.Piece.GetType() != typeof(King)))

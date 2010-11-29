@@ -487,22 +487,24 @@ namespace ChessLib
         /// Imports the specified moves.
         /// </summary>
         /// <param name="moves">The moves.</param>
+        /// <param name="tryAll">Whether to try importing all the moves.</param>
         /// <returns>Whether all moves could be executed.</returns>
-        public bool Import(string moves)
+        public bool Import(string moves, bool tryAll = false)
         {
-            return this.Import(ChessMoveParser.Parse(moves));
+            return this.Import(ChessMoveParser.Parse(moves), tryAll);
         }
 
         /// <summary>
         /// Imports the specified moves.
         /// </summary>
         /// <param name="moves">The moves.</param>
+        /// /// <param name="tryAll">Whether to try importing all the moves.</param>
         /// <returns>Whether all moves could be executed.</returns>
-        public bool Import(Move[] moves)
+        public bool Import(Move[] moves, bool tryAll = false)
         {
             foreach (Move m in moves)
             {
-                if (!this.Move(this[m.A], this[m.B])) return false;
+                if (!this.Move(this[m.A], this[m.B]) && !tryAll) return false;
             }
 
             return true;
